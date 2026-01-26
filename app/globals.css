@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light theme colors - Red, Green, White */
+  --color-primary: #dc2626; /* Red-600 */
+  --color-primary-hover: #b91c1c; /* Red-700 */
+  --color-secondary: #16a34a; /* Green-600 */
+  --color-secondary-hover: #15803d; /* Green-700 */
+  --color-background: #ffffff; /* White */
+  --color-surface: #f9fafb; /* Gray-50 for subtle backgrounds */
+  --color-text: #111827; /* Gray-900 */
+  --color-text-secondary: #6b7280; /* Gray-500 */
+  --color-border: #e5e7eb; /* Gray-200 */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utility classes for our theme */
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
