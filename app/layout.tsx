@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +20,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <main className="min-h-screen pt-16 pb-20 md:pb-0">
+        {/* Adjusted padding: pt-20 for header height, pb-24 for mobile nav */}
+        <main className="min-h-screen pt-20 pb-24 md:pb-8">
           {children}
         </main>
+		<Footer />
       </body>
     </html>
   );
