@@ -184,8 +184,33 @@ function NumberDetailPanel({ number }: { number: NumberData }) {
 
   const playAudio = () => {
     setIsPlaying(true);
-    // Placeholder audio - will work when audio files are added
-    setTimeout(() => setIsPlaying(false), 1000);
+    
+    // Map number to audio file ID
+    const audioMap: { [key: number]: string } = {
+      1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+      6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten"
+    };
+    
+    const audioId = audioMap[number.number];
+    
+    if (audioId) {
+      const audioPath = `/audio/numbers/${audioId}.mp3`;
+      const audio = new Audio(audioPath);
+
+      audio.onended = () => setIsPlaying(false);
+      audio.onerror = () => {
+        console.error('Audio playback failed');
+        setIsPlaying(false);
+      };
+
+      audio.play().catch((error) => {
+        console.error('Error playing audio:', error);
+        setIsPlaying(false);
+      });
+    } else {
+      // For numbers without audio files (11-100)
+      setIsPlaying(false);
+    }
   };
 
   return (
