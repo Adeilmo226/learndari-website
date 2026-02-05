@@ -169,7 +169,7 @@ export default function Home() {
             LearnDari makes it simple, accessible, and enjoyable.
           </p>
           <Link
-            href="/about"
+            href="/more/about"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
           >
             Read Our Mission
