@@ -11,6 +11,7 @@ import {
   User,
   Earth
 } from "lucide-react";
+import UserMenu from "./usermenu";
 
 /**
  * Header Component
@@ -83,11 +84,8 @@ export default function Header() {
               })}
             </nav>
 
-            {/* User Account Button */}
-            <button className="flex items-center gap-2 px-5 py-2.5 rounded-lg border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all font-medium shadow-sm">
-              <User className="w-5 h-5" />
-              <span className="hidden sm:inline">Account</span>
-            </button>
+            {/* User Menu Component */}
+            <UserMenu />
           </div>
         </div>
       </header>

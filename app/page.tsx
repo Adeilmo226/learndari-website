@@ -48,7 +48,7 @@ export default function Home() {
               </Link>
 			                <Link
                 href="/more"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl"
               >
                 <GraduationCap className="w-5 h-5" />
                 Discover More
