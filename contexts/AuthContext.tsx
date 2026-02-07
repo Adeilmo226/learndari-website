@@ -75,18 +75,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-const signOut = async () => {
-  try {
-    console.log('Starting sign out...')
-    const { error } = await supabase.auth.signOut()
-    console.log('Sign out result:', error)
-    if (error) throw error
-    console.log('Redirecting to login...')
-    window.location.href = '/login'
-  } catch (error) {
-    console.error('Error signing out:', error)
+  const signOut = async () => {
+    try {
+      console.log('Starting sign out...')
+      
+      // Call signOut but don't wait forever - timeout after 2 seconds
+      const signOutPromise = supabase.auth.signOut()
+      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 2000))
+      
+      await Promise.race([signOutPromise, timeoutPromise])
+      
+      console.log('Sign out completed, redirecting...')
+      // Force redirect regardless
+      window.location.href = '/login'
+    } catch (error) {
+      console.error('Error signing out:', error)
+      // Redirect anyway even if there's an error
+      window.location.href = '/login'
+    }
   }
-}
 
   return (
     <AuthContext.Provider value={{ user, loading, signOut }}>
