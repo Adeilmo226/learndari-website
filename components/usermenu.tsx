@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Link from 'next/link'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function UserMenu() {
-  const { user, signOut } = useAuth()
+  const { user, loading, signOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -19,7 +20,32 @@ export default function UserMenu() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  if (!user) return null
+  // Show nothing while loading to prevent flash
+  if (loading) {
+    return (
+      <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+    )
+  }
+
+  // Show sign in/up buttons when not authenticated
+  if (!user) {
+    return (
+      <div className="flex items-center gap-2">
+        <Link
+          href="/login"
+          className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition"
+        >
+          Sign In
+        </Link>
+        <Link
+          href="/signup"
+          className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition"
+        >
+          Sign Up
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div className="relative" ref={menuRef}>
@@ -41,11 +67,11 @@ export default function UserMenu() {
             <p className="text-sm font-medium text-gray-900">Signed in as</p>
             <p className="text-sm text-gray-600 truncate">{user.email}</p>
           </div>
-          
+
           <button
             onClick={() => {
-              signOut()
               setIsOpen(false)
+              signOut()
             }}
             className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition"
           >

@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
-import { useRouter } from 'next/navigation'
 
 type AuthContextType = {
   user: User | null
@@ -28,7 +27,6 @@ export const useAuth = () => {
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
 
   useEffect(() => {
     // Check active session
@@ -77,25 +75,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     try {
-      console.log('Starting sign out...')
-      
-      // Immediately clear local user state
+      // Clear local user state first
       setUser(null)
-      
-      // Call signOut with timeout
-      const signOutPromise = supabase.auth.signOut()
-      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1000))
-      
-      await Promise.race([signOutPromise, timeoutPromise])
-      
-      console.log('Sign out completed, redirecting...')
-      
-      // Force a hard reload to clear all state
-      window.location.replace('/login')
+
+      // Sign out from Supabase - this clears the session cookie
+      const { error } = await supabase.auth.signOut()
+
+      if (error) {
+        console.error('Supabase signOut error:', error)
+      }
+
+      // Small delay to ensure cookies are cleared before navigation
+      await new Promise(resolve => setTimeout(resolve, 100))
+
+      // Force a hard navigation to login page
+      window.location.href = '/login'
     } catch (error) {
       console.error('Error signing out:', error)
-      // Redirect anyway even if there's an error
-      window.location.replace('/login')
+      // Clear state and redirect anyway
+      setUser(null)
+      window.location.href = '/login'
     }
   }
 
