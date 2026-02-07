@@ -35,10 +35,29 @@ export async function middleware(req: NextRequest) {
 
   // Public routes that don't require authentication
   const publicRoutes = ['/login', '/signup']
+
+  // Free tier routes - accessible without login (but with limited content)
+  // Routes with allowSubRoutes: true will also match sub-paths (e.g., /vocab/colors/flashcards)
+  const freeTierRoutes = [
+    { path: '/', allowSubRoutes: false },              // Homepage only
+    { path: '/vocab', allowSubRoutes: false },         // Vocab list (shows locked items)
+    { path: '/vocab/colors', allowSubRoutes: true },   // Free vocab set + flashcards/quiz
+    { path: '/learn', allowSubRoutes: false },         // Learn list (shows locked items)
+    { path: '/learn/level-1', allowSubRoutes: true },  // Free first milestone + quiz
+    { path: '/more', allowSubRoutes: false },          // Discover more list only (sub-routes blocked)
+  ]
+
   const isPublicRoute = publicRoutes.some(route => req.nextUrl.pathname.startsWith(route))
+  const isFreeTierRoute = freeTierRoutes.some(({ path, allowSubRoutes }) => {
+    if (allowSubRoutes) {
+      return req.nextUrl.pathname === path || req.nextUrl.pathname.startsWith(path + '/')
+    }
+    return req.nextUrl.pathname === path
+  })
 
   // If user is not signed in and trying to access protected route
-  if (!session && !isPublicRoute) {
+  // Allow public routes and free tier routes without authentication
+  if (!session && !isPublicRoute && !isFreeTierRoute) {
     const redirectUrl = req.nextUrl.clone()
     redirectUrl.pathname = '/login'
     return NextResponse.redirect(redirectUrl)
