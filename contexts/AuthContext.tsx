@@ -79,19 +79,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       console.log('Starting sign out...')
       
-      // Call signOut but don't wait forever - timeout after 2 seconds
+      // Immediately clear local user state
+      setUser(null)
+      
+      // Call signOut with timeout
       const signOutPromise = supabase.auth.signOut()
-      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 2000))
+      const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1000))
       
       await Promise.race([signOutPromise, timeoutPromise])
       
       console.log('Sign out completed, redirecting...')
-      // Force redirect regardless
-      window.location.href = '/login'
+      
+      // Force a hard reload to clear all state
+      window.location.replace('/login')
     } catch (error) {
       console.error('Error signing out:', error)
       // Redirect anyway even if there's an error
-      window.location.href = '/login'
+      window.location.replace('/login')
     }
   }
 
