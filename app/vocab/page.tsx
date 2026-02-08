@@ -1,11 +1,16 @@
+"use client";
+
 import Link from "next/link";
-import { BookOpen, Headphones } from "lucide-react";
+import { BookOpen, Headphones, Lock } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 /**
  * Vocab Page - Main vocabulary sets selection
  * Users can browse and select different vocabulary sets to study
  */
 export default function VocabPage() {
+  const { user, loading } = useAuth();
+
   // Vocabulary sets available
   const vocabSets = [
     {
@@ -14,6 +19,7 @@ export default function VocabPage() {
       description: "Learn basic color names in Dari",
       wordCount: 10,
       emoji: "🎨",
+      free: true, // Free tier - accessible without login
     },
     // We can add more sets later
     {
@@ -34,6 +40,8 @@ export default function VocabPage() {
     },
   ];
 
+  const isAuthenticated = !loading && !!user;
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       {/* Header */}
@@ -49,7 +57,7 @@ export default function VocabPage() {
       {/* Vocabulary Sets Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {vocabSets.map((set) => (
-          <VocabSetCard key={set.id} set={set} />
+          <VocabSetCard key={set.id} set={set} isAuthenticated={isAuthenticated} />
         ))}
       </div>
     </div>
@@ -62,6 +70,7 @@ export default function VocabPage() {
  */
 function VocabSetCard({
   set,
+  isAuthenticated,
 }: {
   set: {
     id: string;
@@ -70,8 +79,14 @@ function VocabSetCard({
     wordCount: number;
     emoji: string;
     disabled?: boolean;
+    free?: boolean;
   };
+  isAuthenticated: boolean;
 }) {
+  // Locked if: not free, not disabled (coming soon), and user not authenticated
+  const isLocked = !set.free && !set.disabled && !isAuthenticated;
+
+  // Coming soon state
   if (set.disabled) {
     return (
       <div className="bg-white p-6 rounded-xl border-2 border-gray-200 opacity-60 cursor-not-allowed">
@@ -91,6 +106,36 @@ function VocabSetCard({
     );
   }
 
+  // Locked state - requires sign in
+  if (isLocked) {
+    return (
+      <Link
+        href="/signup"
+        className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 transition-all hover:shadow-lg group"
+      >
+        <div className="flex items-start justify-between mb-4">
+          <div className="text-5xl opacity-50">{set.emoji}</div>
+          <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
+            <Lock className="w-3 h-3" />
+            Sign in to unlock
+          </span>
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">{set.title}</h3>
+        <p className="text-gray-600 mb-4">{set.description}</p>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-gray-500">
+            <BookOpen className="w-4 h-4" />
+            <span className="text-sm">{set.wordCount} words</span>
+          </div>
+          <span className="text-red-600 font-medium group-hover:translate-x-1 transition-transform">
+            Sign up free →
+          </span>
+        </div>
+      </Link>
+    );
+  }
+
+  // Accessible state
   return (
     <Link
       href={`/vocab/${set.id}`}

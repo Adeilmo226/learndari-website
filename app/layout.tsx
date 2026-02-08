@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        {/* Adjusted padding: pt-20 for header height, pb-24 for mobile nav */}
-        <main className="min-h-screen pt-20 pb-24 md:pb-8">
-          {children}
-        </main>
-		<Footer />
+        <AuthProvider>
+          <Header />
+          {/* Adjusted padding: pt-20 for header height, pb-24 for mobile nav */}
+          <main className="min-h-screen pt-20 pb-24 md:pb-8">
+            {children}
+          </main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

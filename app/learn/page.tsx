@@ -2,12 +2,16 @@
 
 import Link from "next/link";
 import { Lock, CheckCircle, BookOpen, Type, FileText, MessageSquare, Award } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 /**
  * Learn Page - Reading Dari Path
  * Structured learning path from alphabet to phrases
  */
 export default function LearnPage() {
+  const { user, loading } = useAuth();
+  const isAuthenticated = !loading && !!user;
+
   // Track completed levels (will be stored in localStorage later)
   const completedLevels = new Set([1]); // Level 1 is unlocked by default
 
@@ -20,6 +24,7 @@ export default function LearnPage() {
       href: "/learn/level-1",
       color: "from-red-500 to-red-600",
       unlocked: true,
+      free: true, // Free tier - accessible without login
     },
     {
       id: 2,
@@ -29,6 +34,7 @@ export default function LearnPage() {
       href: "/learn/level-2",
       color: "from-green-500 to-green-600",
       unlocked: completedLevels.has(1),
+      free: false,
     },
     {
       id: 3,
@@ -38,6 +44,7 @@ export default function LearnPage() {
       href: "/learn/level-3",
       color: "from-blue-500 to-blue-600",
       unlocked: completedLevels.has(2),
+      free: false,
     },
     {
       id: 4,
@@ -47,6 +54,7 @@ export default function LearnPage() {
       href: "/learn/level-4",
       color: "from-purple-500 to-purple-600",
       unlocked: completedLevels.has(3),
+      free: false,
     },
     {
       id: 5,
@@ -56,6 +64,7 @@ export default function LearnPage() {
       href: "/learn/level-5",
       color: "from-yellow-500 to-yellow-600",
       unlocked: completedLevels.has(4),
+      free: false,
     },
   ];
 
@@ -101,6 +110,7 @@ export default function LearnPage() {
             level={level}
             completed={completedLevels.has(level.id)}
             isLast={index === levels.length - 1}
+            isAuthenticated={isAuthenticated}
           />
         ))}
       </div>
@@ -116,6 +126,7 @@ function LevelCard({
   level,
   completed,
   isLast,
+  isAuthenticated,
 }: {
   level: {
     id: number;
@@ -125,12 +136,59 @@ function LevelCard({
     href: string;
     color: string;
     unlocked: boolean;
+    free: boolean;
   };
   completed: boolean;
   isLast: boolean;
+  isAuthenticated: boolean;
 }) {
   const Icon = level.icon;
 
+  // Check if level requires sign in (not free and user not authenticated)
+  const requiresSignIn = !level.free && !isAuthenticated;
+
+  // Locked state - requires sign in
+  if (requiresSignIn) {
+    return (
+      <div className="relative">
+        <Link
+          href="/signup"
+          className="block bg-white p-6 rounded-2xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group"
+        >
+          <div className="flex items-center gap-6">
+            <div className={`w-16 h-16 bg-gradient-to-br ${level.color} rounded-xl flex items-center justify-center relative opacity-50`}>
+              <Lock className="w-8 h-8 text-white" />
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <span className="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-full">
+                  Level {level.id}
+                </span>
+                <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
+                  <Lock className="w-3 h-3" />
+                  Sign in to unlock
+                </span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors">
+                {level.title}
+              </h3>
+              <p className="text-gray-600">{level.description}</p>
+            </div>
+            <div className="text-gray-400 group-hover:text-red-600 group-hover:translate-x-2 transition-all text-3xl">
+              →
+            </div>
+          </div>
+        </Link>
+        {!isLast && (
+          <div className="flex justify-center py-4">
+            <div className="w-1 h-8 bg-gray-300 rounded-full" />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Progress locked state - previous level not completed
   if (!level.unlocked) {
     return (
       <div className="relative">
@@ -144,7 +202,7 @@ function LevelCard({
                 <span className="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-full">
                   Level {level.id}
                 </span>
-                <span className="text-gray-500 text-sm">🔒 Locked</span>
+                <span className="text-gray-500 text-sm">Complete previous level first</span>
               </div>
               <h3 className="text-2xl font-bold text-gray-500 mb-1">{level.title}</h3>
               <p className="text-gray-500">{level.description}</p>
