@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Link from 'next/link'
+import { Settings } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function UserMenu() {
@@ -59,6 +60,15 @@ export default function UserMenu() {
             <p className="text-sm font-medium text-gray-900">Signed in as</p>
             <p className="text-sm text-gray-600 truncate">{user.email}</p>
           </div>
+
+          <Link
+            href="/account"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition"
+          >
+            <Settings className="w-4 h-4" />
+            Account Settings
+          </Link>
 
           <button
             onClick={() => {
