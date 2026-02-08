@@ -1,17 +1,19 @@
 'use client'
 
-import { createContext, useContext, useEffect, useState } from 'react'
-import { User } from '@supabase/supabase-js'
+import { createContext, useContext, useEffect, useState, useCallback } from 'react'
+import { User, Session } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 
 type AuthContextType = {
   user: User | null
+  session: Session | null
   loading: boolean
   signOut: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
+  session: null,
   loading: true,
   signOut: async () => {},
 })
@@ -26,44 +28,62 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
+  const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Check active session
-    const checkUser = async () => {
+    // Get initial session
+    const initializeAuth = async () => {
       try {
-        const { data: { session } } = await supabase.auth.getSession()
-        setUser(session?.user ?? null)
+        const { data: { session: currentSession }, error } = await supabase.auth.getSession()
+
+        if (error) {
+          console.error('Error getting session:', error)
+        }
+
+        setSession(currentSession)
+        setUser(currentSession?.user ?? null)
       } catch (error) {
-        console.error('Error checking auth session:', error)
+        console.error('Error initializing auth:', error)
       } finally {
         setLoading(false)
       }
     }
 
-    checkUser()
+    initializeAuth()
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setUser(session?.user ?? null)
+      async (event, newSession) => {
+        setSession(newSession)
+        setUser(newSession?.user ?? null)
         setLoading(false)
 
-        // Create user profile on sign up
-        if (event === 'SIGNED_IN' && session?.user) {
-          const { error } = await supabase
-            .from('user_profiles')
-            .upsert({
-              id: session.user.id,
-              email: session.user.email!,
-              updated_at: new Date().toISOString(),
-            }, {
-              onConflict: 'id'
-            })
+        // Create user profile on initial sign up
+        if (event === 'SIGNED_IN' && newSession?.user) {
+          // Use setTimeout to avoid blocking the auth flow
+          setTimeout(async () => {
+            try {
+              await supabase
+                .from('user_profiles')
+                .upsert({
+                  id: newSession.user.id,
+                  email: newSession.user.email!,
+                  updated_at: new Date().toISOString(),
+                }, {
+                  onConflict: 'id'
+                })
+            } catch (error) {
+              // Silently fail - profile creation is not critical
+              console.error('Error creating user profile:', error)
+            }
+          }, 0)
+        }
 
-          if (error && error.code !== '23505') { // Ignore duplicate key errors
-            console.error('Error creating user profile:', error)
-          }
+        // Handle sign out event
+        if (event === 'SIGNED_OUT') {
+          setUser(null)
+          setSession(null)
         }
       }
     )
@@ -73,33 +93,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const signOut = async () => {
+  const signOut = useCallback(async () => {
     try {
-      // Clear local user state first
-      setUser(null)
+      setLoading(true)
 
-      // Sign out from Supabase - this clears the session cookie
+      // Sign out from Supabase
       const { error } = await supabase.auth.signOut()
 
       if (error) {
-        console.error('Supabase signOut error:', error)
+        console.error('Error signing out:', error)
+        throw error
       }
 
-      // Small delay to ensure cookies are cleared before navigation
-      await new Promise(resolve => setTimeout(resolve, 100))
+      // Clear local state
+      setUser(null)
+      setSession(null)
 
-      // Force a hard navigation to login page
+      // Navigate to login page with a full page reload to clear any cached state
       window.location.href = '/login'
     } catch (error) {
-      console.error('Error signing out:', error)
-      // Clear state and redirect anyway
+      console.error('Sign out error:', error)
+      // Force clear state and redirect even on error
       setUser(null)
+      setSession(null)
       window.location.href = '/login'
     }
-  }
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signOut }}>
       {children}
     </AuthContext.Provider>
   )

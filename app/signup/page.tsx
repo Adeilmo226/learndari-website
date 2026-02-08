@@ -17,6 +17,7 @@ export default function SignUpPage() {
     setLoading(true)
     setError(null)
 
+    // Validation
     if (password !== confirmPassword) {
       setError('Passwords do not match')
       setLoading(false)
@@ -30,39 +31,42 @@ export default function SignUpPage() {
     }
 
     try {
-      console.log('Starting signup...')
-      const { data, error } = await supabase.auth.signUp({
-        email,
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: email.trim(),
         password,
         options: {
           emailRedirectTo: `${window.location.origin}/auth/callback`,
         },
       })
 
-      console.log('Signup response:', { data, error })
-
-      if (error) throw error
+      if (signUpError) {
+        // Handle specific error cases
+        if (signUpError.message.includes('already registered')) {
+          throw new Error('An account with this email already exists. Please sign in instead.')
+        }
+        throw signUpError
+      }
 
       if (data.user) {
-        console.log('User created:', data.user.id)
-        console.log('Session exists?', !!data.session)
-        
         // Check if email confirmation is required
         if (data.user.identities && data.user.identities.length === 0) {
-          setError('An account with this email already exists')
-        } else {
+          throw new Error('An account with this email already exists. Please sign in instead.')
+        }
+
+        // If we have a session, user is logged in
+        if (data.session) {
           setSuccess(true)
-          console.log('About to redirect...')
-          // Auto sign in and redirect after a brief moment
+          // Redirect after showing success message
           setTimeout(() => {
-            console.log('Redirecting now!')
             window.location.href = '/'
           }, 1500)
+        } else {
+          // Email confirmation required
+          setSuccess(true)
         }
       }
-    } catch (error: any) {
-      console.error('Signup error:', error)
-      setError(error.message || 'Failed to create account')
+    } catch (err: any) {
+      setError(err.message || 'Failed to create account. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -70,27 +74,31 @@ export default function SignUpPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md text-center">
-          <div className="text-green-600 text-5xl mb-4">✓</div>
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-green-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md text-center">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Account Created!</h2>
-          <p className="text-gray-600">Redirecting to your dashboard...</p>
+          <p className="text-gray-600">Redirecting to start your learning journey...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-green-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Join LearnDari</h1>
-          <p className="text-gray-600">Start your Dari language learning journey</p>
+          <p className="text-gray-600">Start your free Dari language learning journey</p>
         </div>
 
         <form onSubmit={handleSignUp} className="space-y-6">
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
             </div>
           )}
@@ -105,7 +113,8 @@ export default function SignUpPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              autoComplete="email"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
               placeholder="your@email.com"
             />
           </div>
@@ -121,8 +130,9 @@ export default function SignUpPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="••••••••"
+              autoComplete="new-password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+              placeholder="Create a password"
             />
             <p className="text-xs text-gray-500 mt-1">At least 6 characters</p>
           </div>
@@ -137,27 +147,34 @@ export default function SignUpPage() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="••••••••"
+              autoComplete="new-password"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+              placeholder="Confirm your password"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            className="w-full bg-red-600 text-white py-3 rounded-lg hover:bg-red-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
           >
-            {loading ? 'Creating account...' : 'Create Account'}
+            {loading ? 'Creating account...' : 'Create Free Account'}
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Already have an account?{' '}
-            <Link href="/login" className="text-blue-600 hover:underline font-medium">
+            <Link href="/login" className="text-red-600 hover:underline font-medium">
               Sign in
             </Link>
           </p>
+        </div>
+
+        <div className="mt-4 text-center">
+          <Link href="/" className="text-sm text-gray-500 hover:text-gray-700">
+            Continue as guest
+          </Link>
         </div>
       </div>
     </div>

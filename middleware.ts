@@ -33,6 +33,9 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
+  // Auth routes (callbacks, etc.) - always accessible
+  const authRoutes = ['/auth']
+
   // Public routes that don't require authentication
   const publicRoutes = ['/login', '/signup']
 
@@ -40,6 +43,7 @@ export async function middleware(req: NextRequest) {
   // Routes with allowSubRoutes: true will also match sub-paths (e.g., /vocab/colors/flashcards)
   const freeTierRoutes = [
     { path: '/', allowSubRoutes: false },              // Homepage only
+    { path: '/explore', allowSubRoutes: false },       // Search/explore vocabulary
     { path: '/vocab', allowSubRoutes: false },         // Vocab list (shows locked items)
     { path: '/vocab/colors', allowSubRoutes: true },   // Free vocab set + flashcards/quiz
     { path: '/learn', allowSubRoutes: false },         // Learn list (shows locked items)
@@ -47,6 +51,7 @@ export async function middleware(req: NextRequest) {
     { path: '/more', allowSubRoutes: false },          // Discover more list only (sub-routes blocked)
   ]
 
+  const isAuthRoute = authRoutes.some(route => req.nextUrl.pathname.startsWith(route))
   const isPublicRoute = publicRoutes.some(route => req.nextUrl.pathname.startsWith(route))
   const isFreeTierRoute = freeTierRoutes.some(({ path, allowSubRoutes }) => {
     if (allowSubRoutes) {
@@ -54,6 +59,11 @@ export async function middleware(req: NextRequest) {
     }
     return req.nextUrl.pathname === path
   })
+
+  // Auth routes are always accessible (callbacks, etc.)
+  if (isAuthRoute) {
+    return supabaseResponse
+  }
 
   // If user is not signed in and trying to access protected route
   // Allow public routes and free tier routes without authentication
