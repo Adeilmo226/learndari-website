@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 
 export default function AccountPage() {
-  const { user, loading: authLoading, signOut } = useAuth()
+  const { user, loading: authLoading, signOut, setDisplayName: setContextDisplayName } = useAuth()
   const router = useRouter()
 
   const [displayName, setDisplayName] = useState('')
@@ -65,7 +65,9 @@ export default function AccountPage() {
     if (error) {
       setSaveMessage({ type: 'error', text: 'Failed to save changes. Please try again.' })
     } else {
-      setOriginalDisplayName(displayName.trim())
+      const newName = displayName.trim() || null
+      setOriginalDisplayName(newName || '')
+      setContextDisplayName(newName)
       setSaveMessage({ type: 'success', text: 'Profile updated successfully!' })
       setTimeout(() => setSaveMessage(null), 3000)
     }

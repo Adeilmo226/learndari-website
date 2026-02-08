@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase'
 import Link from 'next/link'
 
 export default function SignUpPage() {
+  const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -36,6 +37,9 @@ export default function SignUpPage() {
         password,
         options: {
           emailRedirectTo: `${window.location.origin}/auth/callback`,
+          data: {
+            display_name: displayName.trim(),
+          },
         },
       })
 
@@ -102,6 +106,22 @@ export default function SignUpPage() {
               {error}
             </div>
           )}
+
+          <div>
+            <label htmlFor="displayName" className="block text-sm font-medium text-gray-700 mb-2">
+              Name
+            </label>
+            <input
+              id="displayName"
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              required
+              autoComplete="name"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent transition"
+              placeholder="Your name"
+            />
+          </div>
 
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">

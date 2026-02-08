@@ -63,7 +63,7 @@ export default function Home() {
           <div className="relative">
             <div className="aspect-square rounded-3xl shadow-2xl overflow-hidden border-4 border-white">
               <Image
-                src="/public/education.avif"
+                src="/education.avif"
                 alt="Learn Dari - Language Learning Platform"
                 width={600}
                 height={600}

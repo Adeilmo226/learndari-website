@@ -8,6 +8,8 @@ type AuthContextType = {
   user: User | null
   session: Session | null
   loading: boolean
+  displayName: string | null
+  setDisplayName: (name: string | null) => void
   signOut: () => Promise<void>
 }
 
@@ -15,6 +17,8 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   session: null,
   loading: true,
+  displayName: null,
+  setDisplayName: () => {},
   signOut: async () => {},
 })
 
@@ -30,6 +34,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [displayName, setDisplayName] = useState<string | null>(null)
 
   useEffect(() => {
     // Get initial session
@@ -43,6 +48,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         setSession(currentSession)
         setUser(currentSession?.user ?? null)
+
+        // Fetch display name if user exists
+        if (currentSession?.user) {
+          const { data } = await supabase
+            .from('user_profiles')
+            .select('display_name')
+            .eq('id', currentSession.user.id)
+            .single()
+          if (data?.display_name) {
+            setDisplayName(data.display_name)
+          }
+        }
       } catch (error) {
         console.error('Error initializing auth:', error)
       } finally {
@@ -69,6 +86,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 .upsert({
                   id: newSession.user.id,
                   email: newSession.user.email!,
+                  display_name: newSession.user.user_metadata?.display_name || null,
                   updated_at: new Date().toISOString(),
                 }, {
                   onConflict: 'id'
@@ -84,6 +102,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (event === 'SIGNED_OUT') {
           setUser(null)
           setSession(null)
+          setDisplayName(null)
         }
       }
     )
@@ -121,7 +140,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, displayName, setDisplayName, signOut }}>
       {children}
     </AuthContext.Provider>
   )

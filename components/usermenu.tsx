@@ -6,7 +6,7 @@ import { Settings } from 'lucide-react'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function UserMenu() {
-  const { user, loading, signOut } = useAuth()
+  const { user, loading, displayName, signOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -47,17 +47,19 @@ export default function UserMenu() {
         className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition"
       >
         <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
-          {user.email?.charAt(0).toUpperCase()}
+          {(displayName || user.email)?.charAt(0).toUpperCase()}
         </div>
         <span className="text-sm font-medium text-gray-700 hidden sm:block">
-          {user.email?.split('@')[0]}
+          {displayName || user.email?.split('@')[0]}
         </span>
       </button>
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
           <div className="px-4 py-3 border-b border-gray-200">
-            <p className="text-sm font-medium text-gray-900">Signed in as</p>
+            {displayName && (
+              <p className="text-sm font-medium text-gray-900">{displayName}</p>
+            )}
             <p className="text-sm text-gray-600 truncate">{user.email}</p>
           </div>
 
