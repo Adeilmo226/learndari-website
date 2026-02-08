@@ -35,10 +35,10 @@ export function LockedContent({ message = "Sign in to unlock this content and sa
         </p>
         <div className="flex flex-col gap-3">
           <Link
-            href="/signup"
+            href="/login"
             className="w-full py-3 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
           >
-            Create Free Account
+            Sign In
           </Link>
           <Link
             href="/login"

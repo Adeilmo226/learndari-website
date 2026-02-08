@@ -152,7 +152,7 @@ function LevelCard({
     return (
       <div className="relative">
         <Link
-          href="/signup"
+          href="/login"
           className="block bg-white p-6 rounded-2xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group"
         >
           <div className="flex items-center gap-6">

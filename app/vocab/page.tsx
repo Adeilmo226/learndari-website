@@ -110,7 +110,7 @@ function VocabSetCard({
   if (isLocked) {
     return (
       <Link
-        href="/signup"
+        href="/login"
         className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 transition-all hover:shadow-lg group"
       >
         <div className="flex items-start justify-between mb-4">

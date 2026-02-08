@@ -152,7 +152,7 @@ function SectionCard({
   if (!isAuthenticated) {
     return (
       <Link
-        href="/signup"
+        href="/login"
         className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group"
       >
         <div className="flex items-start justify-between mb-4">
@@ -167,10 +167,6 @@ function SectionCard({
         <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
           {section.title}
         </h3>
-        <p className="text-gray-600 mb-4">{section.description}</p>
-        <div className="text-red-600 font-medium group-hover:translate-x-2 transition-all">
-          Sign up free →
-        </div>
       </Link>
     );
   }
