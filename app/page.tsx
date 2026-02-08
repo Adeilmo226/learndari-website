@@ -38,7 +38,7 @@ export default function Home() {
                 Learn to Read Dari
               </Link>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+            {/* <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link
                 href="/explore"
                 className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl"
@@ -46,7 +46,7 @@ export default function Home() {
                 <Search className="w-5 h-5" />
                 Look up a word
               </Link>
-			                <Link
+			    <Link
                 href="/more"
                 className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl"
               >
@@ -55,7 +55,7 @@ export default function Home() {
               </Link>
 			  
 
-            </div>
+            </div> */}
 			
           </div>
 
@@ -63,7 +63,7 @@ export default function Home() {
           <div className="relative">
             <div className="aspect-square rounded-3xl shadow-2xl overflow-hidden border-4 border-white">
               <Image
-                src="/education.avif"
+                src="/public/education.avif"
                 alt="Learn Dari - Language Learning Platform"
                 width={600}
                 height={600}
