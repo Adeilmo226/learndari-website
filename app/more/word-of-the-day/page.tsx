@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Volume2, Calendar } from "lucide-react";
+import { ArrowLeft, Volume2, Calendar, RefreshCw } from "lucide-react";
 import { getWordOfTheDay, type VocabWord } from "@/lib/vocabulary";
 
 /**
@@ -50,7 +50,7 @@ export default function WordOfDayPage() {
 
       {/* Title */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-full mb-4">
+        <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-600 rounded-full mb-4">
           <Calendar className="w-5 h-5" />
           <span className="font-semibold">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
         </div>
@@ -59,49 +59,43 @@ export default function WordOfDayPage() {
       </div>
 
       {/* Word Card */}
-      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8 md:p-12 mb-8">
-        {/* Row layout for word details */}
-        <div className="space-y-6">
-          {/* English */}
-          <div className="flex items-baseline gap-3">
-            <span className="text-sm font-medium text-gray-500 w-28 shrink-0">English</span>
-            <span className="text-2xl font-semibold text-gray-900">{word.english}</span>
+      <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl shadow-2xl p-12 text-white mb-8">
+        <div className="text-center">
+          {/* Category Badge */}
+          <span className="inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-medium mb-6">
+            {word.category}
+          </span>
+
+          {/* English Word */}
+          <h2 className="text-5xl font-bold mb-8">{word.english}</h2>
+
+          {/* Dari Word */}
+          <div className="mb-6">
+            <p className="text-purple-100 text-sm mb-2">Dari</p>
+            <p className="text-7xl font-bold mb-4" dir="rtl">
+              {word.dari}
+            </p>
           </div>
 
-          {/* Dari */}
-          <div className="flex items-baseline gap-3">
-            <span className="text-sm font-medium text-gray-500 w-28 shrink-0">Dari</span>
-            <span className="text-3xl font-semibold text-gray-900" dir="rtl">{word.dari}</span>
+          {/* Phonetic */}
+          <div className="mb-8">
+            <p className="text-purple-100 text-sm mb-2">Pronunciation</p>
+            <p className="text-3xl font-medium italic">{word.phonetic}</p>
           </div>
 
-          {/* Pronunciation */}
-          <div className="flex items-baseline gap-3">
-            <span className="text-sm font-medium text-gray-500 w-28 shrink-0">Pronunciation</span>
-            <span className="text-xl text-gray-700 italic">{word.phonetic}</span>
-          </div>
-
-          {/* Category */}
-          <div className="flex items-baseline gap-3">
-            <span className="text-sm font-medium text-gray-500 w-28 shrink-0">Category</span>
-            <span className="text-sm font-medium text-gray-700 px-3 py-1 bg-gray-100 rounded-full">{word.category}</span>
-          </div>
-
-          {/* Divider */}
-          <div className="border-t border-gray-100 pt-6">
-            {/* Audio Button */}
-            <button
-              onClick={playAudio}
-              disabled={isPlaying}
-              className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-colors ${
-                isPlaying
-                  ? "bg-red-600 text-white"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
-            >
-              <Volume2 className="w-5 h-5" />
-              {isPlaying ? "Playing..." : "Hear Pronunciation"}
-            </button>
-          </div>
+          {/* Audio Button */}
+          <button
+            onClick={playAudio}
+            disabled={isPlaying}
+            className={`inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg transition-all ${
+              isPlaying
+                ? "bg-white text-purple-600 scale-110"
+                : "bg-white/20 hover:bg-white hover:text-purple-600 hover:scale-105"
+            }`}
+          >
+            <Volume2 className="w-6 h-6" />
+            {isPlaying ? "Playing..." : "Hear Pronunciation"}
+          </button>
         </div>
       </div>
 

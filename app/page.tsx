@@ -17,7 +17,7 @@ export default function Home() {
             src="/homepage_background.jpg"
             alt=""
             fill
-            className="object-cover opacity-[0.06]"
+            className="object-cover opacity-[0.10]"
             priority
           />
         </div>
