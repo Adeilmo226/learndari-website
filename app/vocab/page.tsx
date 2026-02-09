@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { BookOpen, Headphones, Lock } from "lucide-react";
-import { useUser } from "@clerk/nextjs";
+import { useUser, SignInButton } from "@clerk/nextjs";
 
 /**
  * Vocab Page - Main vocabulary sets selection
@@ -109,29 +109,28 @@ function VocabSetCard({
   // Locked state - requires sign in
   if (isLocked) {
     return (
-      <Link
-        href="/login"
-        className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 transition-all hover:shadow-lg group"
-      >
-        <div className="flex items-start justify-between mb-4">
-          <div className="text-5xl opacity-50">{set.emoji}</div>
-          <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
-            <Lock className="w-3 h-3" />
-            Sign in to unlock
-          </span>
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">{set.title}</h3>
-        <p className="text-gray-600 mb-4">{set.description}</p>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-gray-500">
-            <BookOpen className="w-4 h-4" />
-            <span className="text-sm">{set.wordCount} words</span>
+      <SignInButton>
+        <button className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 transition-all hover:shadow-lg group text-left w-full cursor-pointer">
+          <div className="flex items-start justify-between mb-4">
+            <div className="text-5xl opacity-50">{set.emoji}</div>
+            <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
+              <Lock className="w-3 h-3" />
+              Sign in to unlock
+            </span>
           </div>
-          <span className="text-red-600 font-medium group-hover:translate-x-1 transition-transform">
-            Sign up free →
-          </span>
-        </div>
-      </Link>
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">{set.title}</h3>
+          <p className="text-gray-600 mb-4">{set.description}</p>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-gray-500">
+              <BookOpen className="w-4 h-4" />
+              <span className="text-sm">{set.wordCount} words</span>
+            </div>
+            <span className="text-red-600 font-medium group-hover:translate-x-1 transition-transform">
+              Sign in →
+            </span>
+          </div>
+        </button>
+      </SignInButton>
     );
   }
 

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Lock, CheckCircle, BookOpen, Type, FileText, MessageSquare, Award } from "lucide-react";
-import { useUser } from "@clerk/nextjs";
+import { useUser, SignInButton } from "@clerk/nextjs";
 
 /**
  * Learn Page - Reading Dari Path
@@ -151,34 +151,33 @@ function LevelCard({
   if (requiresSignIn) {
     return (
       <div className="relative">
-        <Link
-          href="/login"
-          className="block bg-white p-6 rounded-2xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group"
-        >
-          <div className="flex items-center gap-6">
-            <div className={`w-16 h-16 bg-gradient-to-br ${level.color} rounded-xl flex items-center justify-center relative opacity-50`}>
-              <Lock className="w-8 h-8 text-white" />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-2">
-                <span className="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-full">
-                  Level {level.id}
-                </span>
-                <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
-                  <Lock className="w-3 h-3" />
-                  Sign in to unlock
-                </span>
+        <SignInButton>
+          <button className="block w-full text-left bg-white p-6 rounded-2xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group cursor-pointer">
+            <div className="flex items-center gap-6">
+              <div className={`w-16 h-16 bg-gradient-to-br ${level.color} rounded-xl flex items-center justify-center relative opacity-50`}>
+                <Lock className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors">
-                {level.title}
-              </h3>
-              <p className="text-gray-600">{level.description}</p>
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-full">
+                    Level {level.id}
+                  </span>
+                  <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
+                    <Lock className="w-3 h-3" />
+                    Sign in to unlock
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-1 group-hover:text-red-600 transition-colors">
+                  {level.title}
+                </h3>
+                <p className="text-gray-600">{level.description}</p>
+              </div>
+              <div className="text-gray-400 group-hover:text-red-600 group-hover:translate-x-2 transition-all text-3xl">
+                →
+              </div>
             </div>
-            <div className="text-gray-400 group-hover:text-red-600 group-hover:translate-x-2 transition-all text-3xl">
-              →
-            </div>
-          </div>
-        </Link>
+          </button>
+        </SignInButton>
         {!isLast && (
           <div className="flex justify-center py-4">
             <div className="w-1 h-8 bg-gray-300 rounded-full" />

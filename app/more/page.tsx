@@ -12,7 +12,7 @@ import {
   Info,
   Lock
 } from "lucide-react";
-import { useUser } from "@clerk/nextjs";
+import { useUser, SignInButton } from "@clerk/nextjs";
 
 /**
  * More/Discover Page
@@ -151,23 +151,22 @@ function SectionCard({
   // Locked state - requires sign in
   if (!isAuthenticated) {
     return (
-      <Link
-        href="/login"
-        className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group"
-      >
-        <div className="flex items-start justify-between mb-4">
-          <div className={`w-14 h-14 ${section.bgColor} rounded-lg flex items-center justify-center opacity-50`}>
-            <Icon className={`w-7 h-7 ${section.textColor}`} />
+      <SignInButton>
+        <button className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group text-left w-full cursor-pointer">
+          <div className="flex items-start justify-between mb-4">
+            <div className={`w-14 h-14 ${section.bgColor} rounded-lg flex items-center justify-center opacity-50`}>
+              <Icon className={`w-7 h-7 ${section.textColor}`} />
+            </div>
+            <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
+              <Lock className="w-3 h-3" />
+              Sign in
+            </span>
           </div>
-          <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
-            <Lock className="w-3 h-3" />
-            Sign in
-          </span>
-        </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
-          {section.title}
-        </h3>
-      </Link>
+          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+            {section.title}
+          </h3>
+        </button>
+      </SignInButton>
     );
   }
 
