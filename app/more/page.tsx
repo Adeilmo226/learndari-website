@@ -185,6 +185,6 @@ function SectionCard({
       <div className="text-gray-400 group-hover:text-gray-900 group-hover:translate-x-2 transition-all text-2xl">
         →
       </div>
-    </Link> 
+    </Link>
   );
 }
