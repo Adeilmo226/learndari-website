@@ -12,15 +12,15 @@ import {
   Info,
   Lock
 } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useUser } from "@clerk/nextjs";
 
 /**
  * More/Discover Page
  * Additional resources and learning tools
  */
 export default function MorePage() {
-  const { user, loading } = useAuth();
-  const isAuthenticated = !loading && !!user;
+  const { isSignedIn, isLoaded } = useUser();
+  const isAuthenticated = isLoaded && !!isSignedIn;
 
   const sections = [
     {

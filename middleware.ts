@@ -1,97 +1,12 @@
-import { createServerClient } from '@supabase/ssr'
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { clerkMiddleware } from '@clerk/nextjs/server'
 
-export async function middleware(req: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request: req,
-  })
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return req.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => req.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request: req,
-          })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-
-  // Refresh session if expired - required for Server Components
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  // Auth routes (callbacks, etc.) - always accessible
-  const authRoutes = ['/auth']
-
-  // Public routes that don't require authentication
-  const publicRoutes = ['/login', '/signup']
-
-  // Free tier routes - accessible without login (but with limited content)
-  // Routes with allowSubRoutes: true will also match sub-paths (e.g., /vocab/colors/flashcards)
-  const freeTierRoutes = [
-    { path: '/', allowSubRoutes: false },              // Homepage only
-    { path: '/explore', allowSubRoutes: false },       // Search/explore vocabulary
-    { path: '/vocab', allowSubRoutes: false },         // Vocab list (shows locked items)
-    { path: '/vocab/colors', allowSubRoutes: true },   // Free vocab set + flashcards/quiz
-    { path: '/learn', allowSubRoutes: false },         // Learn list (shows locked items)
-    { path: '/learn/level-1', allowSubRoutes: true },  // Free first milestone + quiz
-    { path: '/more', allowSubRoutes: false },          // Discover more list only (sub-routes blocked)
-  ]
-
-  const isAuthRoute = authRoutes.some(route => req.nextUrl.pathname.startsWith(route))
-  const isPublicRoute = publicRoutes.some(route => req.nextUrl.pathname.startsWith(route))
-  const isFreeTierRoute = freeTierRoutes.some(({ path, allowSubRoutes }) => {
-    if (allowSubRoutes) {
-      return req.nextUrl.pathname === path || req.nextUrl.pathname.startsWith(path + '/')
-    }
-    return req.nextUrl.pathname === path
-  })
-
-  // Auth routes are always accessible (callbacks, etc.)
-  if (isAuthRoute) {
-    return supabaseResponse
-  }
-
-  // If user is not signed in and trying to access protected route
-  // Allow public routes and free tier routes without authentication
-  if (!session && !isPublicRoute && !isFreeTierRoute) {
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/login'
-    return NextResponse.redirect(redirectUrl)
-  }
-
-  // If user is signed in and trying to access login/signup, redirect to home
-  if (session && isPublicRoute) {
-    const redirectUrl = req.nextUrl.clone()
-    redirectUrl.pathname = '/'
-    return NextResponse.redirect(redirectUrl)
-  }
-
-  return supabaseResponse
-}
+export default clerkMiddleware()
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public files (public directory)
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp3|wav)$).*)',
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
   ],
 }

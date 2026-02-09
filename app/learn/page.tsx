@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { Lock, CheckCircle, BookOpen, Type, FileText, MessageSquare, Award } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useUser } from "@clerk/nextjs";
 
 /**
  * Learn Page - Reading Dari Path
  * Structured learning path from alphabet to phrases
  */
 export default function LearnPage() {
-  const { user, loading } = useAuth();
-  const isAuthenticated = !loading && !!user;
+  const { isSignedIn, isLoaded } = useUser();
+  const isAuthenticated = isLoaded && !!isSignedIn;
 
   // Track completed levels (will be stored in localStorage later)
   const completedLevels = new Set([1]); // Level 1 is unlocked by default

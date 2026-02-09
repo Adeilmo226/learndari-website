@@ -1,8 +1,7 @@
 'use client'
 
-import Link from 'next/link'
 import { Lock } from 'lucide-react'
-import { useAuth } from '@/contexts/AuthContext'
+import { useUser, SignInButton } from '@clerk/nextjs'
 
 interface LockedContentProps {
   message?: string
@@ -14,10 +13,10 @@ interface LockedContentProps {
  * Returns null if user is authenticated
  */
 export function LockedContent({ message = "Sign in to unlock this content and save your progress" }: LockedContentProps) {
-  const { user, loading } = useAuth()
+  const { isSignedIn, isLoaded } = useUser()
 
   // Don't show lock for authenticated users
-  if (loading || user) {
+  if (!isLoaded || isSignedIn) {
     return null
   }
 
@@ -33,20 +32,11 @@ export function LockedContent({ message = "Sign in to unlock this content and sa
         <p className="text-gray-600 mb-6">
           {message}
         </p>
-        <div className="flex flex-col gap-3">
-          <Link
-            href="/login"
-            className="w-full py-3 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
-          >
+        <SignInButton>
+          <button className="w-full py-3 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors">
             Sign In
-          </Link>
-          <Link
-            href="/login"
-            className="w-full py-3 px-6 border-2 border-gray-200 text-gray-700 font-semibold rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors"
-          >
-            Sign In
-          </Link>
-        </div>
+          </button>
+        </SignInButton>
       </div>
     </div>
   )
@@ -56,6 +46,6 @@ export function LockedContent({ message = "Sign in to unlock this content and sa
  * Hook to check if content should be locked
  */
 export function useIsLocked(): boolean {
-  const { user, loading } = useAuth()
-  return !loading && !user
+  const { isSignedIn, isLoaded } = useUser()
+  return isLoaded && !isSignedIn
 }

@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { BookOpen, Headphones, Lock } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useUser } from "@clerk/nextjs";
 
 /**
  * Vocab Page - Main vocabulary sets selection
  * Users can browse and select different vocabulary sets to study
  */
 export default function VocabPage() {
-  const { user, loading } = useAuth();
+  const { isSignedIn, isLoaded } = useUser();
 
   // Vocabulary sets available
   const vocabSets = [
@@ -40,7 +40,7 @@ export default function VocabPage() {
     },
   ];
 
-  const isAuthenticated = !loading && !!user;
+  const isAuthenticated = isLoaded && !!isSignedIn;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
