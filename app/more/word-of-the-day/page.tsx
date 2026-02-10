@@ -73,7 +73,7 @@ export default function WordOfDayPage() {
               </div>
               <div>
                 <p className="text-white/80 text-sm mb-1">Dari</p>
-                <p className="text-4xl font-bold text-white" dir="rtl">
+                <p className="text-4xl font-bold text-white text-left" dir="rtl">
                   {word.dari}
                 </p>
               </div>
