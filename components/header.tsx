@@ -3,15 +3,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { 
-  BookOpen, 
-  GraduationCap, 
-  Search, 
-  MoreHorizontal,
-  User,
+import {
+  BookOpen,
+  GraduationCap,
+  Search,
   Earth
 } from "lucide-react";
-import UserMenu from "./usermenu";
+import {
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 /**
  * Header Component
@@ -84,8 +87,17 @@ export default function Header() {
               })}
             </nav>
 
-            {/* User Menu Component */}
-            <UserMenu />
+            {/* User Auth */}
+            <SignedOut>
+              <SignInButton>
+                <button className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
+                  Sign In
+                </button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
       </header>

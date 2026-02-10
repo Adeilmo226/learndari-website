@@ -100,8 +100,8 @@ function VocabWordCard({ word }: { word: typeof colorsVocab[0] }) {
 
           {/* Dari */}
           <div>
-            <p className="text-sm text-gray-500 mb-1">دری (Dari)</p>
-            <p className="text-2xl font-semibold text-gray-900 text-right" dir="rtl">
+            <p className="text-sm text-gray-500 mb-1">Dari</p>
+            <p className="text-2xl font-semibold text-gray-900 text-left" dir="rtl">
               {word.dari}
             </p>
           </div>

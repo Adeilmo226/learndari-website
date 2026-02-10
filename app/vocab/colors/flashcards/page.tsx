@@ -148,7 +148,7 @@ export default function FlashcardsPage() {
                   isFlipped ? "visible" : "invisible"
                 }`}
               >
-                <p className="text-red-100 text-lg mb-4">دری (Dari)</p>
+                <p className="text-red-100 text-lg mb-4">Dari</p>
                 <h2 className="text-7xl font-bold text-white mb-4" dir="rtl">
                   {currentWord.dari}
                 </h2>

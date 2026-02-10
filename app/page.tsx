@@ -10,7 +10,18 @@ export default function Home() {
   return (
     <div className="bg-white">
       {/* Section 1: Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <section className="relative overflow-hidden">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="/homepage_background.jpg"
+            alt=""
+            fill
+            className="object-cover opacity-[0.10]"
+            priority
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Text Content */}
           <div className="space-y-6">
@@ -73,6 +84,7 @@ export default function Home() {
             </div>
           </div>
 		</div>
+        </div>
       </section>
 
       {/* Section 2: How It Works */}
