@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Volume2, Calendar, RefreshCw } from "lucide-react";
+import { ArrowLeft, Volume2, Calendar, Star } from "lucide-react";
 import { getWordOfTheDay, type VocabWord } from "@/lib/vocabulary";
 
 /**
@@ -59,43 +59,39 @@ export default function WordOfDayPage() {
       </div>
 
       {/* Word Card */}
-      <div className="bg-gradient-to-br from-purple-500 to-pink-600 rounded-3xl shadow-2xl p-12 text-white mb-8">
-        <div className="text-center">
-          {/* Category Badge */}
-          <span className="inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-medium mb-6">
-            {word.category}
-          </span>
-
-          {/* English Word */}
-          <h2 className="text-5xl font-bold mb-8">{word.english}</h2>
-
-          {/* Dari Word */}
-          <div className="mb-6">
-            <p className="text-purple-100 text-sm mb-2">Dari</p>
-            <p className="text-7xl font-bold mb-4" dir="rtl">
-              {word.dari}
-            </p>
+      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl p-8 text-white mb-8">
+        <div className="flex items-center gap-2 mb-4">
+          <Star className="w-6 h-6" />
+          <h2 className="text-2xl font-bold">Word of the Day</h2>
+        </div>
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border-2 border-white/20">
+          <div className="flex items-center justify-between">
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <p className="text-white/80 text-sm mb-1">English</p>
+                <p className="text-3xl font-bold text-white">{word.english}</p>
+              </div>
+              <div>
+                <p className="text-white/80 text-sm mb-1">Dari</p>
+                <p className="text-4xl font-bold text-white" dir="rtl">
+                  {word.dari}
+                </p>
+              </div>
+              <div>
+                <p className="text-white/80 text-sm mb-1">Pronunciation</p>
+                <p className="text-2xl font-medium text-white italic">{word.phonetic}</p>
+              </div>
+            </div>
+            <button
+              onClick={playAudio}
+              disabled={isPlaying}
+              className={`ml-6 w-16 h-16 rounded-full flex items-center justify-center transition-all ${
+                isPlaying ? "bg-white scale-110" : "bg-white/20 hover:bg-white hover:scale-105"
+              }`}
+            >
+              <Volume2 className={`w-7 h-7 ${isPlaying ? "text-red-600" : "text-white"}`} />
+            </button>
           </div>
-
-          {/* Phonetic */}
-          <div className="mb-8">
-            <p className="text-purple-100 text-sm mb-2">Pronunciation</p>
-            <p className="text-3xl font-medium italic">{word.phonetic}</p>
-          </div>
-
-          {/* Audio Button */}
-          <button
-            onClick={playAudio}
-            disabled={isPlaying}
-            className={`inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-lg transition-all ${
-              isPlaying
-                ? "bg-white text-purple-600 scale-110"
-                : "bg-white/20 hover:bg-white hover:text-purple-600 hover:scale-105"
-            }`}
-          >
-            <Volume2 className="w-6 h-6" />
-            {isPlaying ? "Playing..." : "Hear Pronunciation"}
-          </button>
         </div>
       </div>
 
