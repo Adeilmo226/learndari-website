@@ -22,7 +22,7 @@ export const colorsVocab: VocabWord[] = [
     id: "blue",
     english: "Blue",
     dari: "آبی",
-    phonetic: "abi",
+    phonetic: "ahbee",
   },
   {
     id: "green",
@@ -40,7 +40,7 @@ export const colorsVocab: VocabWord[] = [
     id: "white",
     english: "White",
     dari: "سفید",
-    phonetic: "safed",
+    phonetic: "safeyd",
   },
   {
     id: "black",
@@ -57,20 +57,32 @@ export const colorsVocab: VocabWord[] = [
   {
     id: "purple",
     english: "Purple",
-    dari: "بنفش",
-    phonetic: "banafsh",
+    dari: "یاسمانی",
+    phonetic: "yasamani",
   },
   {
     id: "pink",
     english: "Pink",
-    dari: "صورتی",
-    phonetic: "surati",
+    dari: "گلابی",
+    phonetic: "gulabi",
   },
   {
     id: "brown",
     english: "Brown",
-    dari: "قهوه‌ای",
-    phonetic: "qahwa'i",
+    dari: "نسواری",
+    phonetic: "naswari",
+  },
+  {
+    id: "gold",
+    english: "Gold",
+    dari: "طلایی",
+    phonetic: "talayi",
+  },
+  {
+    id: "gray",
+    english: "Gray",
+    dari: "فولادی",
+    phonetic: "foladi",
   },
 ];
 
