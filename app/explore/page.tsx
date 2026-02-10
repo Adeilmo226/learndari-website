@@ -148,6 +148,7 @@ function WordCard({ word, featured = false }: { word: VocabWord; featured?: bool
               <p className="text-3xl font-bold text-white">{word.english}</p>
             </div>
             <div>
+			  <div className="text-left"></div>
               <p className="text-white/80 text-sm mb-1">Dari</p>
               <p className="text-4xl font-bold text-white " dir="rtl">
                 {word.dari}
