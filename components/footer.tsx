@@ -27,8 +27,13 @@ export default function Footer() {
 
           {/* Column 2: Learn */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Learn</h3>
+            <h3 className="font-semibold text-lg mb-4">Links</h3>
             <ul className="space-y-2">
+              <li>
+                <Link href="/explore" className="text-gray-400 hover:text-white transition-colors">
+                  Explore
+                </Link>
+              </li>
               <li>
                 <Link href="/vocab" className="text-gray-400 hover:text-white transition-colors">
                   Vocabulary
@@ -40,13 +45,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/explore" className="text-gray-400 hover:text-white transition-colors">
-                  Explore Words
-                </Link>
-              </li>
-              <li>
                 <Link href="/more" className="text-gray-400 hover:text-white transition-colors">
-                  More Resources
+                  Discover More
                 </Link>
               </li>
             </ul>
