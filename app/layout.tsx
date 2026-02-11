@@ -51,7 +51,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <Header />
-          <main className="min-h-screen pt-20 pb-24 md:pb-8">
+          <main className="min-h-screen pt-20 pb-24 md:pb-8 flex flex-col">
             {children}
           </main>
           <Footer />
