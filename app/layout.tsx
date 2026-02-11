@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { light } from "@clerk/themes";
+
 import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: light,
+        // Clerk defaults to light mode; no baseTheme needed
         variables: {
           colorPrimary: "#dc2626",
           colorTextOnPrimaryBackground: "#ffffff",
