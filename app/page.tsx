@@ -100,7 +100,14 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1: Learn Vocab */}
+            {/* Card 1: Explore */}
+            <HowItWorksCard
+              icon={<Search className="w-8 h-8" />}
+              title="Explore"
+              description="Search for words in English or Dari from our database"
+              color="bg-blue-50 text-blue-600"
+            />
+            {/* Card 2: Learn Vocab */}
             <HowItWorksCard
               icon={<BookOpen className="w-8 h-8" />}
               title="Learn Vocab"
@@ -108,20 +115,12 @@ export default function Home() {
               color="bg-red-50 text-red-600"
             />
 
-            {/* Card 2: Learn to Read */}
+            {/* Card 3: Learn to Read */}
             <HowItWorksCard
               icon={<GraduationCap className="w-8 h-8" />}
               title="Learn to Read"
               description="Alphabet, sounds, and phrases with native pronunciation"
               color="bg-green-50 text-green-600"
-            />
-
-            {/* Card 3: Explore */}
-            <HowItWorksCard
-              icon={<Search className="w-8 h-8" />}
-              title="Explore"
-              description="Search for words in English or Dari from our database"
-              color="bg-blue-50 text-blue-600"
             />
 
             {/* Card 4: Discover More */}
@@ -156,7 +155,7 @@ export default function Home() {
             <WhyCard
               icon={<Volume2 className="w-6 h-6" />}
               title="Audio-first pronunciation"
-              description="Native speaker audio for every word and phrase"
+              description="Speaker audio for every word and phrase"
             />
 
             {/* Feature 3 */}
@@ -177,7 +176,7 @@ export default function Home() {
           </h2>
           <p className="text-xl text-white/90 mb-8 leading-relaxed">
             We believe everyone should have access to quality Dari language education. 
-            Whether you're reconnecting with your heritage or learning for the first time, 
+            Whether you're reconnecting with your roots or learning for the first time, 
             LearnDari makes it simple, accessible, and enjoyable.
           </p>
           <Link
