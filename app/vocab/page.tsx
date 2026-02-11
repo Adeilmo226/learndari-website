@@ -96,10 +96,10 @@ export default function VocabPage() {
     {
       id: "numbers",
       title: "Numbers",
-      description: "Count from 1 to 20 in Dari",
-      wordCount: 20,
+      description: "Learn to count in Dari from 1 to 1000",
+      wordCount: 38,
       emoji: "🔢",
-      disabled: true,
+      free: true,
     },
     {
       id: "greetings",
