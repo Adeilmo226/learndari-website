@@ -101,6 +101,14 @@ export default function VocabPage() {
       emoji: "🔢",
       free: true,
     },
+    {
+      id: "greetings",
+      title: "Greetings",
+      description: "Learn common greetings and phrases in Dari",
+      wordCount: 10,
+      emoji: "👋🏽",
+      free: true,
+    },
   ];
 
   const isAuthenticated = isLoaded && !!isSignedIn;

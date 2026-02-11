@@ -81,8 +81,8 @@ export const bodyPartsVocab: VocabWord[] = [
   {
     id: "ankle",
     english: "Ankle",
-    dari: "بوکلک پای",
-    phonetic: "bookulak paai",
+    dari: "بوجلک پای",
+    phonetic: "boojulak paai",
   },
 ];
 
