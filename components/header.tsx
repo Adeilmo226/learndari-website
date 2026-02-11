@@ -29,7 +29,7 @@ export default function Header() {
 	{ name: "Explore", href: "/explore", icon: Search },
     { name: "Vocab", href: "/vocab", icon: BookOpen },
     { name: "Learn", href: "/learn", icon: GraduationCap },
-    { name: "Discover", href: "/more", icon: Earth },
+    { name: "Culture", href: "/more", icon: Earth },
   ];
 
   /**

@@ -116,3 +116,14 @@ export function getProverbCategories(): string[] {
 export function getRandomProverb(): Proverb {
   return dariProverbs[Math.floor(Math.random() * dariProverbs.length)];
 }
+
+/**
+ * Get the proverb of the day (consistent for the entire day)
+ */
+export function getDailyProverb(): Proverb {
+  const now = new Date();
+  const dayOfYear = Math.floor(
+    (now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000
+  );
+  return dariProverbs[dayOfYear % dariProverbs.length];
+}

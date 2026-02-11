@@ -46,7 +46,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/more" className="text-gray-400 hover:text-white transition-colors">
-                  Discover More
+                  Cultural Corner
                 </Link>
               </li>
             </ul>
