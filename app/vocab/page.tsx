@@ -101,14 +101,6 @@ export default function VocabPage() {
       emoji: "🔢",
       free: true,
     },
-    {
-      id: "greetings",
-      title: "Greetings",
-      description: "Common greetings and phrases",
-      wordCount: 15,
-      emoji: "👋",
-      disabled: true,
-    },
   ];
 
   const isAuthenticated = isLoaded && !!isSignedIn;
