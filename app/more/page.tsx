@@ -6,7 +6,6 @@ import {
   Calendar,
   MessageCircle,
   Landmark,
-  BookOpen,
   MessageSquare,
   Info,
   Lock,
@@ -26,15 +25,6 @@ export default function MorePage() {
 
   const cultureItems = [
     {
-      id: "word-of-the-day",
-      title: "Word of the Day",
-      description: "Learn a new Dari word every day",
-      icon: Calendar,
-      href: "/more/word-of-the-day",
-      bgColor: "bg-purple-100",
-      textColor: "text-purple-600",
-    },
-    {
       id: "proverbs",
       title: "Dari Proverbs",
       description: "Explore traditional Afghan wisdom and sayings",
@@ -53,13 +43,13 @@ export default function MorePage() {
       textColor: "text-yellow-600",
     },
     {
-      id: "resources",
-      title: "Learning Resources",
-      description: "External materials, books, and podcasts",
-      icon: BookOpen,
-      href: "/more/resources",
-      bgColor: "bg-indigo-100",
-      textColor: "text-indigo-600",
+      id: "word-of-the-day",
+      title: "Word of the Day",
+      description: "Learn a new Dari word every day",
+      icon: Calendar,
+      href: "/more/word-of-the-day",
+      bgColor: "bg-purple-100",
+      textColor: "text-purple-600",
     },
   ];
 
@@ -107,7 +97,7 @@ export default function MorePage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/10" />
         </div>
 
         {/* Content */}
@@ -145,13 +135,23 @@ export default function MorePage() {
           </div>
 
           <div className="mt-6 pt-4 border-t border-white/20">
-            <Link
-              href="/more/proverbs"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors"
-            >
-              Browse all proverbs
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            {isAuthenticated ? (
+              <Link
+                href="/more/proverbs"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors"
+              >
+                Browse all proverbs
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            ) : (
+              <SignInButton>
+                <button className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors cursor-pointer">
+                  <Lock className="w-3.5 h-3.5" />
+                  Sign in to browse all proverbs
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </SignInButton>
+            )}
           </div>
         </div>
       </div>
