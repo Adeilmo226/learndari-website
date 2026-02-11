@@ -169,26 +169,24 @@ export default function Home() {
       </section>
 
       {/* Section 4: About Teaser */}
-      <section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24 flex-1 flex items-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Why LearnDari Exists
-          </h2>
-          <p className="text-xl text-white/90 mb-8 leading-relaxed">
-        Finding quality Dari resources online shouldn't be this hard. That's why 
-		LearnDari exists—to preserve our language for future generations and provide 
-		the tools that many of us wished we had growing up. Whether you're a heritage 
-		speaker reconnecting with your roots or learning for the first time, we're 
-		here to help keep Dari alive.
-          </p>
-          <Link
-            href="/more/about"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
-          >
-            Read Our Mission
-          </Link>
-        </div>
-      </section>
+		<section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24">
+		<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+			Why LearnDari Exists
+			</h2>
+			<p className="text-xl text-white/90 mb-8 leading-relaxed">
+			Finding quality Dari resources online shouldn't be this hard.
+			LearnDari was built to preserve our language for future generations and give 
+			heritage speakers the tools to reconnect with their roots.
+			</p>
+			<Link
+			href="/more/about"
+			className="inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
+			>
+			Read Our Mission
+			</Link>
+		</div>
+		</section>
     </div>
   );
 }
