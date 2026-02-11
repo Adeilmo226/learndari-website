@@ -107,7 +107,7 @@ export default function MorePage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/60" />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
 
         {/* Content */}
@@ -177,7 +177,7 @@ export default function MorePage() {
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
           About & Support
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {supportItems.map((item) => (
             <SectionCard
               key={item.id}
