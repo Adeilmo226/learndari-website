@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
   Calendar,
   MessageCircle,
@@ -96,29 +97,63 @@ export default function MorePage() {
       </div>
 
       {/* Proverb of the Day Banner */}
-      <div className="bg-gradient-to-br from-red-500 to-red-700 rounded-2xl shadow-xl p-6 sm:p-8 mb-12 text-white">
-        <p className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-4">
-          Proverb of the Day
-        </p>
-        <p className="text-2xl sm:text-3xl font-bold mb-2 text-right" dir="rtl">
-          {dailyProverb.dari}
-        </p>
-        <p className="text-lg text-white/80 italic mb-4">
-          {dailyProverb.phonetic}
-        </p>
-        <p className="text-xl font-semibold mb-2">
-          &ldquo;{dailyProverb.english}&rdquo;
-        </p>
-        <p className="text-white/80 mb-6">
-          {dailyProverb.meaning}
-        </p>
-        <Link
-          href="/more/proverbs"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors"
-        >
-          Browse all proverbs
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+      <div className="relative rounded-2xl shadow-xl overflow-hidden mb-12">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/afghan_landscape.avif"
+            alt=""
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+
+        {/* Content */}
+        <div className="relative p-6 sm:p-8 text-white">
+          <p className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-6">
+            Proverb of the Day
+          </p>
+
+          <div className="flex flex-col md:flex-row md:items-start gap-6">
+            {/* Right side: Dari + Phonetic */}
+            <div className="md:w-1/2 md:order-2">
+              <p className="text-2xl sm:text-3xl font-bold mb-2 text-right" dir="rtl">
+                {dailyProverb.dari}
+              </p>
+              <p className="text-lg text-white/70 italic text-right">
+                {dailyProverb.phonetic}
+              </p>
+            </div>
+
+            {/* Left side: English + Meaning */}
+            <div className="md:w-1/2 md:order-1">
+              <p className="text-xl font-semibold mb-3">
+                &ldquo;{dailyProverb.english}&rdquo;
+              </p>
+              <div className="bg-white/10 rounded-lg p-4 mb-4">
+                <p className="text-white/90">
+                  <span className="font-semibold text-white">Meaning:</span>{" "}
+                  {dailyProverb.meaning}
+                </p>
+              </div>
+              <span className="inline-block px-3 py-1 bg-white/20 text-white text-sm font-medium rounded-full">
+                {dailyProverb.category}
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-6 pt-4 border-t border-white/20">
+            <Link
+              href="/more/proverbs"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors"
+            >
+              Browse all proverbs
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Culture & Language Section */}
@@ -179,7 +214,7 @@ function SectionCard({
   if (!isAuthenticated) {
     return (
       <SignInButton>
-        <button className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group text-left w-full cursor-pointer">
+        <button className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group text-left w-full cursor-pointer h-full flex flex-col">
           <div className="flex items-start justify-between mb-4">
             <div
               className={`w-14 h-14 ${section.bgColor} rounded-lg flex items-center justify-center opacity-50`}
@@ -194,6 +229,7 @@ function SectionCard({
           <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
             {section.title}
           </h3>
+          <p className="text-gray-600 mt-auto">{section.description}</p>
         </button>
       </SignInButton>
     );
@@ -202,7 +238,7 @@ function SectionCard({
   return (
     <Link
       href={section.href}
-      className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all group"
+      className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-gray-400 hover:shadow-xl transition-all group h-full flex flex-col"
     >
       <div
         className={`w-14 h-14 ${section.bgColor} rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
@@ -213,7 +249,7 @@ function SectionCard({
         {section.title}
       </h3>
       <p className="text-gray-600 mb-4">{section.description}</p>
-      <div className="text-gray-400 group-hover:text-gray-900 group-hover:translate-x-2 transition-all text-2xl">
+      <div className="text-gray-400 group-hover:text-gray-900 group-hover:translate-x-2 transition-all text-2xl mt-auto">
         →
       </div>
     </Link>
