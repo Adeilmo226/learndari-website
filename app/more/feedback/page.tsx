@@ -163,33 +163,24 @@ export default function FeedbackPage() {
         </div>
       )}
 
-      {/* Contact Info */}
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl p-6 border-2 border-teal-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">
-            📧 Direct Contact
-          </h3>
-          <p className="text-gray-700 mb-2">
-            For urgent matters or detailed inquiries:
-          </p>
-          <a
-            href="mailto:contact@learndari.com"
-            className="text-teal-600 font-semibold hover:text-teal-700"
-          >
-            contact@learndari.com
-          </a>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">
-            💡 What We'd Love to Hear
-          </h3>
-          <ul className="text-gray-700 space-y-1 text-sm">
-            <li>• Feature requests</li>
-            <li>• Content suggestions</li>
-            <li>• Bug reports</li>
-            <li>• General feedback</li>
-          </ul>
+      {/* What We'd Love to Hear */}
+      <div className="mt-12 bg-green-50 rounded-xl p-8 border-2 border-green-200">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">
+          What We'd Love to Hear
+        </h3>
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
+            <p className="font-semibold text-gray-900">Feature requests</p>
+          </div>
+          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
+            <p className="font-semibold text-gray-900">Content suggestions</p>
+          </div>
+          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
+            <p className="font-semibold text-gray-900">Bug reports</p>
+          </div>
+          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
+            <p className="font-semibold text-gray-900">General feedback</p>
+          </div>
         </div>
       </div>
     </div>

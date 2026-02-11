@@ -169,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* Section 4: About Teaser */}
-		<section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24">
+		<section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24 min-h-[50vh] flex items-center">
 		<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
 			Why LearnDari Exists

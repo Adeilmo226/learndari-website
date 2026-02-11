@@ -13,9 +13,6 @@ export default function TermsOfServicePage() {
       </Link>
 
       <div className="text-center mb-12">
-        <div className="flex justify-center mb-4">
-          <FileText className="w-12 h-12 text-red-600" />
-        </div>
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           Terms of Service
         </h1>
