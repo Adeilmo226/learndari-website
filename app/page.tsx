@@ -8,7 +8,7 @@ import { BookOpen, GraduationCap, Search, Sparkles, Volume2, Users, Heart } from
  */
 export default function Home() {
   return (
-    <div className="bg-white flex-1 flex flex-col">
+    <div className="bg-white min-h-[calc(100vh-5rem-6rem)] md:min-h-[calc(100vh-5rem-2rem)] flex flex-col">
       {/* Section 1: Hero */}
       <section className="relative overflow-hidden">
         {/* Background Image Overlay */}
@@ -169,7 +169,7 @@ export default function Home() {
       </section>
 
       {/* Section 4: About Teaser */}
-		<section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24 min-h-[50vh] flex items-center">
+		<section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24 flex-1 flex items-center">
 		<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
 			<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
 			Why LearnDari Exists
