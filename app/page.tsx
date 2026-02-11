@@ -29,7 +29,7 @@ export default function Home() {
               The easiest way to learn Dari online
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Learn words, pronunciation, and reading. Built for real learners.
+              Learn words, pronunciation, and reading.
             </p>
             
             {/* CTA Buttons */}
@@ -49,24 +49,6 @@ export default function Home() {
                 Learn to Read Dari
               </Link>
             </div>
-            {/* <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link
-                href="/explore"
-                className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl"
-              >
-                <Search className="w-5 h-5" />
-                Look up a word
-              </Link>
-			    <Link
-                href="/more"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl"
-              >
-                <GraduationCap className="w-5 h-5" />
-                Discover More
-              </Link>
-			  
-
-            </div> */}
 			
           </div>
 

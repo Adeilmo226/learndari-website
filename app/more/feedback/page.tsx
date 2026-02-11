@@ -163,26 +163,6 @@ export default function FeedbackPage() {
         </div>
       )}
 
-      {/* What We'd Love to Hear */}
-      <div className="mt-12 bg-green-50 rounded-xl p-8 border-2 border-green-200">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">
-          What We'd Love to Hear
-        </h3>
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
-            <p className="font-semibold text-gray-900">Feature requests</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
-            <p className="font-semibold text-gray-900">Content suggestions</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
-            <p className="font-semibold text-gray-900">Bug reports</p>
-          </div>
-          <div className="bg-white rounded-lg p-4 border border-green-200 text-center">
-            <p className="font-semibold text-gray-900">General feedback</p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

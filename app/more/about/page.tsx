@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Heart, Target, Users, Sparkles } from "lucide-react";
+import { ArrowLeft, Target, Volume2, Monitor, GraduationCap } from "lucide-react";
 
 /**
  * About Page
@@ -22,134 +22,124 @@ export default function AboutPage() {
           About LearnDari
         </h1>
         <p className="text-xl text-gray-600">
-          Our mission to make Dari accessible to everyone
+          Keeping our language alive for the next generation
         </p>
       </div>
 
-      {/* Mission Statement */}
+      {/* The Problem */}
       <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-3xl shadow-2xl p-12 text-white mb-12">
-        <div className="flex items-center gap-4 mb-6">
-          <Heart className="w-12 h-12" />
-          <h2 className="text-3xl font-bold">Our Mission</h2>
+        <h2 className="text-3xl font-bold mb-6">We saw a problem.</h2>
+        <div className="space-y-4 text-xl leading-relaxed text-white/90">
+          <p>
+            If you've ever tried to learn Dari online, you already know — there's almost
+            nothing out there. The resources that do exist are often outdated, expensive,
+            or built for Farsi (Iranian Persian) and just close enough to be confusing.
+          </p>
+          <p>
+            Dari and Farsi are similar languages, but they're not the same. The pronunciation
+            is different. The vocabulary has its own flavor. The culture behind the words is
+            distinctly Afghan. We deserved something built specifically for us.
+          </p>
         </div>
-        <p className="text-xl leading-relaxed">
-          We believe everyone should have access to quality Dari language education. 
-          Whether you're reconnecting with your heritage, learning for travel, or exploring 
-          a new culture, LearnDari makes it simple, accessible, and enjoyable.
-        </p>
       </div>
 
       {/* Why We Built This */}
       <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
-        <div className="flex items-center gap-4 mb-6">
-          <Target className="w-10 h-10 text-red-600" />
-          <h2 className="text-3xl font-bold text-gray-900">Why LearnDari?</h2>
-        </div>
-        <div className="space-y-4 text-gray-700 leading-relaxed">
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">Why we built this</h2>
+        <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
           <p>
-            Dari is one of the official languages of Afghanistan, spoken by millions worldwide. 
-            Yet there's a significant gap in accessible, modern learning resources specifically 
-            designed for Dari.
+            LearnDari started because we were tired of watching our language slip away.
+            Too many of us grew up understanding Dari but never learning to read or write it.
+            Too many of us wished we had better tools when we were younger.
           </p>
           <p>
-            Most language learning platforms focus on more widely-studied languages, leaving 
-            Dari learners with limited options. Existing resources are often outdated, expensive, 
-            or not designed with modern learning principles in mind.
+            We're building what we wish existed — a free, modern platform tailored specifically
+            for Afghan Dari. Not adapted from Farsi. Not a generic translation app. Something
+            made with our language, our pronunciation, and our culture in mind.
           </p>
           <p>
-            LearnDari was created to fill this gap - providing a free, audio-first platform 
-            that makes learning Dari engaging and effective for everyone.
+            Dari is spoken by millions of people around the world, but it doesn't get the same
+            attention as other languages on major learning platforms. We're here to change that.
+            We're committed to making sure Dari doesn't become a dying language and that we
+            continue to keep our heritage alive.
           </p>
         </div>
       </div>
 
       {/* Who It's For */}
       <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
-        <div className="flex items-center gap-4 mb-6">
-          <Users className="w-10 h-10 text-green-600" />
-          <h2 className="text-3xl font-bold text-gray-900">Who It's For</h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Heritage Learners</h3>
-            <p className="text-gray-700">
-              Reconnect with your roots and communicate with family members.
-            </p>
-          </div>
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Complete Beginners</h3>
-            <p className="text-gray-700">
-              Start from scratch with our structured, step-by-step approach.
-            </p>
-          </div>
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Travelers</h3>
-            <p className="text-gray-700">
-              Learn practical phrases and cultural insights for your journey.
-            </p>
-          </div>
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Culture Enthusiasts</h3>
-            <p className="text-gray-700">
-              Explore Persian literature, poetry, and Afghan culture.
-            </p>
-          </div>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">Who it's for</h2>
+        <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+          <p>
+            Whether you're a heritage speaker trying to reconnect with your roots, a complete
+            beginner curious about the language, or someone who grew up hearing Dari at home
+            but never got the chance to formally learn it — this is for you.
+          </p>
+          <p>
+            We built LearnDari for the kid who wished they could read their grandparents' letters,
+            for the adult reconnecting with family, and for anyone who believes this language is
+            worth preserving.
+          </p>
         </div>
       </div>
 
       {/* What Makes Us Different */}
       <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
-        <div className="flex items-center gap-4 mb-6">
-          <Sparkles className="w-10 h-10 text-yellow-600" />
-          <h2 className="text-3xl font-bold text-gray-900">What Makes Us Different</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-6">What makes us different</h2>
+        <div className="grid sm:grid-cols-2 gap-6">
+          <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
+            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-3">
+              <Target className="w-5 h-5 text-red-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-1">Dari-Specific</h3>
+            <p className="text-gray-600">
+              Built exclusively for Dari, not adapted from Farsi or Persian resources.
+            </p>
+          </div>
+          <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
+            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mb-3">
+              <Volume2 className="w-5 h-5 text-blue-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-1">Audio-First</h3>
+            <p className="text-gray-600">
+              Every word includes native pronunciation to help you sound natural.
+            </p>
+          </div>
+          <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
+              <Monitor className="w-5 h-5 text-green-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-1">Modern & Accessible</h3>
+            <p className="text-gray-600">
+              Clean interface, works on any device, completely free.
+            </p>
+          </div>
+          <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
+            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
+              <GraduationCap className="w-5 h-5 text-purple-600" />
+            </div>
+            <h3 className="text-lg font-bold text-gray-900 mb-1">Structured Learning</h3>
+            <p className="text-gray-600">
+              Clear progression from alphabet to sentences, with quizzes to track your progress.
+            </p>
+          </div>
         </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start gap-3">
-            <span className="text-2xl">🎯</span>
-            <div>
-              <strong className="text-gray-900">Dari-Specific:</strong> Built exclusively for Dari, 
-              not adapted from Farsi or Persian resources.
-            </div>
-          </li>
-          <li className="flex items-start gap-3">
-            <span className="text-2xl">🔊</span>
-            <div>
-              <strong className="text-gray-900">Audio-First:</strong> Every word includes native 
-              pronunciation to help you sound natural.
-            </div>
-          </li>
-          <li className="flex items-start gap-3">
-            <span className="text-2xl">📱</span>
-            <div>
-              <strong className="text-gray-900">Modern & Accessible:</strong> Clean interface, 
-              works on any device, completely free.
-            </div>
-          </li>
-          <li className="flex items-start gap-3">
-            <span className="text-2xl">🎓</span>
-            <div>
-              <strong className="text-gray-900">Structured Learning:</strong> Clear progression 
-              from alphabet to sentences, with quizzes to track your progress.
-            </div>
-          </li>
-        </ul>
       </div>
 
       {/* Call to Action */}
-      <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-xl p-8 text-center">
+      <div className="bg-gray-50 border-2 border-gray-200 rounded-xl p-8 text-center">
         <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          Join Our Learning Community
+          Start your journey
         </h3>
-        <p className="text-gray-700 mb-6">
-          Start your Dari learning journey today and become part of a growing community 
-          of language learners connecting with Afghan culture.
+        <p className="text-gray-700 text-lg mb-6">
+          Every word you learn is a step toward keeping Dari alive.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/vocab"
             className="px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold"
           >
-            Start Learning →
+            Start Learning
           </Link>
           <Link
             href="/more/feedback"
