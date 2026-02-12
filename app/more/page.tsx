@@ -15,7 +15,7 @@ import { useUser, SignInButton } from "@clerk/nextjs";
 import { getDailyProverb } from "@/lib/proverbs";
 
 /**
- * Cultural Corner Page
+ * Discover Page
  * Cultural resources and support links
  */
 export default function MorePage() {
@@ -79,7 +79,7 @@ export default function MorePage() {
       {/* Header */}
       <div className="text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Cultural Corner
+          Discover
         </h1>
         <p className="text-xl text-gray-600">
           Explore Afghan culture, wisdom, and traditions

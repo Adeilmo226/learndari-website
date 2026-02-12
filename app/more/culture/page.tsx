@@ -137,7 +137,7 @@ export default function CulturePage() {
         className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
-        Back to Cultural Corner
+        Discover More
       </Link>
 
       <div className="text-center mb-12">
@@ -154,18 +154,6 @@ export default function CulturePage() {
         {culturalTopics.map((topic) => (
           <CulturalTopicCard key={topic.id} topic={topic} />
         ))}
-      </div>
-
-      {/* Footer Note */}
-      <div className="mt-12 bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-xl p-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">
-          Learning Language Through Culture
-        </h3>
-        <p className="text-gray-700 leading-relaxed">
-          Understanding Afghan culture enriches your language learning experience. Language and culture are deeply interconnected - 
-          knowing cultural context helps you use the language more naturally and communicate more effectively. As you learn Dari, 
-          you're also gaining insight into a rich cultural heritage spanning thousands of years.
-        </p>
       </div>
     </div>
   );
