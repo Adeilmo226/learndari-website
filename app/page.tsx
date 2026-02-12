@@ -8,7 +8,7 @@ import { BookOpen, GraduationCap, Search, Sparkles, Volume2, Users, Heart } from
  */
 export default function Home() {
   return (
-    <div className="bg-white min-h-screen flex flex-col">
+    <div className="bg-white flex-1 flex flex-col">
       {/* Section 1: Hero */}
       <section className="relative overflow-hidden">
         {/* Background Image Overlay */}

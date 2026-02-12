@@ -87,7 +87,7 @@ export default function MorePage() {
       </div>
 
       {/* Proverb of the Day Banner */}
-      <div className="relative rounded-2xl shadow-xl overflow-hidden mb-12 bg-gray-900">
+      <div className="relative rounded-2xl shadow-xl overflow-hidden mb-12 bg-white">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
@@ -100,8 +100,8 @@ export default function MorePage() {
         </div>
 
         {/* Content */}
-        <div className="relative p-6 sm:p-8 text-white">
-          <p className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-6">
+        <div className="relative p-6 sm:p-8 text-gray-900">
+          <p className="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-6">
             Proverb of the Day
           </p>
 
@@ -111,7 +111,7 @@ export default function MorePage() {
               <p className="text-2xl sm:text-3xl font-bold mb-2 text-right" dir="rtl">
                 {dailyProverb.dari}
               </p>
-              <p className="text-lg text-white/70 italic text-right">
+              <p className="text-lg text-gray-500 italic text-right">
                 {dailyProverb.phonetic}
               </p>
             </div>
@@ -121,30 +121,30 @@ export default function MorePage() {
               <p className="text-xl font-semibold mb-3">
                 &ldquo;{dailyProverb.english}&rdquo;
               </p>
-              <div className="bg-white/10 rounded-lg p-4 mb-4">
-                <p className="text-white/90">
-                  <span className="font-semibold text-white">Meaning:</span>{" "}
+              <div className="bg-gray-100 rounded-lg p-4 mb-4">
+                <p className="text-gray-700">
+                  <span className="font-semibold text-gray-900">Meaning:</span>{" "}
                   {dailyProverb.meaning}
                 </p>
               </div>
-              <span className="inline-block px-3 py-1 bg-white/20 text-white text-sm font-medium rounded-full">
+              <span className="inline-block px-3 py-1 bg-gray-200 text-gray-700 text-sm font-medium rounded-full">
                 {dailyProverb.category}
               </span>
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/20">
+          <div className="mt-6 pt-4 border-t border-gray-200">
             {isAuthenticated ? (
               <Link
                 href="/more/proverbs"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors"
               >
                 Browse all proverbs
                 <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (
               <SignInButton>
-                <button className="inline-flex items-center gap-2 text-sm font-semibold text-white/90 hover:text-white transition-colors cursor-pointer">
+                <button className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors cursor-pointer">
                   <Lock className="w-3.5 h-3.5" />
                   Sign in to browse all proverbs
                   <ArrowRight className="w-4 h-4" />
