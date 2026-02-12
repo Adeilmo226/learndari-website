@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
-import { letterForms, type LetterForms } from "@/lib/alphabet";
+import { dariAlphabet, letterForms, type LetterForms } from "@/lib/alphabet";
 import { useUser } from "@clerk/nextjs";
 import { saveLevelProgress } from "@/lib/progress";
 
@@ -273,6 +273,14 @@ export default function Level2QuizPage() {
                   ? "✓ Correct!"
                   : `✗ Incorrect. The correct answer is ${currentQuestion.correctAnswer}`}
               </p>
+              {(() => {
+                const match = dariAlphabet.find((l) => l.name === currentQuestion.correctAnswer);
+                return match ? (
+                  <p className="text-sm text-gray-600 mt-2">
+                    Phonetic: <span className="italic">{match.phonetic}</span>
+                  </p>
+                ) : null;
+              })()}
             </div>
           )}
         </div>

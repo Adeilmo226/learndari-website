@@ -240,6 +240,9 @@ export default function Level3QuizPage() {
                   ? "✓ Correct!"
                   : `✗ Incorrect. The correct answer is ${currentQuestion.correctAnswer}`}
               </p>
+              <p className="text-sm text-gray-600 mt-2">
+                Phonetic: <span className="italic">{currentQuestion.word.phonetic}</span>
+              </p>
             </div>
           )}
         </div>
