@@ -1,70 +1,102 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Lock, CheckCircle, BookOpen, Type, FileText, MessageSquare, Award } from "lucide-react";
 import { useUser, SignInButton } from "@clerk/nextjs";
+import { fetchLevelProgress, type LevelProgressData } from "@/lib/progress";
 
 /**
  * Learn Page - Reading Dari Path
  * Structured learning path from alphabet to phrases
  */
 export default function LearnPage() {
-  const { isSignedIn, isLoaded } = useUser();
+  const { isSignedIn, isLoaded, user } = useUser();
   const isAuthenticated = isLoaded && !!isSignedIn;
+  const [progressMap, setProgressMap] = useState<Map<string, LevelProgressData>>(new Map());
+  const [loadingProgress, setLoadingProgress] = useState(true);
 
-  // Track completed levels (will be stored in localStorage later)
-  const completedLevels = new Set([1]); // Level 1 is unlocked by default
+  // Fetch progress from Supabase
+  useEffect(() => {
+    if (user?.id) {
+      fetchLevelProgress(user.id).then((data) => {
+        setProgressMap(data);
+        setLoadingProgress(false);
+      });
+    } else {
+      setLoadingProgress(false);
+    }
+  }, [user?.id]);
+
+  // Determine completed levels from DB
+  const isLevelCompleted = (levelId: string) => {
+    const progress = progressMap.get(levelId);
+    return progress?.completed_at != null && (progress?.quiz_score ?? 0) >= 80;
+  };
+
+  const isLevelUnlocked = (levelId: string, previousLevelId?: string) => {
+    if (!previousLevelId) return true; // Level 1 always unlocked
+    return isLevelCompleted(previousLevelId);
+  };
+
+  const completedCount = ["level-1", "level-2", "level-3", "level-4", "level-5"]
+    .filter(isLevelCompleted).length;
 
   const levels = [
     {
-      id: 1,
+      id: "level-1",
+      number: 1,
       title: "Alphabet Basics",
       description: "Learn all 32 Dari letters with sounds",
       icon: Type,
       href: "/learn/level-1",
       color: "from-red-500 to-red-600",
-      unlocked: true,
-      free: true, // Free tier - accessible without login
+      free: true,
+      previousLevel: undefined,
     },
     {
-      id: 2,
+      id: "level-2",
+      number: 2,
       title: "Letter Forms",
       description: "How letters change in different positions",
       icon: FileText,
       href: "/learn/level-2",
       color: "from-green-500 to-green-600",
-      unlocked: completedLevels.has(1),
       free: false,
+      previousLevel: "level-1",
     },
     {
-      id: 3,
+      id: "level-3",
+      number: 3,
       title: "Simple Words",
       description: "Practice reading 2-3 letter words",
       icon: BookOpen,
       href: "/learn/level-3",
       color: "from-blue-500 to-blue-600",
-      unlocked: completedLevels.has(2),
       free: false,
+      previousLevel: "level-2",
     },
     {
-      id: 4,
+      id: "level-4",
+      number: 4,
       title: "Common Words",
       description: "Build vocabulary with everyday words",
       icon: MessageSquare,
       href: "/learn/level-4",
       color: "from-purple-500 to-purple-600",
-      unlocked: completedLevels.has(3),
       free: false,
+      previousLevel: "level-3",
     },
     {
-      id: 5,
+      id: "level-5",
+      number: 5,
       title: "Short Phrases",
       description: "Read and understand simple sentences",
       icon: Award,
       href: "/learn/level-5",
       color: "from-yellow-500 to-yellow-600",
-      unlocked: completedLevels.has(4),
       free: false,
+      previousLevel: "level-4",
     },
   ];
 
@@ -89,7 +121,7 @@ export default function LearnPage() {
           </div>
           <div className="text-right">
             <div className="text-4xl font-bold text-gray-900">
-              {completedLevels.size}/{levels.length}
+              {loadingProgress ? "..." : completedCount}/{levels.length}
             </div>
             <div className="text-sm text-gray-500">Levels Complete</div>
           </div>
@@ -97,57 +129,57 @@ export default function LearnPage() {
         <div className="w-full bg-gray-200 rounded-full h-3">
           <div
             className="bg-gradient-to-r from-red-600 to-green-600 h-full rounded-full transition-all duration-500"
-            style={{ width: `${(completedLevels.size / levels.length) * 100}%` }}
+            style={{ width: `${(completedCount / levels.length) * 100}%` }}
           />
         </div>
       </div>
 
       {/* Learning Path */}
       <div className="max-w-4xl mx-auto space-y-6">
-        {levels.map((level, index) => (
-          <LevelCard
-            key={level.id}
-            level={level}
-            completed={completedLevels.has(level.id)}
-            isLast={index === levels.length - 1}
-            isAuthenticated={isAuthenticated}
-          />
-        ))}
+        {levels.map((level, index) => {
+          const completed = isLevelCompleted(level.id);
+          const unlocked = isLevelUnlocked(level.id, level.previousLevel);
+          const requiresSignIn = !level.free && !isAuthenticated;
+
+          return (
+            <LevelCard
+              key={level.id}
+              level={level}
+              completed={completed}
+              unlocked={unlocked}
+              requiresSignIn={requiresSignIn}
+              isLast={index === levels.length - 1}
+            />
+          );
+        })}
       </div>
     </div>
   );
 }
 
-/**
- * Level Card Component
- * Displays individual level with lock/unlock state
- */
 function LevelCard({
   level,
   completed,
+  unlocked,
+  requiresSignIn,
   isLast,
-  isAuthenticated,
 }: {
   level: {
-    id: number;
+    number: number;
     title: string;
     description: string;
     icon: any;
     href: string;
     color: string;
-    unlocked: boolean;
-    free: boolean;
   };
   completed: boolean;
+  unlocked: boolean;
+  requiresSignIn: boolean;
   isLast: boolean;
-  isAuthenticated: boolean;
 }) {
   const Icon = level.icon;
 
-  // Check if level requires sign in (not free and user not authenticated)
-  const requiresSignIn = !level.free && !isAuthenticated;
-
-  // Locked state - requires sign in
+  // Requires sign in
   if (requiresSignIn) {
     return (
       <div className="relative">
@@ -160,7 +192,7 @@ function LevelCard({
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <span className="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-full">
-                    Level {level.id}
+                    Level {level.number}
                   </span>
                   <span className="px-3 py-1 bg-red-100 text-red-600 text-sm font-medium rounded-full flex items-center gap-1">
                     <Lock className="w-3 h-3" />
@@ -187,8 +219,8 @@ function LevelCard({
     );
   }
 
-  // Progress locked state - previous level not completed
-  if (!level.unlocked) {
+  // Progress locked
+  if (!unlocked) {
     return (
       <div className="relative">
         <div className="bg-gray-100 p-6 rounded-2xl border-2 border-gray-200 opacity-60">
@@ -199,7 +231,7 @@ function LevelCard({
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
                 <span className="px-3 py-1 bg-gray-200 text-gray-600 text-sm font-medium rounded-full">
-                  Level {level.id}
+                  Level {level.number}
                 </span>
                 <span className="text-gray-500 text-sm">Complete previous level first</span>
               </div>
@@ -217,6 +249,7 @@ function LevelCard({
     );
   }
 
+  // Unlocked / Completed
   return (
     <div className="relative">
       <Link
@@ -234,7 +267,7 @@ function LevelCard({
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
               <span className={`px-3 py-1 bg-gradient-to-r ${level.color} text-white text-sm font-medium rounded-full`}>
-                Level {level.id}
+                Level {level.number}
               </span>
               {completed && (
                 <span className="text-green-600 text-sm font-medium">✓ Completed</span>
@@ -252,7 +285,7 @@ function LevelCard({
       </Link>
       {!isLast && (
         <div className="flex justify-center py-4">
-          <div className={`w-1 h-8 rounded-full ${level.unlocked ? 'bg-gradient-to-b from-gray-300 to-gray-400' : 'bg-gray-200'}`} />
+          <div className={`w-1 h-8 rounded-full ${unlocked ? 'bg-gradient-to-b from-gray-300 to-gray-400' : 'bg-gray-200'}`} />
         </div>
       )}
     </div>

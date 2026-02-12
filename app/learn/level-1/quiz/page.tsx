@@ -4,24 +4,41 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, CheckCircle, XCircle } from "lucide-react";
 import { dariAlphabet, type DariLetter } from "@/lib/alphabet";
+import { useUser } from "@clerk/nextjs";
+import { saveLevelProgress } from "@/lib/progress";
 
 /**
  * Level 1 Quiz: Alphabet Recognition
  * Test knowledge of Dari letters
  */
 export default function Level1QuizPage() {
+  const { user } = useUser();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [quizComplete, setQuizComplete] = useState(false);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [progressSaved, setProgressSaved] = useState(false);
 
   // Generate quiz questions on mount
   useEffect(() => {
     const generatedQuestions = generateQuizQuestions();
     setQuestions(generatedQuestions);
   }, []);
+
+  // Save progress when quiz is completed and passed
+  useEffect(() => {
+    if (quizComplete && !progressSaved) {
+      const percentage = Math.round((score / questions.length) * 100);
+      const passed = percentage >= 80;
+      if (passed && user?.id) {
+        saveLevelProgress(user.id, "level-1", percentage, "level-2").then(() => {
+          setProgressSaved(true);
+        });
+      }
+    }
+  }, [quizComplete, progressSaved, score, questions.length, user?.id]);
 
   if (questions.length === 0) {
     return <div>Loading quiz...</div>;
@@ -30,23 +47,15 @@ export default function Level1QuizPage() {
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
-  /**
-   * Handle answer selection
-   */
   const handleAnswerSelect = (answer: string) => {
     if (showResult) return;
-
     setSelectedAnswer(answer);
     setShowResult(true);
-
     if (answer === currentQuestion.correctAnswer) {
       setScore(score + 1);
     }
   };
 
-  /**
-   * Move to next question
-   */
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -57,9 +66,6 @@ export default function Level1QuizPage() {
     }
   };
 
-  /**
-   * Restart the quiz
-   */
   const handleRestart = () => {
     const generatedQuestions = generateQuizQuestions();
     setQuestions(generatedQuestions);
@@ -68,11 +74,9 @@ export default function Level1QuizPage() {
     setShowResult(false);
     setScore(0);
     setQuizComplete(false);
+    setProgressSaved(false);
   };
 
-  /**
-   * Play audio for the question letter
-   */
   const playAudio = () => {
     const audioUrl = `/audio/alphabet/${currentQuestion.letter.id}.mp3`;
     const audio = new Audio(audioUrl);
@@ -211,7 +215,6 @@ export default function Level1QuizPage() {
 
         {/* Question Card */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
-          {/* Question */}
           <div className="text-center mb-8">
             <p className="text-gray-500 text-lg mb-4">What is this letter called?</p>
             <div className="text-9xl font-bold text-gray-900 mb-6" dir="rtl">
@@ -226,7 +229,6 @@ export default function Level1QuizPage() {
             </button>
           </div>
 
-          {/* Answer Options */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {currentQuestion.options.map((option, index) => {
               const isSelected = selectedAnswer === option;
@@ -265,7 +267,6 @@ export default function Level1QuizPage() {
             })}
           </div>
 
-          {/* Result Message */}
           {showResult && (
             <div
               className={`mt-6 p-4 rounded-lg ${
@@ -289,7 +290,6 @@ export default function Level1QuizPage() {
           )}
         </div>
 
-        {/* Next Button */}
         {showResult && (
           <button
             onClick={handleNext}
@@ -305,34 +305,24 @@ export default function Level1QuizPage() {
   );
 }
 
-/**
- * Quiz Question Type
- */
 interface QuizQuestion {
   letter: DariLetter;
   options: string[];
   correctAnswer: string;
 }
 
-/**
- * Generate quiz questions
- * 15 random letters with multiple choice answers
- */
 function generateQuizQuestions(): QuizQuestion[] {
-  // Select 15 random letters for the quiz
   const selectedLetters = [...dariAlphabet]
     .sort(() => Math.random() - 0.5)
     .slice(0, 15);
 
   return selectedLetters.map((letter) => {
-    // Get 3 wrong answers
     const wrongAnswers = dariAlphabet
       .filter((l) => l.id !== letter.id)
       .sort(() => Math.random() - 0.5)
       .slice(0, 3)
       .map((l) => l.name);
 
-    // Shuffle options
     const options = [letter.name, ...wrongAnswers].sort(() => Math.random() - 0.5);
 
     return {

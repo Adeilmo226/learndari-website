@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Volume2, CheckCircle } from "lucide-react";
+import { ArrowLeft, Volume2, CheckCircle, BookOpen, Brain } from "lucide-react";
 import { dariAlphabet, type DariLetter } from "@/lib/alphabet";
 
 /**
@@ -18,7 +18,6 @@ export default function Level1Page() {
     setReviewedLetters(new Set([...reviewedLetters, letter.id]));
   };
 
-  const allReviewed = reviewedLetters.size === dariAlphabet.length;
   const progress = (reviewedLetters.size / dariAlphabet.length) * 100;
 
   return (
@@ -63,6 +62,37 @@ export default function Level1Page() {
           </div>
         </div>
 
+        {/* Study Mode Buttons */}
+        <div className="grid md:grid-cols-2 gap-4 mb-8">
+          <Link
+            href="/learn/level-1/flashcards"
+            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-red-600 hover:shadow-lg transition-all group"
+          >
+            <div className="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-600 transition-colors">
+              <BookOpen className="w-7 h-7 text-red-600 group-hover:text-white transition-colors" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-gray-900">Flashcards</h3>
+              <p className="text-gray-600">Review letters with interactive cards</p>
+            </div>
+            <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+          </Link>
+
+          <Link
+            href="/learn/level-1/quiz"
+            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
+          >
+            <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+              <Brain className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-gray-900">Quiz Mode</h3>
+              <p className="text-gray-600">Test your knowledge (80% to pass)</p>
+            </div>
+            <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+          </Link>
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Alphabet Grid */}
           <div className="lg:col-span-2">
@@ -101,26 +131,6 @@ export default function Level1Page() {
             )}
           </div>
         </div>
-
-        {/* Quiz Button */}
-        {allReviewed && (
-          <div className="mt-12 bg-green-50 border-2 border-green-200 rounded-2xl p-8 text-center">
-            <div className="text-6xl mb-4">🎉</div>
-            <h3 className="text-3xl font-bold text-green-900 mb-2">
-              Great Job!
-            </h3>
-            <p className="text-green-700 mb-6">
-              You've reviewed all {dariAlphabet.length} letters. Ready to test your knowledge?
-            </p>
-            <Link
-              href="/learn/level-1/quiz"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-semibold text-lg"
-            >
-              Take the Quiz
-              <CheckCircle className="w-6 h-6" />
-            </Link>
-          </div>
-        )}
       </div>
     </div>
   );
