@@ -45,7 +45,7 @@ export default function WordOfDayPage() {
         className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
-        Back to More
+        Discover More
       </Link>
 
       {/* Title */}
@@ -95,38 +95,6 @@ export default function WordOfDayPage() {
         </div>
       </div>
 
-      {/* Additional Info */}
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white rounded-xl shadow-md p-6 border-2 border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-3">💡 Learning Tip</h3>
-          <p className="text-gray-600">
-            Try using this word in a sentence today to help remember it. Practice makes perfect!
-          </p>
-        </div>
-
-        <div className="bg-white rounded-xl shadow-md p-6 border-2 border-gray-200">
-          <h3 className="text-lg font-bold text-gray-900 mb-3">📅 Daily Practice</h3>
-          <p className="text-gray-600">
-            Come back tomorrow for a new word. Consistent daily practice is the key to language learning success.
-          </p>
-        </div>
-      </div>
-
-      {/* Actions */}
-      <div className="flex flex-col sm:flex-row gap-4">
-        <Link
-          href="/vocab"
-          className="flex-1 px-6 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-center"
-        >
-          Practice More Vocabulary →
-        </Link>
-        <Link
-          href="/more"
-          className="flex-1 px-6 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-xl hover:border-gray-400 transition-colors font-semibold text-center"
-        >
-          Explore More Resources
-        </Link>
-      </div>
     </div>
   );
 }

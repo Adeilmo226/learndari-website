@@ -8,7 +8,7 @@ import { BookOpen, GraduationCap, Search, Sparkles, Volume2, Users, Heart } from
  */
 export default function Home() {
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-[calc(100vh-5rem)] flex flex-col">
       {/* Section 1: Hero */}
       <section className="relative overflow-hidden">
         {/* Background Image Overlay */}
@@ -25,11 +25,11 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Text Content */}
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black-900 leading-tight">
               The easiest way to learn Dari online
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Learn words, pronunciation, and reading. Built for real learners.
+              Learn words, pronunciation, and reading.
             </p>
             
             {/* CTA Buttons */}
@@ -49,24 +49,6 @@ export default function Home() {
                 Learn to Read Dari
               </Link>
             </div>
-            {/* <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Link
-                href="/explore"
-                className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-orange-600 text-white rounded-lg font-semibold hover:bg-orange-700 transition-colors shadow-lg hover:shadow-xl"
-              >
-                <Search className="w-5 h-5" />
-                Look up a word
-              </Link>
-			    <Link
-                href="/more"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors shadow-lg hover:shadow-xl"
-              >
-                <GraduationCap className="w-5 h-5" />
-                Discover More
-              </Link>
-			  
-
-            </div> */}
 			
           </div>
 
@@ -100,7 +82,14 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Card 1: Learn Vocab */}
+            {/* Card 1: Explore */}
+            <HowItWorksCard
+              icon={<Search className="w-8 h-8" />}
+              title="Explore"
+              description="Search for words in English or Dari from our database"
+              color="bg-blue-50 text-blue-600"
+            />
+            {/* Card 2: Learn Vocab */}
             <HowItWorksCard
               icon={<BookOpen className="w-8 h-8" />}
               title="Learn Vocab"
@@ -108,20 +97,12 @@ export default function Home() {
               color="bg-red-50 text-red-600"
             />
 
-            {/* Card 2: Learn to Read */}
+            {/* Card 3: Learn to Read */}
             <HowItWorksCard
               icon={<GraduationCap className="w-8 h-8" />}
               title="Learn to Read"
               description="Alphabet, sounds, and phrases with native pronunciation"
               color="bg-green-50 text-green-600"
-            />
-
-            {/* Card 3: Explore */}
-            <HowItWorksCard
-              icon={<Search className="w-8 h-8" />}
-              title="Explore"
-              description="Search for words in English or Dari from our database"
-              color="bg-blue-50 text-blue-600"
             />
 
             {/* Card 4: Discover More */}
@@ -156,7 +137,7 @@ export default function Home() {
             <WhyCard
               icon={<Volume2 className="w-6 h-6" />}
               title="Audio-first pronunciation"
-              description="Native speaker audio for every word and phrase"
+              description="Speaker audio for every word and phrase"
             />
 
             {/* Feature 3 */}
@@ -170,25 +151,24 @@ export default function Home() {
       </section>
 
       {/* Section 4: About Teaser */}
-      <section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-            Why LearnDari Exists
-          </h2>
-          <p className="text-xl text-white/90 mb-8 leading-relaxed">
-            We believe everyone should have access to quality Dari language education. 
-            Whether you're reconnecting with your heritage or learning for the first time, 
-            LearnDari makes it simple, accessible, and enjoyable.
-          </p>
-          <Link
-            href="/more/about"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
-          >
-            Read Our Mission
-            <span className="text-xl">→</span>
-          </Link>
-        </div>
-      </section>
+		<section className="bg-gradient-to-br from-red-600 to-green-600 py-16 md:py-24 flex-1 flex items-center">
+		<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+			<h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+			Why LearnDari Exists
+			</h2>
+			<p className="text-xl text-white/90 mb-8 leading-relaxed">
+			Finding quality Dari resources online shouldn't be this hard.
+			LearnDari was built to preserve our language for future generations and give 
+			heritage speakers the tools to reconnect with their roots.
+			</p>
+			<Link
+			href="/more/about"
+			className="inline-flex items-center gap-2 px-8 py-4 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-50 transition-colors shadow-lg"
+			>
+			Read Our Mission
+			</Link>
+		</div>
+		</section>
     </div>
   );
 }

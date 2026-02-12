@@ -52,7 +52,7 @@ export default function FeedbackPage() {
         className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
       >
         <ArrowLeft className="w-5 h-5" />
-        Back to More
+        Discover More
       </Link>
 
       <div className="text-center mb-12">
@@ -163,35 +163,6 @@ export default function FeedbackPage() {
         </div>
       )}
 
-      {/* Contact Info */}
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl p-6 border-2 border-teal-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">
-            📧 Direct Contact
-          </h3>
-          <p className="text-gray-700 mb-2">
-            For urgent matters or detailed inquiries:
-          </p>
-          <a
-            href="mailto:contact@learndari.com"
-            className="text-teal-600 font-semibold hover:text-teal-700"
-          >
-            contact@learndari.com
-          </a>
-        </div>
-
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border-2 border-purple-200">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">
-            💡 What We'd Love to Hear
-          </h3>
-          <ul className="text-gray-700 space-y-1 text-sm">
-            <li>• Feature requests</li>
-            <li>• Content suggestions</li>
-            <li>• Bug reports</li>
-            <li>• General feedback</li>
-          </ul>
-        </div>
-      </div>
     </div>
   );
 }
