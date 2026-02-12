@@ -1,5 +1,3 @@
-import { supabase } from './supabase'
-
 export interface LevelProgressData {
   level_id: string
   is_unlocked: boolean
@@ -8,82 +6,48 @@ export interface LevelProgressData {
 }
 
 /**
- * Fetch all level progress for a user
+ * Fetch all level progress for the authenticated user (via API route)
  */
-export async function fetchLevelProgress(userId: string): Promise<Map<string, LevelProgressData>> {
-  const { data, error } = await supabase
-    .from('level_progress')
-    .select('level_id, is_unlocked, quiz_score, completed_at')
-    .eq('user_id', userId)
-
+export async function fetchLevelProgress(): Promise<Map<string, LevelProgressData>> {
   const progressMap = new Map<string, LevelProgressData>()
 
-  if (error || !data) {
-    return progressMap
-  }
+  try {
+    const res = await fetch('/api/progress')
+    if (!res.ok) return progressMap
 
-  for (const row of data) {
-    progressMap.set(row.level_id, {
-      level_id: row.level_id,
-      is_unlocked: row.is_unlocked,
-      quiz_score: row.quiz_score,
-      completed_at: row.completed_at,
-    })
+    const { data } = await res.json()
+    for (const row of data) {
+      progressMap.set(row.level_id, {
+        level_id: row.level_id,
+        is_unlocked: row.is_unlocked,
+        quiz_score: row.quiz_score,
+        completed_at: row.completed_at,
+      })
+    }
+  } catch (err) {
+    console.error('Error fetching progress:', err)
   }
 
   return progressMap
 }
 
 /**
- * Save quiz completion and unlock the next level
+ * Save quiz completion and unlock the next level (via API route)
  */
 export async function saveLevelProgress(
-  userId: string,
   levelId: string,
   score: number,
   nextLevelId?: string
 ): Promise<boolean> {
-  const now = new Date().toISOString()
-
-  // Upsert current level as completed
-  const { error: upsertError } = await supabase
-    .from('level_progress')
-    .upsert(
-      {
-        user_id: userId,
-        level_id: levelId,
-        is_unlocked: true,
-        quiz_score: score,
-        completed_at: now,
-        updated_at: now,
-      },
-      { onConflict: 'user_id,level_id' }
-    )
-
-  if (upsertError) {
-    console.error('Error saving level progress:', upsertError)
+  try {
+    const res = await fetch('/api/progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ levelId, score, nextLevelId }),
+    })
+    return res.ok
+  } catch (err) {
+    console.error('Error saving progress:', err)
     return false
   }
-
-  // Unlock the next level if provided
-  if (nextLevelId) {
-    const { error: unlockError } = await supabase
-      .from('level_progress')
-      .upsert(
-        {
-          user_id: userId,
-          level_id: nextLevelId,
-          is_unlocked: true,
-          updated_at: now,
-        },
-        { onConflict: 'user_id,level_id' }
-      )
-
-    if (unlockError) {
-      console.error('Error unlocking next level:', unlockError)
-      return false
-    }
-  }
-
-  return true
 }

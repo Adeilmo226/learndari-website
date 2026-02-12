@@ -29,7 +29,7 @@ export default function Level4QuizPage() {
     if (quizComplete && !progressSaved) {
       const percentage = Math.round((score / questions.length) * 100);
       if (percentage >= 80 && user?.id) {
-        saveLevelProgress(user.id, "level-4", percentage, "level-5").then(() => {
+        saveLevelProgress("level-4", percentage, "level-5").then(() => {
           setProgressSaved(true);
         });
       }

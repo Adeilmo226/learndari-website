@@ -16,10 +16,10 @@ export default function LearnPage() {
   const [progressMap, setProgressMap] = useState<Map<string, LevelProgressData>>(new Map());
   const [loadingProgress, setLoadingProgress] = useState(true);
 
-  // Fetch progress from Supabase
+  // Fetch progress from API
   useEffect(() => {
     if (user?.id) {
-      fetchLevelProgress(user.id).then((data) => {
+      fetchLevelProgress().then((data) => {
         setProgressMap(data);
         setLoadingProgress(false);
       });
