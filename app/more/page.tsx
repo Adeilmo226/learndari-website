@@ -97,7 +97,7 @@ export default function MorePage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-black/5" />
         </div>
 
         {/* Content */}
