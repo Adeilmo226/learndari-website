@@ -94,10 +94,9 @@ export default function MorePage() {
             src="/afghan_landscape.avif"
             alt=""
             fill
-            className="object-cover"
+            className="object-cover opacity-[0.10]"
             priority
           />
-          <div className="absolute inset-0 bg-black/5" />
         </div>
 
         {/* Content */}
