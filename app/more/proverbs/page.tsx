@@ -39,11 +39,11 @@ export default function ProverbsPage() {
         Discover More
       </Link>
 
-      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl p-8 text-white mb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
           Dari Proverbs
         </h1>
-        <p className="text-xl text-white/80">
+        <p className="text-xl text-gray-600">
           Explore traditional Afghan wisdom and sayings
         </p>
       </div>
