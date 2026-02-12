@@ -8,7 +8,7 @@ import { BookOpen, GraduationCap, Search, Sparkles, Volume2, Users, Heart } from
  */
 export default function Home() {
   return (
-    <div className="bg-white min-h-[calc(100vh-5rem-6rem)] md:min-h-[calc(100vh-5rem-2rem)] flex flex-col">
+    <div className="bg-white min-h-screen flex flex-col">
       {/* Section 1: Hero */}
       <section className="relative overflow-hidden">
         {/* Background Image Overlay */}
@@ -25,7 +25,7 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Text Content */}
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black-900 leading-tight">
               The easiest way to learn Dari online
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">

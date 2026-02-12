@@ -87,7 +87,7 @@ export default function MorePage() {
       </div>
 
       {/* Proverb of the Day Banner */}
-      <div className="relative rounded-2xl shadow-xl overflow-hidden mb-12">
+      <div className="relative rounded-2xl shadow-xl overflow-hidden mb-12 bg-gray-900">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
