@@ -26,17 +26,6 @@ export default function AboutPage() {
         </p>
       </div>
 
-      {/* The Problem */}
-      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-3xl shadow-2xl p-12 text-white mb-12">
-        <h2 className="text-3xl font-bold mb-6 text-center">We saw a problem.</h2>
-        <div className="space-y-4 text-xl leading-relaxed text-white/90">
-          <p>
-            If you've ever tried to learn Dari online, you already know, there's almost
-            nothing out there. The resources that do exist are often outdated, expensive,
-            or built for Farsi (Iranian Persian) and just close enough to be confusing.
-          </p>
-        </div>
-      </div>
 
       {/* Why We Built This */}
       <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">

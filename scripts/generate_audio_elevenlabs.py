@@ -72,7 +72,7 @@ def main():
     print("LearnDari Audio Generation Script")
     print("=" * 60)
 
-    base_path = "public/audio"
+    base_path = "../public/audio"
     create_directory_if_not_exists(base_path)
 
     for category in ALL_CATEGORIES:
