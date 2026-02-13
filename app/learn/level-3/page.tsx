@@ -134,7 +134,7 @@ function WordCard({ word }: { word: typeof simpleWords[0] }) {
         </div>
 
         <button
-          onClick={() => playAudio(`/audio/${word.category.toLowerCase()}/${word.id.replace('l3-', '')}.mp3`)}
+          onClick={() => playAudio(`/audio/${word.audioFolder}/${word.id.replace('l3-', '')}.mp3`)}
           disabled={isPlaying}
           className={`ml-6 w-14 h-14 rounded-full flex items-center justify-center transition-all ${
             isPlaying

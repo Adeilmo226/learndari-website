@@ -75,7 +75,7 @@ export default function QuizPage() {
    * Play audio for the question word
    */
   const playAudio = () => {
-    const audioUrl = `/audio/fruit/${currentQuestion.word.id}.mp3`;
+    const audioUrl = `/audio/fruits/${currentQuestion.word.id}.mp3`;
     const audio = new Audio(audioUrl);
     audio.play().catch(() => {
       console.log("Audio file not available yet");

@@ -126,7 +126,7 @@ function WordCard({ word, featured = false }: { word: VocabWord; featured?: bool
 
   const playAudio = () => {
     setIsPlaying(true);
-    const audioUrl = `/audio/${word.category.toLowerCase()}/${word.id}.mp3`;
+    const audioUrl = `/audio/${word.audioFolder}/${word.id}.mp3`;
     const audio = new Audio(audioUrl);
 
     audio.onended = () => setIsPlaying(false);
