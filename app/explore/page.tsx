@@ -53,6 +53,7 @@ export default function ExplorePage() {
             type="text"
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
+            maxLength={100}
             placeholder="Search for a word... (e.g., 'hello', 'salaam', or 'سلام')"
             className="w-full pl-14 pr-4 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-red-600 focus:outline-none transition-colors"
           />

@@ -1,13 +1,26 @@
 import { NextResponse } from "next/server";
+import { headers } from "next/headers";
 import { Resend } from "resend";
+import { rateLimit } from "@/lib/rate-limit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { name, email, category, message } = await request.json();
+    const headersList = await headers();
+    const ip = headersList.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    const rateLimitResponse = rateLimit(ip);
+    if (rateLimitResponse) return rateLimitResponse;
 
-    if (!message || message.trim().length === 0) {
+    const body = await request.json();
+
+    const name = typeof body.name === "string" ? body.name.trim().slice(0, 100) : "";
+    const email = typeof body.email === "string" ? body.email.trim().slice(0, 200) : "";
+    const message = typeof body.message === "string" ? body.message.trim().slice(0, 2000) : "";
+    const validCategories = ["suggestion", "bug", "content", "question", "other"];
+    const category = validCategories.includes(body.category) ? body.category : "other";
+
+    if (message.length === 0) {
       return NextResponse.json(
         { error: "Message is required" },
         { status: 400 }

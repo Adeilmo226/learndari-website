@@ -107,6 +107,7 @@ export default function FeedbackPage() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                maxLength={100}
                 placeholder="Your name"
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none transition-colors"
               />
@@ -123,6 +124,7 @@ export default function FeedbackPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                maxLength={200}
                 placeholder="your.email@example.com"
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none transition-colors"
               />
@@ -162,6 +164,7 @@ export default function FeedbackPage() {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                maxLength={2000}
                 rows={6}
                 placeholder="Share your thoughts, report an issue, or suggest a feature..."
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none transition-colors resize-none"
