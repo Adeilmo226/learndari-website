@@ -3,25 +3,41 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
-import { letterForms, type LetterForms } from "@/lib/alphabet";
+import { dariAlphabet, letterForms, type LetterForms } from "@/lib/alphabet";
+import { useUser } from "@clerk/nextjs";
+import { saveLevelProgress } from "@/lib/progress";
 
 /**
  * Level 2 Quiz: Letter Forms Recognition
- * Test knowledge of letter forms in different positions
+ * Show a letter in one of its forms, user selects the correct letter name
  */
 export default function Level2QuizPage() {
+  const { user } = useUser();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const [quizComplete, setQuizComplete] = useState(false);
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
+  const [progressSaved, setProgressSaved] = useState(false);
 
-  // Generate quiz questions on mount
   useEffect(() => {
     const generatedQuestions = generateQuizQuestions();
     setQuestions(generatedQuestions);
   }, []);
+
+  // Save progress when quiz is completed and passed
+  useEffect(() => {
+    if (quizComplete && !progressSaved) {
+      const percentage = Math.round((score / questions.length) * 100);
+      const passed = percentage >= 80;
+      if (passed && user?.id) {
+        saveLevelProgress("level-2", percentage, "level-3").then(() => {
+          setProgressSaved(true);
+        });
+      }
+    }
+  }, [quizComplete, progressSaved, score, questions.length, user?.id]);
 
   if (questions.length === 0) {
     return <div>Loading quiz...</div>;
@@ -30,23 +46,15 @@ export default function Level2QuizPage() {
   const currentQuestion = questions[currentQuestionIndex];
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
-  /**
-   * Handle answer selection
-   */
   const handleAnswerSelect = (answer: string) => {
     if (showResult) return;
-
     setSelectedAnswer(answer);
     setShowResult(true);
-
     if (answer === currentQuestion.correctAnswer) {
       setScore(score + 1);
     }
   };
 
-  /**
-   * Move to next question
-   */
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -57,9 +65,6 @@ export default function Level2QuizPage() {
     }
   };
 
-  /**
-   * Restart the quiz
-   */
   const handleRestart = () => {
     const generatedQuestions = generateQuizQuestions();
     setQuestions(generatedQuestions);
@@ -68,6 +73,7 @@ export default function Level2QuizPage() {
     setShowResult(false);
     setScore(0);
     setQuizComplete(false);
+    setProgressSaved(false);
   };
 
   // Quiz complete screen
@@ -144,10 +150,10 @@ export default function Level2QuizPage() {
                     Try Again
                   </button>
                   <Link
-                    href="/learn/level-2/practice"
+                    href="/learn/level-2/flashcards"
                     className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-xl hover:border-gray-400 transition-colors font-semibold"
                   >
-                    More Practice
+                    Study Flashcards
                   </Link>
                 </>
               )}
@@ -200,24 +206,23 @@ export default function Level2QuizPage() {
 
         {/* Question Card */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
-          {/* Question */}
           <div className="text-center mb-8">
-            <p className="text-gray-500 text-lg mb-4">
-              What position is this letter form in?
+            <p className="text-gray-500 text-lg mb-2">
+              What letter is this?
+            </p>
+            <p className="text-sm text-gray-400 mb-4">
+              ({currentQuestion.position} form)
             </p>
             <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-12 mb-4">
               <div className="text-9xl font-bold text-gray-900" dir="rtl">
                 {currentQuestion.letterForm}
               </div>
             </div>
-            <p className="text-xl text-gray-700">
-              Letter: <span className="font-bold">{currentQuestion.letter.name}</span> ({currentQuestion.letter.letter})
-            </p>
           </div>
 
-          {/* Answer Options */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {currentQuestion.options.map((option) => {
+          {/* Answer Options - Letter names */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {currentQuestion.options.map((option, index) => {
               const isSelected = selectedAnswer === option;
               const isCorrect = option === currentQuestion.correctAnswer;
               const showCorrect = showResult && isCorrect;
@@ -225,10 +230,10 @@ export default function Level2QuizPage() {
 
               return (
                 <button
-                  key={option}
+                  key={index}
                   onClick={() => handleAnswerSelect(option)}
                   disabled={showResult}
-                  className={`p-6 rounded-xl border-2 transition-all ${
+                  className={`p-6 rounded-xl border-2 text-left transition-all ${
                     showCorrect
                       ? "border-green-600 bg-green-50"
                       : showIncorrect
@@ -238,10 +243,10 @@ export default function Level2QuizPage() {
                       : "border-gray-200 hover:border-green-600 hover:bg-green-50"
                   } disabled:cursor-not-allowed`}
                 >
-                  <div className="flex flex-col items-center gap-2">
-                    <p className="text-xl font-bold text-gray-900">{option}</p>
-                    {showCorrect && <CheckCircle className="w-6 h-6 text-green-600" />}
-                    {showIncorrect && <XCircle className="w-6 h-6 text-red-600" />}
+                  <div className="flex items-center justify-between">
+                    <p className="text-2xl font-bold text-gray-900">{option}</p>
+                    {showCorrect && <CheckCircle className="w-8 h-8 text-green-600" />}
+                    {showIncorrect && <XCircle className="w-8 h-8 text-red-600" />}
                   </div>
                 </button>
               );
@@ -266,8 +271,16 @@ export default function Level2QuizPage() {
               >
                 {selectedAnswer === currentQuestion.correctAnswer
                   ? "✓ Correct!"
-                  : `✗ Incorrect. This is the ${currentQuestion.correctAnswer} form.`}
+                  : `✗ Incorrect. The correct answer is ${currentQuestion.correctAnswer}`}
               </p>
+              {(() => {
+                const match = dariAlphabet.find((l) => l.name === currentQuestion.correctAnswer);
+                return match ? (
+                  <p className="text-sm text-gray-600 mt-2">
+                    Phonetic: <span className="italic">{match.phonetic}</span>
+                  </p>
+                ) : null;
+              })()}
             </div>
           )}
         </div>
@@ -288,53 +301,44 @@ export default function Level2QuizPage() {
   );
 }
 
-/**
- * Quiz Question Type
- */
 interface QuizQuestion {
   letter: LetterForms;
   letterForm: string;
+  position: string;
   correctAnswer: string;
   options: string[];
 }
 
-/**
- * Generate 20 quiz questions
- */
 function generateQuizQuestions(): QuizQuestion[] {
   const questions: QuizQuestion[] = [];
-  const allOptions = ["Isolated", "Initial", "Medial", "Final"];
 
-  // Generate 20 questions
   for (let i = 0; i < 20; i++) {
-    // Pick random letter
     const letter = letterForms[Math.floor(Math.random() * letterForms.length)];
 
-    // Get available positions
+    // Get available forms for this letter
     const positions: Array<{ form: string; name: string }> = [
       { form: letter.isolated, name: "Isolated" },
     ];
+    if (letter.initial) positions.push({ form: letter.initial, name: "Initial" });
+    if (letter.medial) positions.push({ form: letter.medial, name: "Medial" });
+    if (letter.final) positions.push({ form: letter.final, name: "Final" });
 
-    if (letter.initial) {
-      positions.push({ form: letter.initial, name: "Initial" });
-    }
-    if (letter.medial) {
-      positions.push({ form: letter.medial, name: "Medial" });
-    }
-    if (letter.final) {
-      positions.push({ form: letter.final, name: "Final" });
-    }
-
-    // Pick random position
     const selectedPosition = positions[Math.floor(Math.random() * positions.length)];
 
-    // Shuffle options
-    const options = [...allOptions].sort(() => Math.random() - 0.5);
+    // Get 3 wrong letter names
+    const wrongAnswers = letterForms
+      .filter((l) => l.id !== letter.id)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 3)
+      .map((l) => l.name);
+
+    const options = [letter.name, ...wrongAnswers].sort(() => Math.random() - 0.5);
 
     questions.push({
       letter,
       letterForm: selectedPosition.form,
-      correctAnswer: selectedPosition.name,
+      position: selectedPosition.name,
+      correctAnswer: letter.name,
       options,
     });
   }

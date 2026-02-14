@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import {
   Calendar,
   MessageCircle,
@@ -87,20 +86,8 @@ export default function MorePage() {
       </div>
 
       {/* Proverb of the Day Banner */}
-      <div className="relative rounded-2xl shadow-xl overflow-hidden mb-12 bg-black">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/Afghanistan.jpg"
-            alt=""
-            fill
-            className="object-cover opacity-[0.30]"
-            priority
-          />
-        </div>
-
-        {/* Content */}
-        <div className="relative p-6 sm:p-8 text-white">
+      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl overflow-hidden mb-12">
+        <div className="p-6 sm:p-8 text-white">
           <p className="text-sm font-semibold uppercase tracking-wider text-white/60 mb-6">
             Proverb of the Day
           </p>

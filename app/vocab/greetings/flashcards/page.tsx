@@ -43,7 +43,7 @@ export default function FlashcardsPage() {
   };
 
   const playAudio = () => {
-    const audioUrl = `/audio/greetings/${currentWord.id}.mp3`;
+    const audioUrl = `/audio/phrases/${currentWord.id}.mp3`;
     const audio = new Audio(audioUrl);
     audio.play().catch(() => {
       console.log("Audio file not available yet");

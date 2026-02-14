@@ -2,23 +2,54 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Info, CheckCircle } from "lucide-react";
+import { ArrowLeft, Info, CheckCircle, BookOpen, Brain, Volume2 } from "lucide-react";
 import { letterForms, type LetterForms } from "@/lib/alphabet";
+import { useUser, SignInButton } from "@clerk/nextjs";
+import { Lock } from "lucide-react";
 
 /**
  * Level 2: Letter Forms
  * Learn how letters change in different positions
  */
 export default function Level2Page() {
+  const { isSignedIn, isLoaded } = useUser();
   const [selectedLetter, setSelectedLetter] = useState<LetterForms | null>(null);
   const [reviewedLetters, setReviewedLetters] = useState<Set<string>>(new Set());
+
+  // Auth gate for Level 2+
+  if (isLoaded && !isSignedIn) {
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-12">
+            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Lock className="w-10 h-10 text-red-600" />
+            </div>
+            <h1 className="text-3xl font-bold text-gray-900 mb-4">Sign in Required</h1>
+            <p className="text-gray-600 mb-8">
+              Sign in to access Level 2 and continue your learning journey.
+            </p>
+            <SignInButton>
+              <button className="px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-lg">
+                Sign In to Continue
+              </button>
+            </SignInButton>
+            <div className="mt-6">
+              <Link href="/learn" className="text-gray-500 hover:text-gray-700 transition-colors">
+                ← Back to Learning Path
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const handleLetterClick = (letter: LetterForms) => {
     setSelectedLetter(letter);
     setReviewedLetters(new Set([...reviewedLetters, letter.id]));
   };
 
-  const allReviewed = reviewedLetters.size === letterForms.length;
   const progress = (reviewedLetters.size / letterForms.length) * 100;
 
   return (
@@ -61,6 +92,37 @@ export default function Level2Page() {
               style={{ width: `${progress}%` }}
             />
           </div>
+        </div>
+
+        {/* Study Mode Buttons */}
+        <div className="grid md:grid-cols-2 gap-4 mb-8">
+          <Link
+            href="/learn/level-2/flashcards"
+            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
+          >
+            <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+              <BookOpen className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-gray-900">Flashcards</h3>
+              <p className="text-gray-600">Review letter forms with interactive cards</p>
+            </div>
+            <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+          </Link>
+
+          <Link
+            href="/learn/level-2/quiz"
+            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
+          >
+            <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+              <Brain className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-gray-900">Quiz Mode</h3>
+              <p className="text-gray-600">Test your knowledge (80% to pass)</p>
+            </div>
+            <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
+          </Link>
         </div>
 
         {/* Info Box */}
@@ -125,57 +187,11 @@ export default function Level2Page() {
             )}
           </div>
         </div>
-
-        {/* Practice and Quiz Buttons */}
-        {allReviewed && (
-          <div className="mt-12 space-y-4">
-            {/* Practice Section */}
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 border-2 border-blue-200 rounded-2xl p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Interactive Practice
-                  </h3>
-                  <p className="text-gray-600">
-                    Test your knowledge by identifying letter forms in different positions
-                  </p>
-                </div>
-                <Link
-                  href="/learn/level-2/practice"
-                  className="px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold whitespace-nowrap"
-                >
-                  Start Practice →
-                </Link>
-              </div>
-            </div>
-
-            {/* Quiz Section */}
-            <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-8 text-center">
-              <div className="text-6xl mb-4">🎉</div>
-              <h3 className="text-3xl font-bold text-green-900 mb-2">
-                Ready for the Quiz?
-              </h3>
-              <p className="text-green-700 mb-6">
-                You've reviewed all {letterForms.length} letters. Test your knowledge!
-              </p>
-              <Link
-                href="/learn/level-2/quiz"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-colors font-semibold text-lg"
-              >
-                Take the Quiz
-                <CheckCircle className="w-6 h-6" />
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
 }
 
-/**
- * Letter Button Component
- */
 function LetterButton({
   letter,
   isSelected,
@@ -208,63 +224,52 @@ function LetterButton({
   );
 }
 
-/**
- * Letter Forms Detail Card Component
- */
 function LetterFormsCard({ letter }: { letter: LetterForms }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = () => {
+    setIsPlaying(true);
+    const audioUrl = `/audio/alphabet/${letter.id}.mp3`;
+    const audio = new Audio(audioUrl);
+    audio.onended = () => setIsPlaying(false);
+    audio.onerror = () => setIsPlaying(false);
+    audio.play().catch(() => {
+      console.log("Audio file not available");
+      setIsPlaying(false);
+    });
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
       <div className="text-center mb-6">
         <h3 className="text-2xl font-bold text-gray-900 mb-1">{letter.name}</h3>
         <p className="text-gray-500">({letter.letter})</p>
+        <button
+          onClick={playAudio}
+          disabled={isPlaying}
+          className={`mt-3 w-14 h-14 rounded-full flex items-center justify-center mx-auto transition-all ${
+            isPlaying
+              ? "bg-green-600 scale-110"
+              : "bg-green-100 hover:bg-green-600 hover:scale-105"
+          }`}
+        >
+          <Volume2 className={`w-7 h-7 ${isPlaying ? "text-white" : "text-green-600 hover:text-white"}`} />
+        </button>
       </div>
 
       <div className="space-y-4">
-        {/* Isolated Form */}
-        <FormDisplay
-          label="Isolated"
-          description="Standing alone"
-          form={letter.isolated}
-        />
-
-        {/* Initial Form */}
+        <FormDisplay label="Isolated" description="Standing alone" form={letter.isolated} />
         {letter.initial ? (
-          <FormDisplay
-            label="Initial"
-            description="Beginning of word"
-            form={letter.initial}
-          />
+          <FormDisplay label="Initial" description="Beginning of word" form={letter.initial} />
         ) : (
-          <FormDisplay
-            label="Initial"
-            description="Does not connect forward"
-            form="—"
-            disabled
-          />
+          <FormDisplay label="Initial" description="Does not connect forward" form="—" disabled />
         )}
-
-        {/* Medial Form */}
         {letter.medial ? (
-          <FormDisplay
-            label="Medial"
-            description="Middle of word"
-            form={letter.medial}
-          />
+          <FormDisplay label="Medial" description="Middle of word" form={letter.medial} />
         ) : (
-          <FormDisplay
-            label="Medial"
-            description="Does not connect forward"
-            form="—"
-            disabled
-          />
+          <FormDisplay label="Medial" description="Does not connect forward" form="—" disabled />
         )}
-
-        {/* Final Form */}
-        <FormDisplay
-          label="Final"
-          description="End of word"
-          form={letter.final || letter.isolated}
-        />
+        <FormDisplay label="Final" description="End of word" form={letter.final || letter.isolated} />
       </div>
 
       {!letter.connectsBothSides && (
@@ -278,9 +283,6 @@ function LetterFormsCard({ letter }: { letter: LetterForms }) {
   );
 }
 
-/**
- * Form Display Component
- */
 function FormDisplay({
   label,
   description,

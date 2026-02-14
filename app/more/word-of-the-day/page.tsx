@@ -21,7 +21,7 @@ export default function WordOfDayPage() {
   const playAudio = () => {
     if (!word) return;
     setIsPlaying(true);
-    const audioUrl = `/audio/${word.category.toLowerCase()}/${word.id}.mp3`;
+    const audioUrl = `/audio/${word.audioFolder}/${word.id}.mp3`;
     const audio = new Audio(audioUrl);
 
     audio.onended = () => setIsPlaying(false);

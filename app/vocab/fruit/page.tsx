@@ -95,7 +95,7 @@ function VocabWordCard({ word }: { word: typeof fruitsVocab[0] }) {
         </div>
 
         <button
-          onClick={() => playAudio(`/audio/fruit/${word.id}.mp3`)}
+          onClick={() => playAudio(`/audio/fruits/${word.id}.mp3`)}
           disabled={isPlaying}
           className={`ml-6 w-14 h-14 rounded-full flex items-center justify-center transition-all ${
             isPlaying
