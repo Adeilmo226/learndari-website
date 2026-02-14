@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Search, Volume2, Star, TrendingUp } from "lucide-react";
 import {
   searchVocabulary,
@@ -56,6 +57,12 @@ export default function ExplorePage() {
             className="w-full pl-14 pr-4 py-4 text-lg border-2 border-gray-300 rounded-xl focus:border-red-600 focus:outline-none transition-colors"
           />
         </div>
+        <p className="text-sm text-gray-400 mt-2 text-center">
+          Don&apos;t see the word you&apos;re looking for?{" "}
+          <Link href="/more/feedback" className="text-red-600 hover:text-red-700 underline">
+            Let us know
+          </Link>
+        </p>
       </div>
 
       {/* Word of the Day */}
