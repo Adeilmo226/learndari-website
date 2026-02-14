@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import { commonWords } from "@/lib/learn-words";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 4 Flashcards: Common Words
@@ -51,6 +52,7 @@ export default function Level4FlashcardsPage() {
   };
 
   return (
+    <AuthGate backHref="/learn/level-4" backLabel="Back to Level 4">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -195,5 +197,6 @@ export default function Level4FlashcardsPage() {
         .rotate-y-180 { transform: rotateY(180deg); }
       `}</style>
     </div>
+    </AuthGate>
   );
 }

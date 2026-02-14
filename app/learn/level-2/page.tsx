@@ -4,46 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Info, CheckCircle, BookOpen, Brain, Volume2 } from "lucide-react";
 import { letterForms, type LetterForms } from "@/lib/alphabet";
-import { useUser, SignInButton } from "@clerk/nextjs";
-import { Lock } from "lucide-react";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 2: Letter Forms
  * Learn how letters change in different positions
  */
 export default function Level2Page() {
-  const { isSignedIn, isLoaded } = useUser();
   const [selectedLetter, setSelectedLetter] = useState<LetterForms | null>(null);
   const [reviewedLetters, setReviewedLetters] = useState<Set<string>>(new Set());
-
-  // Auth gate for Level 2+
-  if (isLoaded && !isSignedIn) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white rounded-2xl shadow-xl p-12">
-            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Lock className="w-10 h-10 text-red-600" />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Sign in Required</h1>
-            <p className="text-gray-600 mb-8">
-              Sign in to access Level 2 and continue your learning journey.
-            </p>
-            <SignInButton>
-              <button className="px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-lg">
-                Sign In to Continue
-              </button>
-            </SignInButton>
-            <div className="mt-6">
-              <Link href="/learn" className="text-gray-500 hover:text-gray-700 transition-colors">
-                ← Back to Learning Path
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const handleLetterClick = (letter: LetterForms) => {
     setSelectedLetter(letter);
@@ -53,6 +22,7 @@ export default function Level2Page() {
   const progress = (reviewedLetters.size / letterForms.length) * 100;
 
   return (
+    <AuthGate backHref="/learn" backLabel="Back to Learning Path">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -189,6 +159,7 @@ export default function Level2Page() {
         </div>
       </div>
     </div>
+    </AuthGate>
   );
 }
 

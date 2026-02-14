@@ -6,6 +6,7 @@ import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
 import { commonWords } from "@/lib/learn-words";
 import { useUser } from "@clerk/nextjs";
 import { saveLevelProgress } from "@/lib/progress";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 4 Quiz: Common Words
@@ -144,6 +145,7 @@ export default function Level4QuizPage() {
   }
 
   return (
+    <AuthGate backHref="/learn/level-4" backLabel="Back to Level 4">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -255,6 +257,7 @@ export default function Level4QuizPage() {
         )}
       </div>
     </div>
+    </AuthGate>
   );
 }
 

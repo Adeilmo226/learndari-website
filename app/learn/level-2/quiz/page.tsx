@@ -6,6 +6,7 @@ import { ArrowLeft, CheckCircle, XCircle } from "lucide-react";
 import { dariAlphabet, letterForms, type LetterForms } from "@/lib/alphabet";
 import { useUser } from "@clerk/nextjs";
 import { saveLevelProgress } from "@/lib/progress";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 2 Quiz: Letter Forms Recognition
@@ -165,6 +166,7 @@ export default function Level2QuizPage() {
   }
 
   return (
+    <AuthGate backHref="/learn/level-2" backLabel="Back to Level 2">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -298,6 +300,7 @@ export default function Level2QuizPage() {
         )}
       </div>
     </div>
+    </AuthGate>
   );
 }
 
