@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
 import { letterForms } from "@/lib/alphabet";
 
 /**
@@ -135,9 +135,21 @@ export default function Level2FlashcardsPage() {
                 <p className="text-3xl text-white font-semibold mb-2">
                   {currentCard.position}
                 </p>
-                <p className="text-green-200 text-sm italic">
+                <p className="text-green-200 text-sm italic mb-4">
                   {currentCard.positionDescription}
                 </p>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const audio = new Audio(`/audio/alphabet/${currentCard.letterId}.mp3`);
+                    audio.play().catch(() => console.log("Audio file not available"));
+                  }}
+                  className="flex items-center gap-2 px-6 py-3 bg-white text-green-600 rounded-lg hover:bg-green-50 transition-colors"
+                >
+                  <Volume2 className="w-5 h-5" />
+                  Play Audio
+                </button>
               </div>
             </div>
           </div>
@@ -227,6 +239,7 @@ export default function Level2FlashcardsPage() {
 
 interface FlashCard {
   form: string;
+  letterId: string;
   letterName: string;
   position: string;
   positionDescription: string;
@@ -245,6 +258,7 @@ function generateFlashcards(): FlashCard[] {
   for (const letter of letterForms) {
     cards.push({
       form: letter.isolated,
+      letterId: letter.id,
       letterName: letter.name,
       position: "Isolated",
       positionDescription: positionDescriptions["Isolated"],
@@ -252,6 +266,7 @@ function generateFlashcards(): FlashCard[] {
     if (letter.initial) {
       cards.push({
         form: letter.initial,
+        letterId: letter.id,
         letterName: letter.name,
         position: "Initial",
         positionDescription: positionDescriptions["Initial"],
@@ -260,6 +275,7 @@ function generateFlashcards(): FlashCard[] {
     if (letter.medial) {
       cards.push({
         form: letter.medial,
+        letterId: letter.id,
         letterName: letter.name,
         position: "Medial",
         positionDescription: positionDescriptions["Medial"],
@@ -268,6 +284,7 @@ function generateFlashcards(): FlashCard[] {
     if (letter.final) {
       cards.push({
         form: letter.final,
+        letterId: letter.id,
         letterName: letter.name,
         position: "Final",
         positionDescription: positionDescriptions["Final"],

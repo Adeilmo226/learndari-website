@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, Info, CheckCircle, BookOpen, Brain } from "lucide-react";
+import { ArrowLeft, Info, CheckCircle, BookOpen, Brain, Volume2 } from "lucide-react";
 import { letterForms, type LetterForms } from "@/lib/alphabet";
 import { useUser, SignInButton } from "@clerk/nextjs";
 import { Lock } from "lucide-react";
@@ -225,11 +225,36 @@ function LetterButton({
 }
 
 function LetterFormsCard({ letter }: { letter: LetterForms }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = () => {
+    setIsPlaying(true);
+    const audioUrl = `/audio/alphabet/${letter.id}.mp3`;
+    const audio = new Audio(audioUrl);
+    audio.onended = () => setIsPlaying(false);
+    audio.onerror = () => setIsPlaying(false);
+    audio.play().catch(() => {
+      console.log("Audio file not available");
+      setIsPlaying(false);
+    });
+  };
+
   return (
     <div className="bg-white rounded-2xl shadow-lg p-6 sticky top-8">
       <div className="text-center mb-6">
         <h3 className="text-2xl font-bold text-gray-900 mb-1">{letter.name}</h3>
         <p className="text-gray-500">({letter.letter})</p>
+        <button
+          onClick={playAudio}
+          disabled={isPlaying}
+          className={`mt-3 w-14 h-14 rounded-full flex items-center justify-center mx-auto transition-all ${
+            isPlaying
+              ? "bg-green-600 scale-110"
+              : "bg-green-100 hover:bg-green-600 hover:scale-105"
+          }`}
+        >
+          <Volume2 className={`w-7 h-7 ${isPlaying ? "text-white" : "text-green-600 hover:text-white"}`} />
+        </button>
       </div>
 
       <div className="space-y-4">

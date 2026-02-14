@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw, Clock } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw, Clock, Volume2 } from "lucide-react";
 import { dariPhrases } from "@/lib/phrases";
 
 /**
@@ -140,9 +140,21 @@ export default function Level5FlashcardsPage() {
                   {currentPhrase.english}
                 </h2>
                 <p className="text-yellow-100 text-lg mb-1">Pronunciation</p>
-                <p className="text-2xl text-white italic">
+                <p className="text-2xl text-white italic mb-4">
                   {currentPhrase.phonetic}
                 </p>
+
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const audio = new Audio(`/audio/phrases/${currentPhrase.id}.mp3`);
+                    audio.play().catch(() => console.log("Audio file not available"));
+                  }}
+                  className="flex items-center gap-2 px-6 py-3 bg-white text-yellow-600 rounded-lg hover:bg-yellow-50 transition-colors"
+                >
+                  <Volume2 className="w-5 h-5" />
+                  Play Audio
+                </button>
               </div>
             </div>
           </div>

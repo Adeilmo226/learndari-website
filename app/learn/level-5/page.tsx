@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Brain, Lock, Clock } from "lucide-react";
+import { useState } from "react";
+import { ArrowLeft, BookOpen, Brain, Lock, Clock, Volume2 } from "lucide-react";
 import { useUser, SignInButton } from "@clerk/nextjs";
-import { dariPhrases } from "@/lib/phrases";
+import { dariPhrases, type DariPhrase } from "@/lib/phrases";
 
 /**
  * Level 5: Short Phrases
@@ -132,25 +133,57 @@ export default function Level5Page() {
 
       <div className="space-y-3">
         {dariPhrases.map((phrase) => (
-          <div key={phrase.id} className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors">
-            <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <p className="text-sm text-gray-500 mb-1">English</p>
-                <p className="text-xl font-semibold text-gray-900">{phrase.english}</p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Dari</p>
-                <p className="text-2xl font-semibold text-gray-900 text-left" dir="rtl">
-                  {phrase.dari}
-                </p>
-              </div>
-              <div>
-                <p className="text-sm text-gray-500 mb-1">Pronunciation</p>
-                <p className="text-xl font-medium text-gray-700 italic">{phrase.phonetic}</p>
-              </div>
-            </div>
-          </div>
+          <PhraseCard key={phrase.id} phrase={phrase} />
         ))}
+      </div>
+    </div>
+  );
+}
+
+function PhraseCard({ phrase }: { phrase: DariPhrase }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const playAudio = () => {
+    setIsPlaying(true);
+    const audio = new Audio(`/audio/phrases/${phrase.id}.mp3`);
+    audio.onended = () => setIsPlaying(false);
+    audio.onerror = () => setIsPlaying(false);
+    audio.play().catch(() => {
+      console.log("Audio file not available");
+      setIsPlaying(false);
+    });
+  };
+
+  return (
+    <div className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-gray-300 transition-colors">
+      <div className="flex items-center">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <p className="text-sm text-gray-500 mb-1">English</p>
+            <p className="text-xl font-semibold text-gray-900">{phrase.english}</p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500 mb-1">Dari</p>
+            <p className="text-2xl font-semibold text-gray-900 text-left" dir="rtl">
+              {phrase.dari}
+            </p>
+          </div>
+          <div>
+            <p className="text-sm text-gray-500 mb-1">Pronunciation</p>
+            <p className="text-xl font-medium text-gray-700 italic">{phrase.phonetic}</p>
+          </div>
+        </div>
+        <button
+          onClick={playAudio}
+          disabled={isPlaying}
+          className={`ml-6 w-14 h-14 rounded-full flex items-center justify-center transition-all ${
+            isPlaying
+              ? "bg-yellow-600 scale-110"
+              : "bg-yellow-100 hover:bg-yellow-600 hover:scale-105"
+          }`}
+        >
+          <Volume2 className={`w-6 h-6 ${isPlaying ? "text-white" : "text-yellow-600 hover:text-white"}`} />
+        </button>
       </div>
     </div>
   );
