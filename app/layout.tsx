@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, UserButton } from "@clerk/nextjs";
 
 import "./globals.css";
 import Header from "@/components/header";
@@ -23,6 +23,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={`${inter.className} min-h-screen flex flex-col`}>
           <Header />
+		  <UserButton showName />
           <main className="flex-1 pt-20 pb-24 md:pb-0">
             {children}
           </main>
