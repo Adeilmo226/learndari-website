@@ -19,35 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        // Clerk defaults to light mode; no baseTheme needed
-        variables: {
-          colorPrimary: "#dc2626",
-          colorTextOnPrimaryBackground: "#ffffff",
-          colorBackground: "#ffffff",
-          colorText: "#111827",
-          colorTextSecondary: "#4b5563",
-          colorInputBackground: "#ffffff",
-          colorInputText: "#111827",
-          borderRadius: "0.5rem",
-          fontFamily: "Inter, sans-serif",
-        },
-        elements: {
-          formButtonPrimary:
-            "bg-red-600 hover:bg-red-700 text-white shadow-md",
-          card: "shadow-lg border border-gray-200",
-          headerTitle: "text-gray-900 font-bold",
-          headerSubtitle: "text-gray-600",
-          socialButtonsBlockButton:
-            "border border-gray-300 hover:bg-gray-50 text-gray-700",
-          formFieldInput:
-            "border border-gray-300 focus:border-red-500 focus:ring-red-500",
-          footerActionLink: "text-red-600 hover:text-red-700",
-          userButtonAvatarBox: "w-9 h-9",
-        },
-      }}
-    >
+    <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} min-h-screen flex flex-col`}>
           <Header />
