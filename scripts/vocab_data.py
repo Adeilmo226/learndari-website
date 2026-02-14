@@ -192,6 +192,41 @@ phrases = [
     {"id": "i-am-happy", "dari": "خوشحال هستم", "english": "I am happy", "phonetic": "khushhaal hastam"},
 ]
 
+alphabet = [
+    {"id": "alef", "dari": "ا", "english": "Alef", "phonetic": "alef"},
+    {"id": "be", "dari": "ب", "english": "Be", "phonetic": "be"},
+    {"id": "pe", "dari": "پ", "english": "Pe", "phonetic": "pe"},
+    {"id": "te", "dari": "ت", "english": "Te", "phonetic": "te"},
+    {"id": "se", "dari": "ث", "english": "Se", "phonetic": "se"},
+    {"id": "jeem", "dari": "ج", "english": "Jeem", "phonetic": "jeem"},
+    {"id": "che", "dari": "چ", "english": "Che", "phonetic": "che"},
+    {"id": "he", "dari": "ح", "english": "He", "phonetic": "he"},
+    {"id": "khe", "dari": "خ", "english": "Khe", "phonetic": "khe"},
+    {"id": "dal", "dari": "د", "english": "Dal", "phonetic": "dal"},
+    {"id": "zal", "dari": "ذ", "english": "Zal", "phonetic": "zal"},
+    {"id": "re", "dari": "ر", "english": "Re", "phonetic": "re"},
+    {"id": "ze", "dari": "ز", "english": "Ze", "phonetic": "ze"},
+    {"id": "zhe", "dari": "ژ", "english": "Zhe", "phonetic": "zhe"},
+    {"id": "seen", "dari": "س", "english": "Seen", "phonetic": "seen"},
+    {"id": "sheen", "dari": "ش", "english": "Sheen", "phonetic": "sheen"},
+    {"id": "sad", "dari": "ص", "english": "Sad", "phonetic": "sad"},
+    {"id": "zad", "dari": "ض", "english": "Zad", "phonetic": "zad"},
+    {"id": "taa", "dari": "ط", "english": "Taa", "phonetic": "taa"},
+    {"id": "zaa", "dari": "ظ", "english": "Zaa", "phonetic": "zaa"},
+    {"id": "ayn", "dari": "ع", "english": "Ayn", "phonetic": "ayn"},
+    {"id": "ghayn", "dari": "غ", "english": "Ghayn", "phonetic": "ghayn"},
+    {"id": "fe", "dari": "ف", "english": "Fe", "phonetic": "fe"},
+    {"id": "qaf", "dari": "ق", "english": "Qaf", "phonetic": "qaf"},
+    {"id": "kaf", "dari": "ک", "english": "Kaf", "phonetic": "kaf"},
+    {"id": "gaf", "dari": "گ", "english": "Gaf", "phonetic": "gaf"},
+    {"id": "lam", "dari": "ل", "english": "Lam", "phonetic": "lam"},
+    {"id": "meem", "dari": "م", "english": "Meem", "phonetic": "meem"},
+    {"id": "noon", "dari": "ن", "english": "Noon", "phonetic": "noon"},
+    {"id": "waw", "dari": "و", "english": "Waw", "phonetic": "waw"},
+    {"id": "he2", "dari": "ه", "english": "He", "phonetic": "he"},
+    {"id": "ye", "dari": "ی", "english": "Ye", "phonetic": "ye"},
+]
+
 # Master list of all categories
 # To add a new category: add data above, then add entry here
 ALL_CATEGORIES = [
@@ -207,4 +242,5 @@ ALL_CATEGORIES = [
     {"name": "food", "data": food},
     {"name": "phrases", "data": phrases},
 	{"name": "numbers", "data": numbers},
+    {"name": "alphabet", "data": alphabet},
 ]
