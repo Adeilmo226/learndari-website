@@ -123,6 +123,9 @@ export default function VocabPage() {
         <p className="text-xl text-gray-600">
           Choose a vocabulary set to start learning
         </p>
+        <p className="text-sm text-gray-400 mt-2">
+          More vocab sets coming soon.
+        </p>
       </div>
 
       {/* Vocabulary Sets Grid */}

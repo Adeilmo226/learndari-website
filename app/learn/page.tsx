@@ -110,6 +110,9 @@ export default function LearnPage() {
         <p className="text-xl text-gray-600">
           Master Dari reading step by step, from alphabet to phrases
         </p>
+        <p className="text-sm text-gray-400 mt-2">
+          More levels coming soon.
+        </p>
       </div>
 
       {/* Progress Overview */}

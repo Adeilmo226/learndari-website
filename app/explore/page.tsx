@@ -43,6 +43,9 @@ export default function ExplorePage() {
         <p className="text-xl text-gray-600">
           Search for words in English, Dari, or phonetic spelling
         </p>
+        <p className="text-sm text-gray-400 mt-2">
+          Searching from our vocab database — we&apos;re always adding more.
+        </p>
       </div>
 
       {/* Search Bar */}
