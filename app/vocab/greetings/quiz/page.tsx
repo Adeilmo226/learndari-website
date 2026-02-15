@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, CheckCircle, XCircle } from "lucide-react";
 import { greetingsVocab, setInfo } from "../data";
+import { AuthGate } from "@/components/AuthGate";
 
 export default function QuizPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -128,6 +129,7 @@ export default function QuizPage() {
   }
 
   return (
+    <AuthGate backHref="/vocab" backLabel="Back to Vocabulary Sets">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -253,6 +255,7 @@ export default function QuizPage() {
         )}
       </div>
     </div>
+    </AuthGate>
   );
 }
 

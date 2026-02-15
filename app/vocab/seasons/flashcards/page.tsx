@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
 import { seasonsVocab, setInfo } from "../data";
+import { AuthGate } from "@/components/AuthGate";
 
 export default function FlashcardsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -51,6 +52,7 @@ export default function FlashcardsPage() {
   };
 
   return (
+    <AuthGate backHref="/vocab" backLabel="Back to Vocabulary Sets">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -220,5 +222,6 @@ export default function FlashcardsPage() {
         }
       `}</style>
     </div>
+    </AuthGate>
   );
 }

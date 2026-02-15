@@ -78,7 +78,7 @@ export default function AboutPage() {
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-1">Modern & Accessible</h3>
             <p className="text-gray-600">
-              Clean interface, works on any device, completely free.
+              Clean interface, and works on any device.
             </p>
           </div>
           <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">

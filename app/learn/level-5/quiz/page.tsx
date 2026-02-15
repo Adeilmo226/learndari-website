@@ -6,6 +6,7 @@ import { ArrowLeft, CheckCircle, XCircle, Clock } from "lucide-react";
 import { dariPhrases } from "@/lib/phrases";
 import { useUser } from "@clerk/nextjs";
 import { saveLevelProgress } from "@/lib/progress";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 5 Quiz: Short Phrases
@@ -155,6 +156,7 @@ export default function Level5QuizPage() {
   }
 
   return (
+    <AuthGate backHref="/learn/level-5" backLabel="Back to Level 5">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -266,6 +268,7 @@ export default function Level5QuizPage() {
         )}
       </div>
     </div>
+    </AuthGate>
   );
 }
 

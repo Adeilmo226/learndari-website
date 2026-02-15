@@ -4,9 +4,11 @@ import Link from "next/link";
 import { ArrowLeft, Volume2, BookOpen, Brain } from "lucide-react";
 import { numbersVocab, setInfo } from "./data";
 import { useAudio } from "@/lib/useAudio";
+import { AuthGate } from "@/components/AuthGate";
 
 export default function NumbersPage() {
   return (
+    <AuthGate backHref="/vocab" backLabel="Back to Vocabulary Sets">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <Link
         href="/vocab"
@@ -68,6 +70,7 @@ export default function NumbersPage() {
         ))}
       </div>
     </div>
+    </AuthGate>
   );
 }
 

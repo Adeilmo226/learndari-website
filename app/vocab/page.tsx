@@ -27,7 +27,7 @@ export default function VocabPage() {
       description: "Learn animal names in Dari",
       wordCount: 14,
       emoji: "🐾",
-      free: true,
+      free: false,
     },
     {
       id: "food",
@@ -35,7 +35,7 @@ export default function VocabPage() {
       description: "Learn common food items in Dari",
       wordCount: 8,
       emoji: "🍽️",
-      free: true,
+      free: false,
     },
     {
       id: "fruit",
@@ -43,7 +43,7 @@ export default function VocabPage() {
       description: "Learn fruit names in Dari",
       wordCount: 15,
       emoji: "🍎",
-      free: true,
+      free: false,
     },
     {
       id: "vegetables",
@@ -51,7 +51,7 @@ export default function VocabPage() {
       description: "Learn vegetable names in Dari",
       wordCount: 11,
       emoji: "🥕",
-      free: true,
+      free: false,
     },
     {
       id: "body",
@@ -59,7 +59,7 @@ export default function VocabPage() {
       description: "Learn body part names in Dari",
       wordCount: 12,
       emoji: "🦴",
-      free: true,
+      free: false,
     },
     {
       id: "days-of-the-week",
@@ -67,7 +67,7 @@ export default function VocabPage() {
       description: "Learn the days of the week in Dari",
       wordCount: 7,
       emoji: "📅",
-      free: true,
+      free: false,
     },
     {
       id: "seasons",
@@ -75,7 +75,7 @@ export default function VocabPage() {
       description: "Learn the four seasons in Dari",
       wordCount: 4,
       emoji: "🌸",
-      free: true,
+      free: false,
     },
     {
       id: "weather",
@@ -83,7 +83,7 @@ export default function VocabPage() {
       description: "Learn weather-related terms in Dari",
       wordCount: 9,
       emoji: "⛅",
-      free: true,
+      free: false,
     },
     {
       id: "transportation",
@@ -91,7 +91,7 @@ export default function VocabPage() {
       description: "Learn transportation terms in Dari",
       wordCount: 7,
       emoji: "🚗",
-      free: true,
+      free: false,
     },
     {
       id: "numbers",
@@ -99,7 +99,7 @@ export default function VocabPage() {
       description: "Learn to count in Dari from 1 to 1000",
       wordCount: 38,
       emoji: "🔢",
-      free: true,
+      free: false,
     },
     {
       id: "greetings",
@@ -107,7 +107,7 @@ export default function VocabPage() {
       description: "Learn common greetings and phrases in Dari",
       wordCount: 10,
       emoji: "👋🏽",
-      free: true,
+      free: false,
     },
   ];
 
@@ -122,6 +122,9 @@ export default function VocabPage() {
         </h1>
         <p className="text-xl text-gray-600">
           Choose a vocabulary set to start learning
+        </p>
+        <p className="text-sm text-gray-400 mt-2">
+          More vocab sets coming soon.
         </p>
       </div>
 

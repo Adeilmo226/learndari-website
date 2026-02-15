@@ -1,47 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, Volume2, BookOpen, Brain, Lock } from "lucide-react";
-import { useUser, SignInButton } from "@clerk/nextjs";
+import { ArrowLeft, Volume2, BookOpen, Brain} from "lucide-react";
 import { commonWords } from "@/lib/learn-words";
 import { useAudio } from "@/lib/useAudio";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 4: Common Words
  * Browse common Dari vocabulary words
  */
 export default function Level4Page() {
-  const { isSignedIn, isLoaded } = useUser();
-
-  if (isLoaded && !isSignedIn) {
-    return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="bg-white rounded-2xl shadow-xl p-12">
-            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Lock className="w-10 h-10 text-red-600" />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">Sign in Required</h1>
-            <p className="text-gray-600 mb-8">
-              Sign in to access Level 4 and continue your learning journey.
-            </p>
-            <SignInButton>
-              <button className="px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-lg">
-                Sign In to Continue
-              </button>
-            </SignInButton>
-            <div className="mt-6">
-              <Link href="/learn" className="text-gray-500 hover:text-gray-700 transition-colors">
-                ← Back to Learning Path
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
+    <AuthGate backHref="/learn" backLabel="Back to Learning Path">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <Link
         href="/learn"
@@ -103,6 +75,7 @@ export default function Level4Page() {
         ))}
       </div>
     </div>
+    </AuthGate>
   );
 }
 

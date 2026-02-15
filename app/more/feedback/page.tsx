@@ -16,23 +16,40 @@ export default function FeedbackPage() {
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send to a backend
-    console.log("Feedback submitted:", formData);
-    setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        category: "suggestion",
-        message: "",
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      if (!res.ok) {
+        throw new Error("Failed to send feedback");
+      }
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          category: "suggestion",
+          message: "",
+        });
+      }, 3000);
+    } catch {
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -90,6 +107,7 @@ export default function FeedbackPage() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
+                maxLength={100}
                 placeholder="Your name"
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none transition-colors"
               />
@@ -106,6 +124,7 @@ export default function FeedbackPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                maxLength={200}
                 placeholder="your.email@example.com"
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none transition-colors"
               />
@@ -145,19 +164,28 @@ export default function FeedbackPage() {
                 value={formData.message}
                 onChange={handleChange}
                 required
+                maxLength={2000}
                 rows={6}
                 placeholder="Share your thoughts, report an issue, or suggest a feature..."
                 className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-teal-600 focus:outline-none transition-colors resize-none"
               />
             </div>
 
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border-2 border-red-200 rounded-lg p-4 text-red-700 text-center">
+                {error}
+              </div>
+            )}
+
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-teal-600 text-white rounded-xl hover:bg-teal-700 transition-colors font-semibold text-lg"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-teal-600 text-white rounded-xl hover:bg-teal-700 transition-colors font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Send className="w-5 h-5" />
-              Submit Feedback
+              {isSubmitting ? "Sending..." : "Submit Feedback"}
             </button>
           </form>
         </div>

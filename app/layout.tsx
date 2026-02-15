@@ -21,7 +21,6 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        // Clerk defaults to light mode; no baseTheme needed
         variables: {
           colorPrimary: "#dc2626",
           colorTextOnPrimaryBackground: "#ffffff",

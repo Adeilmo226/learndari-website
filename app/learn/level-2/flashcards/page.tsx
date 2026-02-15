@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw, Volume2 } from "lucide-react";
 import { letterForms } from "@/lib/alphabet";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 2 Flashcards: Letter Forms
@@ -48,6 +49,7 @@ export default function Level2FlashcardsPage() {
   };
 
   return (
+    <AuthGate backHref="/learn/level-2" backLabel="Back to Level 2">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -234,6 +236,7 @@ export default function Level2FlashcardsPage() {
         }
       `}</style>
     </div>
+    </AuthGate>
   );
 }
 

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ChevronLeft, ChevronRight, RotateCcw, Clock, Volume2 } from "lucide-react";
 import { dariPhrases } from "@/lib/phrases";
+import { AuthGate } from "@/components/AuthGate";
 
 /**
  * Level 5 Flashcards: Short Phrases
@@ -62,6 +63,7 @@ export default function Level5FlashcardsPage() {
   };
 
   return (
+    <AuthGate backHref="/learn/level-5" backLabel="Back to Level 5">
     <div className="min-h-screen bg-gray-50 py-12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
@@ -212,5 +214,6 @@ export default function Level5FlashcardsPage() {
         .rotate-y-180 { transform: rotateY(180deg); }
       `}</style>
     </div>
+    </AuthGate>
   );
 }
