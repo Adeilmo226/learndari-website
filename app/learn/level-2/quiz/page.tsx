@@ -255,36 +255,6 @@ export default function Level2QuizPage() {
             })}
           </div>
 
-          {/* Result Message */}
-          {showResult && (
-            <div
-              className={`mt-6 p-4 rounded-lg ${
-                selectedAnswer === currentQuestion.correctAnswer
-                  ? "bg-green-50 border-2 border-green-200"
-                  : "bg-red-50 border-2 border-red-200"
-              }`}
-            >
-              <p
-                className={`text-lg font-semibold text-center ${
-                  selectedAnswer === currentQuestion.correctAnswer
-                    ? "text-green-900"
-                    : "text-red-900"
-                }`}
-              >
-                {selectedAnswer === currentQuestion.correctAnswer
-                  ? "✓ Correct!"
-                  : `✗ Incorrect. The correct answer is ${currentQuestion.correctAnswer}`}
-              </p>
-              {(() => {
-                const match = dariAlphabet.find((l) => l.name === currentQuestion.correctAnswer);
-                return match ? (
-                  <p className="text-sm text-gray-600 mt-2">
-                    Phonetic: <span className="italic">{match.phonetic}</span>
-                  </p>
-                ) : null;
-              })()}
-            </div>
-          )}
         </div>
 
         {/* Next Button */}

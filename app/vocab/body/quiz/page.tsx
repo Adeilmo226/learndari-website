@@ -243,29 +243,6 @@ export default function QuizPage() {
               );
             })}
           </div>
-
-          {/* Result Message */}
-          {showResult && (
-            <div
-              className={`mt-6 p-4 rounded-lg ${
-                selectedAnswer === currentQuestion.correctAnswer
-                  ? "bg-green-50 border-2 border-green-200"
-                  : "bg-red-50 border-2 border-red-200"
-              }`}
-            >
-              <p
-                className={`text-lg font-semibold ${
-                  selectedAnswer === currentQuestion.correctAnswer
-                    ? "text-green-900"
-                    : "text-red-900"
-                }`}
-              >
-                {selectedAnswer === currentQuestion.correctAnswer
-                  ? "✓ Correct!"
-                  : `✗ Incorrect. The correct answer is ${currentQuestion.correctAnswer}`}
-              </p>
-            </div>
-          )}
         </div>
 
         {/* Next Button */}
