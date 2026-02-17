@@ -89,16 +89,16 @@ export default function QuizPage() {
     const passed = percentage >= 70;
 
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="bg-gray-50 py-4">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-6 text-center">
             <div className="mb-6">
               {passed ? (
-                <div className="text-6xl mb-4">🎉</div>
+                <div className="text-4xl mb-2">🎉</div>
               ) : (
-                <div className="text-6xl mb-4">📚</div>
+                <div className="text-4xl mb-2">📚</div>
               )}
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 Quiz Complete!
               </h1>
               <p className="text-xl text-gray-600">
@@ -106,8 +106,8 @@ export default function QuizPage() {
               </p>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-8 mb-8">
-              <div className="text-6xl font-bold text-gray-900 mb-2">
+            <div className="bg-gray-50 rounded-xl p-4 mb-4">
+              <div className="text-4xl font-bold text-gray-900 mb-1">
                 {score} / {questions.length}
               </div>
               <div className="text-2xl text-gray-600 mb-4">{percentage}%</div>
@@ -124,19 +124,19 @@ export default function QuizPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={handleRestart}
-                className="px-8 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
               >
                 Try Again
               </button>
               <Link
                 href="/vocab/food/flashcards"
-                className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
+                className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
               >
                 Study Flashcards
               </Link>
               <Link
                 href="/vocab/food"
-                className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
+                className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
               >
                 Back to Vocab
               </Link>
@@ -149,10 +149,10 @@ export default function QuizPage() {
 
   return (
     <AuthGate backHref="/vocab" backLabel="Back to Vocabulary Sets">
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-gray-50 py-4">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <Link
             href="/vocab/food"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"

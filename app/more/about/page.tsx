@@ -7,7 +7,7 @@ import { ArrowLeft, Target, Volume2, Monitor, GraduationCap } from "lucide-react
  */
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <Link
         href="/more"
@@ -17,8 +17,8 @@ export default function AboutPage() {
         Discover More
       </Link>
 
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           About LearnDari
         </h1>
         <p className="text-xl text-gray-600">
@@ -28,7 +28,7 @@ export default function AboutPage() {
 
 
       {/* Why We Built This */}
-      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
+      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-6 mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our mission</h2>
         <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
           <p>
@@ -51,7 +51,7 @@ export default function AboutPage() {
       </div>
 
       {/* What Makes Us Different */}
-      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
+      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-6 mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">What makes us different</h2>
         <div className="grid sm:grid-cols-2 gap-6">
           <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">

@@ -101,10 +101,10 @@ export default function LearnPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           Learn to Read Dari
         </h1>
         <p className="text-xl text-gray-600">
@@ -116,7 +116,7 @@ export default function LearnPage() {
       </div>
 
       {/* Progress Overview */}
-      <div className="max-w-2xl mx-auto mb-12 bg-white rounded-2xl shadow-lg p-6">
+      <div className="max-w-2xl mx-auto mb-6 bg-white rounded-2xl shadow-lg p-6">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Your Progress</h2>

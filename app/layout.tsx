@@ -4,7 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import "./globals.css";
 import Header from "@/components/header";
-import Footer from "@/components/footer";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,12 +48,11 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${inter.className} min-h-screen flex flex-col`}>
+        <body className={`${inter.className} h-dvh flex flex-col overflow-hidden`}>
           <Header />
-          <main className="flex-1 pt-20 pb-24 md:pb-0">
+          <main className="flex-1 pt-20 pb-20 md:pb-0 overflow-y-auto">
             {children}
           </main>
-          <Footer />
         </body>
       </html>
     </ClerkProvider>

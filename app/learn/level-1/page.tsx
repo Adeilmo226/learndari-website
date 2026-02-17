@@ -21,32 +21,32 @@ export default function Level1Page() {
   const progress = (reviewedLetters.size / dariAlphabet.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-gray-50 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-3">
           <Link
             href="/learn"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-2 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Learning Path
           </Link>
 
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-3">
             <div>
-              <div className="flex items-center gap-3 mb-2">
+              <div className="flex items-center gap-3 mb-1">
                 <span className="px-3 py-1 bg-gradient-to-r from-red-500 to-red-600 text-white text-sm font-medium rounded-full">
                   Level 1
                 </span>
               </div>
-              <h1 className="text-4xl font-bold text-gray-900">Alphabet Basics</h1>
-              <p className="text-gray-600 mt-2">
+              <h1 className="text-2xl font-bold text-gray-900">Alphabet Basics</h1>
+              <p className="text-gray-600 text-sm mt-1">
                 Click on each letter to hear its sound and learn its name
               </p>
             </div>
             <div className="text-right">
-              <div className="text-3xl font-bold text-gray-900">
+              <div className="text-2xl font-bold text-gray-900">
                 {reviewedLetters.size}/{dariAlphabet.length}
               </div>
               <div className="text-sm text-gray-500">Letters Reviewed</div>
@@ -54,7 +54,7 @@ export default function Level1Page() {
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+          <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
             <div
               className="bg-gradient-to-r from-red-600 to-red-500 h-full rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
@@ -63,44 +63,44 @@ export default function Level1Page() {
         </div>
 
         {/* Study Mode Buttons */}
-        <div className="grid md:grid-cols-2 gap-4 mb-8">
+        <div className="grid md:grid-cols-2 gap-3 mb-4">
           <Link
             href="/learn/level-1/flashcards"
-            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-red-600 hover:shadow-lg transition-all group"
+            className="flex items-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-red-600 hover:shadow-lg transition-all group"
           >
-            <div className="w-14 h-14 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-600 transition-colors">
-              <BookOpen className="w-7 h-7 text-red-600 group-hover:text-white transition-colors" />
+            <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-600 transition-colors">
+              <BookOpen className="w-5 h-5 text-red-600 group-hover:text-white transition-colors" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-900">Flashcards</h3>
-              <p className="text-gray-600">Review letters with interactive cards</p>
+              <h3 className="text-lg font-bold text-gray-900">Flashcards</h3>
+              <p className="text-gray-600 text-sm">Review letters with interactive cards</p>
             </div>
             <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
           </Link>
 
           <Link
             href="/learn/level-1/quiz"
-            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
+            className="flex items-center gap-3 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
           >
-            <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
-              <Brain className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+              <Brain className="w-5 h-5 text-green-600 group-hover:text-white transition-colors" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-900">Quiz Mode</h3>
-              <p className="text-gray-600">Test your knowledge (80% to pass)</p>
+              <h3 className="text-lg font-bold text-gray-900">Quiz Mode</h3>
+              <p className="text-gray-600 text-sm">Test your knowledge (80% to pass)</p>
             </div>
             <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
           </Link>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-4">
           {/* Alphabet Grid */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-2xl shadow-lg p-4">
+              <h2 className="text-lg font-bold text-gray-900 mb-3">
                 The Dari Alphabet (32 Letters)
               </h2>
-              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3" dir="rtl">
                 {dariAlphabet.map((letter) => (
                   <LetterButton
                     key={letter.id}
@@ -119,8 +119,8 @@ export default function Level1Page() {
             {selectedLetter ? (
               <LetterDetailCard letter={selectedLetter} />
             ) : (
-              <div className="bg-white rounded-2xl shadow-lg p-8 text-center sticky top-8">
-                <div className="text-6xl mb-4">👆</div>
+              <div className="bg-white rounded-2xl shadow-lg p-6 text-center sticky top-4">
+                <div className="text-4xl mb-2">👆</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
                   Select a Letter
                 </h3>
@@ -153,7 +153,7 @@ function LetterButton({
   return (
     <button
       onClick={onClick}
-      className={`aspect-square rounded-xl text-4xl font-bold transition-all relative ${
+      className={`aspect-square rounded-xl text-2xl font-bold transition-all relative ${
         isSelected
           ? "bg-red-600 text-white scale-110 shadow-lg"
           : isReviewed
@@ -192,9 +192,9 @@ function LetterDetailCard({ letter }: { letter: DariLetter }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg p-8 sticky top-8">
-      <div className="text-center mb-8">
-        <div className="text-9xl font-bold text-gray-900 mb-4" dir="rtl">
+    <div className="bg-white rounded-2xl shadow-lg p-4 sticky top-4">
+      <div className="text-center mb-4">
+        <div className="text-6xl font-bold text-gray-900 mb-2" dir="rtl">
           {letter.letter}
         </div>
         <button

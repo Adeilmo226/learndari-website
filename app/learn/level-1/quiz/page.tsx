@@ -91,16 +91,16 @@ export default function Level1QuizPage() {
     const passed = percentage >= 80;
 
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="bg-gray-50 py-4">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
             <div className="mb-6">
               {passed ? (
-                <div className="text-6xl mb-4">🎉</div>
+                <div className="text-4xl mb-2">🎉</div>
               ) : (
-                <div className="text-6xl mb-4">📚</div>
+                <div className="text-4xl mb-2">📚</div>
               )}
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 Quiz Complete!
               </h1>
               <p className="text-xl text-gray-600">
@@ -174,10 +174,10 @@ export default function Level1QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-gray-50 py-4">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <Link
             href="/learn/level-1"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
@@ -214,7 +214,7 @@ export default function Level1QuizPage() {
         </div>
 
         {/* Question Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <div className="bg-white rounded-2xl shadow-xl p-5 mb-4">
           <div className="text-center mb-8">
             <p className="text-gray-500 text-lg mb-4">What is this letter called?</p>
             <div className="text-9xl font-bold text-gray-900 mb-6" dir="rtl">

@@ -89,16 +89,16 @@ export default function QuizPage() {
     const passed = percentage >= 70;
 
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="bg-gray-50 py-4">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-6 text-center">
             <div className="mb-6">
               {passed ? (
-                <div className="text-6xl mb-4">🎉</div>
+                <div className="text-4xl mb-2">🎉</div>
               ) : (
-                <div className="text-6xl mb-4">📚</div>
+                <div className="text-4xl mb-2">📚</div>
               )}
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-2xl font-bold text-gray-900 mb-1">
                 Quiz Complete!
               </h1>
               <p className="text-xl text-gray-600">
@@ -106,8 +106,8 @@ export default function QuizPage() {
               </p>
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-8 mb-8">
-              <div className="text-6xl font-bold text-gray-900 mb-2">
+            <div className="bg-gray-50 rounded-xl p-4 mb-4">
+              <div className="text-4xl font-bold text-gray-900 mb-1">
                 {score} / {questions.length}
               </div>
               <div className="text-2xl text-gray-600 mb-4">{percentage}%</div>
@@ -124,19 +124,19 @@ export default function QuizPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={handleRestart}
-                className="px-8 py-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
+                className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-semibold"
               >
                 Try Again
               </button>
               <Link
                 href="/vocab/animals/flashcards"
-                className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
+                className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
               >
                 Study Flashcards
               </Link>
               <Link
                 href="/vocab/animals"
-                className="px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
+                className="px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 transition-colors font-semibold"
               >
                 Back to Vocab
               </Link>
@@ -149,10 +149,10 @@ export default function QuizPage() {
 
   return (
     <AuthGate backHref="/vocab" backLabel="Back to Vocabulary Sets">
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-gray-50 py-4">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <Link
             href="/vocab/animals"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
@@ -184,11 +184,11 @@ export default function QuizPage() {
         </div>
 
         {/* Question Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
+        <div className="bg-white rounded-2xl shadow-xl p-5 mb-4">
           {/* Question */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-4">
             <p className="text-gray-500 text-lg mb-4">What is this in Dari?</p>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
               {currentQuestion.word.english}
             </h2>
             <button
@@ -213,7 +213,7 @@ export default function QuizPage() {
                   key={index}
                   onClick={() => handleAnswerSelect(option)}
                   disabled={showResult}
-                  className={`p-6 rounded-xl border-2 text-left transition-all ${
+                  className={`p-4 rounded-xl border-2 text-left transition-all ${
                     showCorrect
                       ? "border-green-600 bg-green-50"
                       : showIncorrect
@@ -225,7 +225,7 @@ export default function QuizPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-3xl font-bold text-gray-900 mb-2" dir="rtl">
+                      <p className="text-2xl font-bold text-gray-900 mb-1" dir="rtl">
                         {option}
                       </p>
                       <p className="text-gray-600">
@@ -272,7 +272,7 @@ export default function QuizPage() {
         {showResult && (
           <button
             onClick={handleNext}
-            className="w-full px-8 py-4 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-lg"
+            className="w-full px-8 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold text-lg"
           >
             {currentQuestionIndex < questions.length - 1
               ? "Next Question →"

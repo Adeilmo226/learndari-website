@@ -29,7 +29,7 @@ export default function ProverbsPage() {
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <Link
         href="/more"
@@ -39,8 +39,8 @@ export default function ProverbsPage() {
         Discover More
       </Link>
 
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           Dari Proverbs
         </h1>
         <p className="text-xl text-gray-600">
@@ -49,7 +49,7 @@ export default function ProverbsPage() {
       </div>
 
       {/* Search and Filter */}
-      <div className="mb-8 space-y-4">
+      <div className="mb-4 space-y-4">
         {/* Search Bar */}
         <div className="relative">
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />

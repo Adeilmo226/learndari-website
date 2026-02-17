@@ -130,7 +130,7 @@ export default function CulturePage() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <Link
         href="/more"
@@ -140,8 +140,8 @@ export default function CulturePage() {
         Discover More
       </Link>
 
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           Afghan Culture & Traditions
         </h1>
         <p className="text-xl text-gray-600">
@@ -150,7 +150,7 @@ export default function CulturePage() {
       </div>
 
       {/* Cultural Topics */}
-      <div className="space-y-8">
+      <div className="space-y-4">
         {culturalTopics.map((topic) => (
           <CulturalTopicCard key={topic.id} topic={topic} />
         ))}

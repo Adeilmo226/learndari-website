@@ -34,10 +34,10 @@ export default function ExplorePage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           Explore Dari Vocabulary
         </h1>
         <p className="text-xl text-gray-600">
@@ -46,7 +46,7 @@ export default function ExplorePage() {
       </div>
 
       {/* Search Bar */}
-      <div className="max-w-3xl mx-auto mb-12">
+      <div className="max-w-3xl mx-auto mb-6">
         <div className="relative">
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6" />
           <input
@@ -68,8 +68,8 @@ export default function ExplorePage() {
 
       {/* Word of the Day */}
       {!searchQuery && wordOfTheDay && (
-        <div className="max-w-3xl mx-auto mb-12">
-          <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl p-8 text-white">
+        <div className="max-w-3xl mx-auto mb-6">
+          <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl p-6 text-white">
             <div className="flex items-center gap-2 mb-4">
               <Star className="w-6 h-6" />
               <h2 className="text-2xl font-bold">Word of the Day</h2>

@@ -62,7 +62,7 @@ export default function FeedbackPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <Link
         href="/more"
@@ -72,8 +72,8 @@ export default function FeedbackPage() {
         Discover More
       </Link>
 
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           Feedback & Contact
         </h1>
         <p className="text-xl text-gray-600">
@@ -94,7 +94,7 @@ export default function FeedbackPage() {
         </div>
       ) : (
         // Feedback Form
-        <div className="bg-white rounded-2xl shadow-xl border-2 border-gray-200 p-8">
+        <div className="bg-white rounded-2xl shadow-xl border-2 border-gray-200 p-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name */}
             <div>
