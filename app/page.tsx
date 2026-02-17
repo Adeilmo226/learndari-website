@@ -8,7 +8,7 @@ import { BookOpen, GraduationCap, Search, Sparkles, Volume2, Users, Heart } from
  */
 export default function Home() {
   return (
-    <div className="bg-white min-h-[calc(100vh-5rem)] flex flex-col">
+    <div className="bg-white flex flex-col">
       {/* Section 1: Hero */}
       <section className="relative overflow-hidden">
         {/* Background Image Overlay */}
@@ -21,14 +21,14 @@ export default function Home() {
             priority
           />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Text Content */}
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black-900 leading-tight">
+          <div className="space-y-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black-900 leading-tight">
               The easiest way to learn Dari online
             </h1>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed">
               Learn words, pronunciation, and reading.
             </p>
             
@@ -36,14 +36,14 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link
                 href="/vocab"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl"
               >
                 <BookOpen className="w-5 h-5" />
                 Start with Vocabulary
               </Link>
               <Link
                 href="/learn"
-                className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition-colors shadow-lg hover:shadow-xl"
               >
                 <GraduationCap className="w-5 h-5" />
                 Learn to Read Dari

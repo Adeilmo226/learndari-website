@@ -38,7 +38,7 @@ export default function WordOfDayPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <Link
         href="/more"
@@ -54,12 +54,12 @@ export default function WordOfDayPage() {
           <Calendar className="w-5 h-5" />
           <span className="font-semibold">{new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
         </div>
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Word of the Day</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Word of the Day</h1>
         <p className="text-gray-600">Learn a new Dari word every day</p>
       </div>
 
       {/* Word Card */}
-      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl p-8 text-white mb-8">
+      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl p-6 text-white mb-8">
         <div className="flex items-center gap-2 mb-4">
           <Star className="w-6 h-6" />
           <h2 className="text-2xl font-bold">Word of the Day</h2>

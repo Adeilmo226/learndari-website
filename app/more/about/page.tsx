@@ -7,7 +7,7 @@ import { ArrowLeft, Target, Volume2, Monitor, GraduationCap } from "lucide-react
  */
 export default function AboutPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <Link
         href="/more"
@@ -17,8 +17,8 @@ export default function AboutPage() {
         Discover More
       </Link>
 
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="text-center mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           About LearnDari
         </h1>
         <p className="text-xl text-gray-600">
@@ -28,9 +28,11 @@ export default function AboutPage() {
 
 
       {/* Why We Built This */}
-      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our mission</h2>
-        <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 overflow-hidden mb-8">
+        <div className="bg-gradient-to-r from-red-500 to-red-600 p-6">
+          <h2 className="text-3xl font-bold text-white text-center">Our mission</h2>
+        </div>
+        <div className="p-6 space-y-4 text-gray-700 text-lg leading-relaxed">
           <p>
             LearnDari started because we were tired of watching our language slip away.
             Too many of us grew up understanding Dari but never learning to read or write it.
@@ -51,9 +53,11 @@ export default function AboutPage() {
       </div>
 
       {/* What Makes Us Different */}
-      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">What makes us different</h2>
-        <div className="grid sm:grid-cols-2 gap-6">
+      <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 overflow-hidden mb-8">
+        <div className="bg-gradient-to-r from-red-500 to-red-600 p-6">
+          <h2 className="text-3xl font-bold text-white text-center">What makes us different</h2>
+        </div>
+        <div className="p-6 grid sm:grid-cols-2 gap-6">
           <div className="p-5 bg-gray-50 rounded-xl border border-gray-200">
             <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-3">
               <Target className="w-5 h-5 text-red-600" />

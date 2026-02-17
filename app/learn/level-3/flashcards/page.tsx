@@ -53,10 +53,10 @@ export default function Level3FlashcardsPage() {
 
   return (
     <AuthGate backHref="/learn/level-3" backLabel="Back to Level 3">
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-gray-50 py-4">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-3">
           <Link
             href="/learn/level-3"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
@@ -88,7 +88,7 @@ export default function Level3FlashcardsPage() {
         </div>
 
         {/* Progress Bar */}
-        <div className="mb-8">
+        <div className="mb-3">
           <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
             <div
               className="bg-blue-600 h-full transition-all duration-300 rounded-full"
@@ -102,10 +102,10 @@ export default function Level3FlashcardsPage() {
         </div>
 
         {/* Flashcard */}
-        <div className="mb-8">
+        <div className="mb-3">
           <div
             onClick={flipCard}
-            className="relative w-full aspect-[3/2] cursor-pointer perspective-1000"
+            className="relative w-full aspect-[5/3] cursor-pointer perspective-1000"
           >
             <div
               className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${
@@ -118,8 +118,8 @@ export default function Level3FlashcardsPage() {
                   isFlipped ? "invisible" : "visible"
                 }`}
               >
-                <p className="text-gray-500 text-lg mb-4">Dari</p>
-                <h2 className="text-7xl font-bold text-gray-900 mb-6" dir="rtl">
+                <p className="text-gray-500 text-sm mb-2">Dari</p>
+                <h2 className="text-5xl font-bold text-gray-900 mb-6" dir="rtl">
                   {currentWord.dari}
                 </h2>
                 <p className="text-gray-400 text-sm">Click to flip</p>
@@ -131,12 +131,12 @@ export default function Level3FlashcardsPage() {
                   isFlipped ? "visible" : "invisible"
                 }`}
               >
-                <p className="text-blue-100 text-lg mb-2">English</p>
-                <h2 className="text-5xl font-bold text-white mb-4">
+                <p className="text-blue-100 text-sm mb-2">English</p>
+                <h2 className="text-4xl font-bold text-white mb-4">
                   {currentWord.english}
                 </h2>
-                <p className="text-blue-100 text-lg mb-1">Pronunciation</p>
-                <p className="text-2xl text-white italic mb-6">
+                <p className="text-blue-100 text-sm mb-1">Pronunciation</p>
+                <p className="text-xl text-white italic mb-3">
                   {currentWord.phonetic}
                 </p>
                 <button

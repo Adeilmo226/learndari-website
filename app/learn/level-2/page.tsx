@@ -23,10 +23,10 @@ export default function Level2Page() {
 
   return (
     <AuthGate backHref="/learn" backLabel="Back to Learning Path">
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="bg-gray-50 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-3">
           <Link
             href="/learn"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
@@ -35,14 +35,14 @@ export default function Level2Page() {
             Back to Learning Path
           </Link>
 
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-3">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <span className="px-3 py-1 bg-gradient-to-r from-green-500 to-green-600 text-white text-sm font-medium rounded-full">
                   Level 2
                 </span>
               </div>
-              <h1 className="text-4xl font-bold text-gray-900">Letter Forms</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Letter Forms</h1>
               <p className="text-gray-600 mt-2">
                 Learn how letters change shape in different positions
               </p>
@@ -56,7 +56,7 @@ export default function Level2Page() {
           </div>
 
           {/* Progress Bar */}
-          <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+          <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
             <div
               className="bg-gradient-to-r from-green-600 to-green-500 h-full rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
@@ -65,16 +65,16 @@ export default function Level2Page() {
         </div>
 
         {/* Study Mode Buttons */}
-        <div className="grid md:grid-cols-2 gap-4 mb-8">
+        <div className="grid md:grid-cols-2 gap-3 mb-4">
           <Link
             href="/learn/level-2/flashcards"
-            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
+            className="flex items-center gap-4 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
           >
-            <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
-              <BookOpen className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+              <BookOpen className="w-5 h-5 text-green-600 group-hover:text-white transition-colors" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-900">Flashcards</h3>
+              <h3 className="text-lg font-bold text-gray-900">Flashcards</h3>
               <p className="text-gray-600">Review letter forms with interactive cards</p>
             </div>
             <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
@@ -82,13 +82,13 @@ export default function Level2Page() {
 
           <Link
             href="/learn/level-2/quiz"
-            className="flex items-center gap-4 p-6 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
+            className="flex items-center gap-4 p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-green-600 hover:shadow-lg transition-all group"
           >
-            <div className="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
-              <Brain className="w-7 h-7 text-green-600 group-hover:text-white transition-colors" />
+            <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-600 transition-colors">
+              <Brain className="w-5 h-5 text-green-600 group-hover:text-white transition-colors" />
             </div>
             <div className="flex-1">
-              <h3 className="text-xl font-bold text-gray-900">Quiz Mode</h3>
+              <h3 className="text-lg font-bold text-gray-900">Quiz Mode</h3>
               <p className="text-gray-600">Test your knowledge (80% to pass)</p>
             </div>
             <span className="text-2xl group-hover:translate-x-1 transition-transform">→</span>
@@ -96,7 +96,7 @@ export default function Level2Page() {
         </div>
 
         {/* Info Box */}
-        <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6 mb-8">
+        <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-4 mb-4">
           <div className="flex gap-4">
             <Info className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
             <div>
@@ -119,14 +119,14 @@ export default function Level2Page() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-4">
           {/* Letters Grid */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-lg p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
                 All Letters and Their Forms
               </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" dir="rtl">
                 {letterForms.map((letter) => (
                   <LetterButton
                     key={letter.id}

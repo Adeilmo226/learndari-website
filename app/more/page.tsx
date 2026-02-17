@@ -70,10 +70,10 @@ export default function MorePage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       {/* Header */}
       <div className="text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
           Discover
         </h1>
         <p className="text-xl text-gray-600">
@@ -82,7 +82,7 @@ export default function MorePage() {
       </div>
 
       {/* Proverb of the Day Banner */}
-      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl overflow-hidden mb-12">
+      <div className="bg-gradient-to-br from-red-500 to-green-600 rounded-2xl shadow-xl overflow-hidden mb-6">
         <div className="p-6 sm:p-8 text-white">
           <p className="text-sm font-semibold uppercase tracking-wider text-white/60 mb-6">
             Proverb of the Day
@@ -129,7 +129,7 @@ export default function MorePage() {
       </div>
 
       {/* Culture & Language Section */}
-      <div className="mb-12">
+      <div className="mb-6">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
           Culture & Language
         </h2>
