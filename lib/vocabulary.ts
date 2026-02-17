@@ -15,6 +15,7 @@ import { bodyPartsVocab } from "@/app/vocab/body/data";
 import { foodVocab } from "@/app/vocab/food/data";
 import { greetingsVocab } from "@/app/vocab/greetings/data";
 import { numbersVocab } from "@/app/vocab/numbers/data";
+import { dariAlphabet } from "@/lib/alphabet";
 
 export interface VocabWord {
   id: string;
@@ -44,13 +45,25 @@ const categories: { data: { id: string; english: string; dari: string; phonetic:
   { data: numbersVocab, category: "Numbers", audioFolder: "numbers" },
 ];
 
-export const vocabularyDatabase: VocabWord[] = categories.flatMap(({ data, category, audioFolder }) =>
-  data.map((word) => ({
-    ...word,
-    category,
-    audioFolder,
-  }))
-);
+const alphabetWords: VocabWord[] = dariAlphabet.map((letter) => ({
+  id: letter.id,
+  english: letter.name,
+  dari: letter.letter,
+  phonetic: letter.phonetic,
+  category: "Alphabet",
+  audioFolder: "alphabet",
+}));
+
+export const vocabularyDatabase: VocabWord[] = [
+  ...categories.flatMap(({ data, category, audioFolder }) =>
+    data.map((word) => ({
+      ...word,
+      category,
+      audioFolder,
+    }))
+  ),
+  ...alphabetWords,
+];
 
 /**
  * Search vocabulary database

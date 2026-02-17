@@ -11,7 +11,7 @@ export default function CulturePage() {
       id: "greetings",
       title: "Greetings & Etiquette",
       icon: Users,
-      color: "from-blue-500 to-blue-600",
+      color: "from-red-500 to-red-600",
       content: [
         {
           subtitle: "Common Greetings",
@@ -31,7 +31,7 @@ export default function CulturePage() {
       id: "hospitality",
       title: "Hospitality & Food",
       icon: Coffee,
-      color: "from-green-500 to-green-600",
+      color: "from-red-500 to-red-600",
       content: [
         {
           subtitle: "Afghan Hospitality",
@@ -51,7 +51,7 @@ export default function CulturePage() {
       id: "holidays",
       title: "Holidays & Celebrations",
       icon: Calendar,
-      color: "from-purple-500 to-purple-600",
+      color: "from-red-500 to-red-600",
       content: [
         {
           subtitle: "Nowruz (نوروز)",
@@ -91,7 +91,7 @@ export default function CulturePage() {
       id: "arts",
       title: "Arts & Literature",
       icon: Music,
-      color: "from-yellow-500 to-yellow-600",
+      color: "from-red-500 to-red-600",
       content: [
         {
           subtitle: "Poetry",
@@ -111,7 +111,7 @@ export default function CulturePage() {
       id: "values",
       title: "Core Values",
       icon: Heart,
-      color: "from-pink-500 to-pink-600",
+      color: "from-red-500 to-red-600",
       content: [
         {
           subtitle: "Honor & Dignity (ناموس - namus)",
