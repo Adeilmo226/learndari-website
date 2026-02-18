@@ -13,7 +13,6 @@ import { AuthGate } from "@/components/AuthGate";
 export default function Level4FlashcardsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [knownCards, setKnownCards] = useState<Set<number>>(new Set());
 
   const currentWord = commonWords[currentIndex];
   const progress = ((currentIndex + 1) / commonWords.length) * 100;
@@ -34,15 +33,9 @@ export default function Level4FlashcardsPage() {
 
   const flipCard = () => setIsFlipped(!isFlipped);
 
-  const markAsKnown = () => {
-    setKnownCards(new Set([...knownCards, currentIndex]));
-    nextCard();
-  };
-
   const resetProgress = () => {
     setCurrentIndex(0);
     setIsFlipped(false);
-    setKnownCards(new Set());
   };
 
   const playAudio = () => {
@@ -93,8 +86,7 @@ export default function Level4FlashcardsPage() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="flex justify-between mt-2 text-sm text-gray-600">
-            <span>{knownCards.size} marked as known</span>
+          <div className="flex justify-end mt-2 text-sm text-gray-600">
             <span>{commonWords.length - currentIndex - 1} remaining</span>
           </div>
         </div>
@@ -154,14 +146,6 @@ export default function Level4FlashcardsPage() {
             <ChevronLeft className="w-5 h-5" />
             Previous
           </button>
-          <div className="flex gap-3">
-            <button onClick={nextCard} className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
-              Still Learning
-            </button>
-            <button onClick={markAsKnown} className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-              Know It! ✓
-            </button>
-          </div>
           <button
             onClick={nextCard}
             disabled={currentIndex === commonWords.length - 1}
@@ -176,7 +160,7 @@ export default function Level4FlashcardsPage() {
           <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 text-center">
             <h3 className="text-2xl font-bold text-green-900 mb-2">Great job! 🎉</h3>
             <p className="text-green-700 mb-4">
-              You've completed all {commonWords.length} cards! You marked {knownCards.size} as known.
+              You've completed all {commonWords.length} cards!
             </p>
             <div className="flex gap-3 justify-center">
               <button onClick={resetProgress} className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
