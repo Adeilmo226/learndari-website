@@ -9,7 +9,6 @@ import { AuthGate } from "@/components/AuthGate";
 export default function FlashcardsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
-  const [knownCards, setKnownCards] = useState<Set<number>>(new Set());
 
   const currentWord = transportationVocab[currentIndex];
   const progress = ((currentIndex + 1) / transportationVocab.length) * 100;
@@ -32,15 +31,9 @@ export default function FlashcardsPage() {
     setIsFlipped(!isFlipped);
   };
 
-  const markAsKnown = () => {
-    setKnownCards(new Set([...knownCards, currentIndex]));
-    nextCard();
-  };
-
   const resetProgress = () => {
     setCurrentIndex(0);
     setIsFlipped(false);
-    setKnownCards(new Set());
   };
 
   const playAudio = () => {
@@ -89,8 +82,7 @@ export default function FlashcardsPage() {
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="flex justify-between mt-2 text-sm text-gray-600">
-            <span>{knownCards.size} marked as known</span>
+          <div className="flex justify-end mt-2 text-sm text-gray-600">
             <span>{transportationVocab.length - currentIndex - 1} remaining</span>
           </div>
         </div>
@@ -155,21 +147,6 @@ export default function FlashcardsPage() {
             Previous
           </button>
 
-          <div className="flex gap-3">
-            <button
-              onClick={nextCard}
-              className="px-6 py-3 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              Still Learning
-            </button>
-            <button
-              onClick={markAsKnown}
-              className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-            >
-              Know It! ✓
-            </button>
-          </div>
-
           <button
             onClick={nextCard}
             disabled={currentIndex === transportationVocab.length - 1}
@@ -187,7 +164,6 @@ export default function FlashcardsPage() {
             </h3>
             <p className="text-green-700 mb-4">
               You've completed all {transportationVocab.length} cards!
-              You marked {knownCards.size} as known.
             </p>
             <div className="flex gap-3 justify-center">
               <button
