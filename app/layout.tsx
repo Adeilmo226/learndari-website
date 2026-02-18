@@ -21,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
+      clerkJSUrl="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
       appearance={{
         variables: {
           colorPrimary: "#dc2626",
