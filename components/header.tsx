@@ -89,7 +89,7 @@ export default function Header() {
 
             {/* User Auth */}
             <SignedOut>
-              <SignInButton>
+              <SignInButton mode="modal">
                 <button className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition">
                   Sign In
                 </button>
