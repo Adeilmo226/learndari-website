@@ -40,12 +40,12 @@ export function AuthGate({ children, backHref, backLabel }: AuthGateProps) {
             progress
           </p>
           <div className="flex gap-3 justify-center">
-            <SignUpButton>
+            <SignUpButton mode="modal">
               <button className="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-colors font-semibold">
                 Sign Up
               </button>
             </SignUpButton>
-            <SignInButton>
+            <SignInButton mode="modal">
               <button className="px-6 py-3 bg-white text-red-600 border-2 border-red-600 rounded-xl hover:bg-red-50 transition-colors font-semibold">
                 Sign In
               </button>

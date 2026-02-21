@@ -186,7 +186,7 @@ function LevelCard({
   if (requiresSignIn) {
     return (
       <div className="relative">
-        <SignInButton>
+        <SignInButton mode="modal">
           <button className="block w-full text-left bg-white p-6 rounded-2xl border-2 border-gray-200 hover:border-red-600 hover:shadow-xl transition-all group cursor-pointer">
             <div className="flex items-center gap-6">
               <div className={`w-16 h-16 bg-gradient-to-br ${level.color} rounded-xl flex items-center justify-center relative opacity-50`}>

@@ -32,7 +32,7 @@ export function LockedContent({ message = "Sign in to unlock this content and sa
         <p className="text-gray-600 mb-6">
           {message}
         </p>
-        <SignInButton>
+        <SignInButton mode="modal">
           <button className="w-full py-3 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors">
             Sign In
           </button>

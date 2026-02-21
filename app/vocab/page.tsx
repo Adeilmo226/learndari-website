@@ -183,7 +183,7 @@ function VocabSetCard({
   // Locked state - requires sign in
   if (isLocked) {
     return (
-      <SignInButton>
+      <SignInButton mode="modal">
         <button className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-red-600 transition-all hover:shadow-lg group text-left w-full cursor-pointer">
           <div className="flex items-start justify-between mb-4">
             <div className="text-5xl opacity-50">{set.emoji}</div>
