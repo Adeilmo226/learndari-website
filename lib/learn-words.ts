@@ -85,3 +85,4 @@ export const commonWords: LearnWord[] = [
   { id: "l4-soup", english: "Soup", dari: "آش", phonetic: "aush", category: "Food", audioFolder: "food" },
   { id: "l4-cheese", english: "Cheese", dari: "پنیر", phonetic: "paneer", category: "Food", audioFolder: "food" },
 ]
+
