@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Info, CheckCircle, BookOpen, Brain, Volume2 } from "lucide-react";
-import { letterForms, type LetterForms } from "@/lib/alphabet";
+import { letterForms, letterAudioFiles, type LetterForms } from "@/lib/alphabet";
 import { AuthGate } from "@/components/AuthGate";
 
 /**
@@ -200,7 +200,7 @@ function LetterFormsCard({ letter }: { letter: LetterForms }) {
 
   const playAudio = () => {
     setIsPlaying(true);
-    const audioUrl = `/audio/alphabet/${letter.id}.mp3`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[letter.id]}.m4a`;
     const audio = new Audio(audioUrl);
     audio.onended = () => setIsPlaying(false);
     audio.onerror = () => setIsPlaying(false);
