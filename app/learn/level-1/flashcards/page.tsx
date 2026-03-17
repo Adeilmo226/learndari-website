@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, ChevronLeft, ChevronRight, RotateCcw } from "lucide-react";
-import { dariAlphabet } from "@/lib/alphabet";
+import { dariAlphabet, letterAudioFiles } from "@/lib/alphabet";
 
 /**
  * Level 1 Flashcards: Alphabet
@@ -40,7 +40,7 @@ export default function Level1FlashcardsPage() {
   };
 
   const playAudio = () => {
-    const audioUrl = `/audio/alphabet/${currentLetter.id}.mp3`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[currentLetter.id]}.m4a`;
     const audio = new Audio(audioUrl);
     audio.play().catch(() => {
       console.log("Audio file not available yet");

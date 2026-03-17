@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, CheckCircle, XCircle } from "lucide-react";
-import { dariAlphabet, type DariLetter } from "@/lib/alphabet";
+import { dariAlphabet, letterAudioFiles, type DariLetter } from "@/lib/alphabet";
 import { useUser } from "@clerk/nextjs";
 import { saveLevelProgress } from "@/lib/progress";
 
@@ -78,7 +78,7 @@ export default function Level1QuizPage() {
   };
 
   const playAudio = () => {
-    const audioUrl = `/audio/alphabet/${currentQuestion.letter.id}.mp3`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[currentQuestion.letter.id]}.m4a`;
     const audio = new Audio(audioUrl);
     audio.play().catch(() => {
       console.log("Audio file not available yet");

@@ -48,6 +48,44 @@ export const dariAlphabet: DariLetter[] = [
 ];
 
 /**
+ * Maps letter IDs to their corresponding audio filenames (without extension)
+ */
+export const letterAudioFiles: Record<string, string> = {
+  alef: "Alef",
+  be: "Bay",
+  pe: "Pay",
+  te: "Tay",
+  se: "Say",
+  jeem: "Jeem",
+  che: "Chay",
+  he: "Hay",
+  khe: "Khay",
+  dal: "Daal",
+  zal: "Zaal",
+  re: "Ray",
+  ze: "Ze",
+  zhe: "Ze",
+  seen: "Sin",
+  sheen: "Shen",
+  sad: "Saad",
+  zad: "Zaad",
+  taa: "Taah",
+  zaa: "Zaah",
+  ayn: "Ayn",
+  ghayn: "Ghayn",
+  fe: "Fe",
+  qaf: "Qaf",
+  kaf: "Kaf",
+  gaf: "Gaf",
+  lam: "Lam",
+  meem: "Meem",
+  noon: "Noon",
+  waw: "Wow",
+  he2: "He",
+  ye: "Yeh",
+};
+
+/**
  * Letter Forms Data
  * Shows how each letter changes in different positions
  */

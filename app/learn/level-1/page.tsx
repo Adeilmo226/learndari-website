@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, Volume2, CheckCircle, BookOpen, Brain } from "lucide-react";
-import { dariAlphabet, type DariLetter } from "@/lib/alphabet";
+import { dariAlphabet, letterAudioFiles, type DariLetter } from "@/lib/alphabet";
 
 /**
  * Level 1: Alphabet Basics
@@ -179,7 +179,7 @@ function LetterDetailCard({ letter }: { letter: DariLetter }) {
 
   const playAudio = () => {
     setIsPlaying(true);
-    const audioUrl = `/audio/alphabet/${letter.id}.mp3`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[letter.id]}.m4a`;
     const audio = new Audio(audioUrl);
 
     audio.onended = () => setIsPlaying(false);
