@@ -200,7 +200,7 @@ function LetterFormsCard({ letter }: { letter: LetterForms }) {
 
   const playAudio = () => {
     setIsPlaying(true);
-    const audioUrl = `/audio/alphabet/${letterAudioFiles[letter.id]}.m4a`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[letter.id]}.mp3`;
     const audio = new Audio(audioUrl);
     audio.onended = () => setIsPlaying(false);
     audio.onerror = () => setIsPlaying(false);

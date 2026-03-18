@@ -179,7 +179,7 @@ function LetterDetailCard({ letter }: { letter: DariLetter }) {
 
   const playAudio = () => {
     setIsPlaying(true);
-    const audioUrl = `/audio/alphabet/${letterAudioFiles[letter.id]}.m4a`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[letter.id]}.mp3`;
     const audio = new Audio(audioUrl);
 
     audio.onended = () => setIsPlaying(false);

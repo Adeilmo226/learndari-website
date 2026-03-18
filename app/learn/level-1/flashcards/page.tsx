@@ -40,7 +40,7 @@ export default function Level1FlashcardsPage() {
   };
 
   const playAudio = () => {
-    const audioUrl = `/audio/alphabet/${letterAudioFiles[currentLetter.id]}.m4a`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[currentLetter.id]}.mp3`;
     const audio = new Audio(audioUrl);
     audio.play().catch(() => {
       console.log("Audio file not available yet");
