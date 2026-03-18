@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useAuth } from '@/contexts/AuthContext'
+import { useUser, useClerk } from '@clerk/nextjs'
 
 export default function UserMenu() {
-  const { user, loading, signOut } = useAuth()
+  const { user, isLoaded } = useUser()
+  const { signOut } = useClerk()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -21,29 +22,21 @@ export default function UserMenu() {
   }, [])
 
   // Show nothing while loading to prevent flash
-  if (loading) {
+  if (!isLoaded) {
     return (
       <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
     )
   }
 
-  // Show sign in/up buttons when not authenticated
+  // Show sign in button when not authenticated
   if (!user) {
     return (
-      <div className="flex items-center gap-2">
-        <Link
-          href="/login"
-          className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition"
-        >
-          Sign In
-        </Link>
-        <Link
-          href="/signup"
-          className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition"
-        >
-          Sign Up
-        </Link>
-      </div>
+      <Link
+        href="/sign-in"
+        className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 transition"
+      >
+        Sign In
+      </Link>
     )
   }
 
@@ -54,10 +47,10 @@ export default function UserMenu() {
         className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition"
       >
         <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-medium">
-          {user.email?.charAt(0).toUpperCase()}
+          {user.emailAddresses[0]?.emailAddress?.charAt(0).toUpperCase()}
         </div>
         <span className="text-sm font-medium text-gray-700 hidden sm:block">
-          {user.email?.split('@')[0]}
+          {user.emailAddresses[0]?.emailAddress?.split('@')[0]}
         </span>
       </button>
 
@@ -65,7 +58,7 @@ export default function UserMenu() {
         <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
           <div className="px-4 py-3 border-b border-gray-200">
             <p className="text-sm font-medium text-gray-900">Signed in as</p>
-            <p className="text-sm text-gray-600 truncate">{user.email}</p>
+            <p className="text-sm text-gray-600 truncate">{user.emailAddresses[0]?.emailAddress}</p>
           </div>
 
           <button

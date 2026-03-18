@@ -78,7 +78,7 @@ export default function Level1QuizPage() {
   };
 
   const playAudio = () => {
-    const audioUrl = `/audio/alphabet/${letterAudioFiles[currentQuestion.letter.id]}.m4a`;
+    const audioUrl = `/audio/alphabet/${letterAudioFiles[currentQuestion.letter.id]}.mp3`;
     const audio = new Audio(audioUrl);
     audio.play().catch(() => {
       console.log("Audio file not available yet");

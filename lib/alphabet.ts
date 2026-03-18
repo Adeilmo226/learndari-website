@@ -63,7 +63,7 @@ export const letterAudioFiles: Record<string, string> = {
   dal: "Daal",
   zal: "Zaal",
   re: "Ray",
-  ze: "Ze",
+  ze: "Zay",
   zhe: "Ze",
   seen: "Sin",
   sheen: "Shen",
